@@ -1,0 +1,144 @@
+<div
+    class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
+    #homeContainer>
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div
+            class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
+        <div
+            class="absolute top-40 right-20 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
+        <div
+            class="absolute bottom-40 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
+                src="/images/Controller.png" alt></div>
+        <div
+            class="absolute top-1/2 right-10 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
+    </div>
+
+    <!-- Interactive Hero Section -->
+    <section #heroSection
+        class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        [@heroAnimation]>
+
+        <!-- Interactive Background with Cursor Light Effect -->
+        <div class="absolute inset-0 hero-bg">
+            <!-- Base gradient background -->
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-navy via-dark-blue/50 to-navy"></div>
+
+            <!-- Main cursor light effect -->
+            <div #cursorLight
+                class="cursor-light absolute w-[600px] h-[600px] pointer-events-none opacity-0 transition-opacity duration-300 ease-out"></div>
+
+            <!-- Animated background orbs -->
+            <div
+                class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-mint/20 to-teal/20 rounded-full blur-3xl animate-pulse"></div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal/20 to-blue-gray/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+
+            <!-- Floating particles -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="floating-particle particle-1"></div>
+                <div class="floating-particle particle-2"></div>
+                <div class="floating-particle particle-3"></div>
+                <div class="floating-particle particle-4"></div>
+                <div class="floating-particle particle-5"></div>
+                <div class="floating-particle particle-6"></div>
+                <div class="floating-particle particle-7"></div>
+                <div class="floating-particle particle-8"></div>
+            </div>
+        </div>
+
+    </section>
+    <div
+        class="w-full max-w-md bg-slate-800/90 rounded-2xl shadow-2xl p-8 border border-slate-700">
+        <!-- Title -->
+        <h2 class="text-2xl font-semibold text-white text-center mb-8">Sign
+            Up</h2>
+
+        <!-- Form -->
+        <form class="space-y-6">
+            <!-- Username Field -->
+            <div class="relative">
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    ngModel
+                    required
+                    placeholder=" "
+                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
+                <label
+                    for="username"
+                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
+                    Username
+                </label>
+            </div>
+
+            <!-- Email Field -->
+            <div class="relative">
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    ngModel
+                    required
+                    placeholder=" "
+                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
+                <label
+                    for="email"
+                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
+                    Email
+                </label>
+            </div>
+
+            <!-- Password Field -->
+            <div class="relative">
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    ngModel
+                    required
+                    placeholder=" "
+                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
+                <label
+                    for="password"
+                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
+                    Password
+                </label>
+            </div>
+
+            <!-- Repassword Field -->
+            <div class="relative">
+                <input
+                    type="password"
+                    id="repassword"
+                    name="repassword"
+                    ngModel
+                    required
+                    placeholder=" "
+                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
+                <label
+                    for="repassword"
+                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
+                    Repassword
+                </label>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+                type="submit"
+                class="w-full py-3 bg-cyan-300 hover:bg-cyan-400 text-slate-800 font-medium rounded-full transition-colors duration-200 mt-8">
+                Sign up
+            </button>
+        </form>
+
+        <!-- Login Link -->
+        <p class="text-center text-gray-400 text-sm mt-6">
+            Already have an Account?
+            <a href="#"
+                class="text-cyan-300 hover:text-cyan-400 transition-colors">Login
+                Now</a>
+        </p>
+    </div>
+</div>

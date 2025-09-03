@@ -1,0 +1,149 @@
+<nav
+    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100">
+    <div class="container mx-auto px-6">
+        <div class="flex items-center justify-between h-16">
+
+            <!-- Logo Section -->
+            <div class="flex items-center space-x-3">
+                <!-- Gaming Controller Icon -->
+                <div class="flex items-center space-x-2">
+                    <a routerLink="home" class="w-60">
+                        <img src="/images/GamerMajlis-removebg-preview.png" alt>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a routerLink="home"
+                    routerLinkActive="bg-teal py-2 text-black rounded-md"
+                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
+                    Home
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
+                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
+                </a>
+                <a href="#"
+                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
+                    Tournaments
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
+                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
+                </a>
+                <a href="#"
+                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
+                    Marketplace
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
+                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
+                </a>
+                <a href="#"
+                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
+                    Events
+                    <span
+                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
+                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
+                </a>
+            </div>
+
+            <!-- Right Section: Messages Button + Profile -->
+            <div class="flex items-center space-x-4">
+
+                <!-- Messages Button -->
+                <button
+                    class="flex items-center space-x-2 bg-navy text-mint px-4 py-2 rounded-lg font-medium hover:bg-dark-blue transition-all duration-200 shadow-md hover:shadow-lg">
+                    <svg class="w-5 h-5" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H6L4,18V4H20V16Z" />
+                    </svg>
+                    <span>Messages</span>
+                </button>
+
+                <!-- Profile Avatar -->
+                <div class="relative group">
+                    <button
+                        class="w-10 h-10 rounded-full overflow-hidden border-2 border-navy hover:border-teal transition-all duration-200 shadow-md hover:shadow-lg">
+                        <img
+                            src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=100&h=100&fit=crop&crop=face"
+                            alt="Profile"
+                            class="w-full h-full object-cover">
+                    </button>
+
+                    <!-- Profile Dropdown -->
+                    <div
+                        class="absolute right-0 top-12 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
+                        <div class="p-4 border-b border-gray-200">
+                            <p class="text-sm font-medium text-gray-900">John
+                                Gamer</p>
+                            <p
+                                class="text-xs text-gray-500">johngamermajlis.com</p>
+                        </div>
+                        <div class="py-2">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Profile</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Settings</a>
+                            <a routerLink="login"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden transition-colors duration-200"
+                    [class]="scrolled ? 'text-gray-700 hover:text-teal' : 'text-navy hover:text-dark-blue'"
+                    (click)="toggleMobileMenu()">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden" [class.hidden]="!isMobileMenuOpen" [@slideDown]>
+            <div
+                class="px-2 pt-2 pb-3 space-y-1 rounded-lg mt-2 backdrop-blur-sm transition-colors duration-300"
+                [class]="scrolled ? 'bg-gray-50' : 'bg-white/10'">
+                <a href="#"
+                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
+                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
+                    Home
+                </a>
+                <a href="#"
+                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
+                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
+                    Tournaments
+                </a>
+                <a href="#"
+                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
+                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
+                    Marketplace
+                </a>
+                <a href="#"
+                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
+                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
+                    Events
+                </a>
+                <div class="px-3 py-2">
+                    <button
+                        class="w-full flex items-center justify-center space-x-2 bg-navy text-mint px-4 py-2 rounded-lg font-medium hover:bg-dark-blue transition-colors duration-200">
+                        <svg class="w-5 h-5" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H6L4,18V4H20V16Z" />
+                        </svg>
+                        <span>Messages</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Spacer to prevent content from hiding behind fixed navbar -->
+<div class="h-16"></div>

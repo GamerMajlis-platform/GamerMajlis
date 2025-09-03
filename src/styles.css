@@ -1,1 +1,422 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Alice&display=swap');
+@import "tailwindcss";
+
+
+.disabled {
+    background-color: teal;
+    cursor: not-allowed;
+}
+
+.disabled:hover {
+    background-color: teal;
+}
+
+body {
+    font-family: 'Alice', serif;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* Your Custom Color Palette */
+:root {
+    --color-mint: #6FFFE9;
+    --color-teal: #5BC0BE;
+    --color-blue-gray: #3A506B;
+    --color-dark-blue: #1C2541;
+    --color-navy: #0B132B;
+    --font-alice: 'Alice', serif;
+
+}
+
+/* Custom animations */
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes bounce-slow {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(111, 255, 233, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(111, 255, 233, 0.8);
+    }
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes bounce-in {
+    0% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    20% {
+        transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+        transform: scale3d(0.97, 0.97, 0.97);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+    }
+}
+
+.animate-bounce-in {
+    animation: bounce-in 600ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Stagger animation delays for multiple elements */
+.animate-stagger-1 {
+    animation-delay: 100ms;
+}
+
+.animate-stagger-2 {
+    animation-delay: 200ms;
+}
+
+.animate-stagger-3 {
+    animation-delay: 300ms;
+}
+
+.animate-stagger-4 {
+    animation-delay: 400ms;
+}
+
+.animate-stagger-5 {
+    animation-delay: 500ms;
+}
+
+.animate-stagger-6 {
+    animation-delay: 600ms;
+}
+
+/* Smooth performance optimizations */
+[appScrollAnimate] {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+}
+
+/* Reduce animations on mobile for performance */
+@media (max-width: 768px) {
+    [appScrollAnimate] {
+        transition-duration: 400ms !important;
+    }
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+    [appScrollAnimate] {
+        transition: none !important;
+        animation: none !important;
+    }
+
+    [appScrollAnimate] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* Custom utility classes */
+.animate-spin-slow {
+    animation: spin-slow 20s linear infinite;
+}
+
+.animate-bounce-slow {
+    animation: bounce-slow 3s ease-in-out infinite;
+}
+
+.animate-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+    animation: gradient-shift 3s ease infinite;
+}
+
+/* Animation delays */
+.animation-delay-100 {
+    animation-delay: 0.1s;
+}
+
+.animation-delay-200 {
+    animation-delay: 0.2s;
+}
+
+.animation-delay-300 {
+    animation-delay: 0.3s;
+}
+
+.animation-delay-500 {
+    animation-delay: 0.5s;
+}
+
+.animation-delay-1000 {
+    animation-delay: 1s;
+}
+
+.animation-delay-1500 {
+    animation-delay: 1.5s;
+}
+
+.animation-delay-2000 {
+    animation-delay: 2s;
+}
+
+/* Custom color classes */
+.text-mint {
+    color: #6FFFE9;
+}
+
+.text-teal {
+    color: #5BC0BE;
+}
+
+.text-blue-gray {
+    color: #3A506B;
+}
+
+.text-dark-blue {
+    color: #1C2541;
+}
+
+.text-navy {
+    color: #0B132B;
+}
+
+.bg-mint {
+    background-color: #6FFFE9;
+}
+
+.bg-teal {
+    background-color: #5BC0BE;
+}
+
+.bg-blue-gray {
+    background-color: #3A506B;
+}
+
+.bg-dark-blue {
+    background-color: #1C2541;
+}
+
+.bg-navy {
+    background-color: #0B132B;
+}
+
+.border-mint {
+    border-color: #6FFFE9;
+}
+
+.border-teal {
+    border-color: #5BC0BE;
+}
+
+.border-blue-gray {
+    border-color: #3A506B;
+}
+
+/* Custom gradients with your palette */
+.gradient-mint-teal {
+    background: linear-gradient(135deg, #6FFFE9, #5BC0BE);
+}
+
+.gradient-teal-blue {
+    background: linear-gradient(135deg, #5BC0BE, #3A506B);
+}
+
+.gradient-blue-navy {
+    background: linear-gradient(135deg, #3A506B, #1C2541);
+}
+
+.gradient-full {
+    background: linear-gradient(135deg, #6FFFE9, #5BC0BE, #3A506B, #1C2541);
+}
+
+.gradient-animated {
+    background: linear-gradient(-45deg, #6FFFE9, #5BC0BE, #3A506B, #1C2541);
+    background-size: 400% 400%;
+}
+
+/* Glow effects with your colors */
+.glow-mint {
+    box-shadow: 0 0 20px rgba(111, 255, 233, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-mint:hover {
+    box-shadow: 0 0 40px rgba(111, 255, 233, 0.8);
+}
+
+.glow-teal {
+    box-shadow: 0 0 20px rgba(91, 192, 190, 0.4);
+    transition: box-shadow 0.3s ease;
+}
+
+.glow-teal:hover {
+    box-shadow: 0 0 40px rgba(91, 192, 190, 0.8);
+}
+
+/* Text gradients with your palette */
+.text-gradient-mint {
+    background: linear-gradient(135deg, #6FFFE9, #5BC0BE);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.text-gradient-blue {
+    background: linear-gradient(135deg, #5BC0BE, #3A506B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Glassmorphism with your theme */
+.glass {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    background: rgba(28, 37, 65, 0.1);
+    border: 1px solid rgba(111, 255, 233, 0.2);
+}
+
+/* Custom scrollbar with your colors */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1C2541;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #6FFFE9, #5BC0BE);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #5BC0BE, #3A506B);
+}
+
+/* Button styles with your palette */
+.btn-primary {
+    background: linear-gradient(135deg, #6FFFE9, #5BC0BE);
+    color: #0B132B;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    padding: 12px 32px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(111, 255, 233, 0.4);
+    background: linear-gradient(135deg, #5BC0BE, #6FFFE9);
+}
+
+.btn-secondary {
+    background: transparent;
+    border: 2px solid #5BC0BE;
+    color: #5BC0BE;
+    transition: all 0.3s ease;
+    border-radius: 50px;
+    padding: 12px 32px;
+    font-weight: bold;
+}
+
+.btn-secondary:hover {
+    background: #5BC0BE;
+    color: #0B132B;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(91, 192, 190, 0.4);
+}
+
+
+
+/* Card styles */
+.card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(28, 37, 65, 0.8);
+    border: 1px solid rgba(91, 192, 190, 0.3);
+}
+
+.card-hover:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(28, 37, 65, 0.95);
+    border: 1px solid rgba(111, 255, 233, 0.5);
+    box-shadow: 0 25px 50px -12px rgba(111, 255, 233, 0.25);
+}
+
+/* Status indicators */
+.status-live {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    animation: pulse 2s infinite;
+}
+
+.status-upcoming {
+    background: linear-gradient(135deg, #6FFFE9, #5BC0BE);
+}
+
+.status-ended {
+    background: linear-gradient(135deg, #6C757D, #495057);
+}

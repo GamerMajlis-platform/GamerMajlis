@@ -1,0 +1,335 @@
+/* Interactive Hero Background Effects */
+.hero-interactive {
+    position: relative;
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+    /* Remove cursor: none - keep normal cursor visible */
+}
+
+/* Main cursor light effect - much smoother */
+.cursor-light {
+    background: radial-gradient(circle at center,
+            rgba(111, 255, 233, 0.15) 0%,
+            rgba(111, 255, 233, 0.12) 15%,
+            rgba(91, 192, 190, 0.08) 30%,
+            rgba(58, 80, 107, 0.04) 50%,
+            rgba(28, 37, 65, 0.02) 70%,
+            transparent 85%);
+    border-radius: 50%;
+    mix-blend-mode: screen;
+    transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, opacity;
+    filter: blur(1px);
+    /* Softer edge */
+}
+
+/* Remove the custom cursor dot since we keep normal cursor */
+.hero-interactive::after {
+    display: none;
+}
+
+/* Smooth hover transition for cursor light */
+.hero-interactive:hover .cursor-light {
+    opacity: 1;
+    transition: opacity 0.4s ease-out;
+}
+
+/* Floating particles - smoother and more subtle */
+.floating-particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: rgba(111, 255, 233, 0.6);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float-smooth 12s ease-in-out infinite;
+    will-change: transform;
+    filter: blur(0.5px);
+}
+
+.particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 10s;
+}
+
+.particle-2 {
+    top: 30%;
+    left: 80%;
+    animation-delay: -1.5s;
+    animation-duration: 11s;
+}
+
+.particle-3 {
+    top: 70%;
+    left: 20%;
+    animation-delay: -3s;
+    animation-duration: 12s;
+}
+
+.particle-4 {
+    top: 40%;
+    left: 60%;
+    animation-delay: -4.5s;
+    animation-duration: 13s;
+}
+
+.particle-5 {
+    top: 80%;
+    left: 70%;
+    animation-delay: -6s;
+    animation-duration: 11s;
+}
+
+.particle-6 {
+    top: 15%;
+    left: 40%;
+    animation-delay: -7.5s;
+    animation-duration: 10s;
+}
+
+.particle-7 {
+    top: 60%;
+    left: 85%;
+    animation-delay: -9s;
+    animation-duration: 12s;
+}
+
+.particle-8 {
+    top: 90%;
+    left: 30%;
+    animation-delay: -10.5s;
+    animation-duration: 11s;
+}
+
+/* Smoother particle animation */
+@keyframes float-smooth {
+
+    0%,
+    100% {
+        transform: translateY(0) translateX(0) scale(1);
+        opacity: 0.2;
+    }
+
+    25% {
+        transform: translateY(-15px) translateX(8px) scale(1.1);
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: translateY(-8px) translateX(-12px) scale(0.9);
+        opacity: 0.6;
+    }
+
+    75% {
+        transform: translateY(-20px) translateX(15px) scale(1.05);
+        opacity: 0.3;
+    }
+}
+
+/* Much smoother ripple effect */
+.ripple-effect {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(111, 255, 233, 0.3);
+    border: 1px solid rgba(111, 255, 233, 0.4);
+    transform: scale(0);
+    animation: smooth-ripple 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    pointer-events: none;
+    z-index: 10;
+}
+
+@keyframes smooth-ripple {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+
+    70% {
+        transform: scale(2.5);
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Subtle text glow enhancement */
+.hero-interactive:hover .hero-title {
+    text-shadow:
+        0 0 5px rgba(111, 255, 233, 0.2),
+        0 0 10px rgba(111, 255, 233, 0.1);
+    transition: text-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-interactive:hover .hero-subtitle {
+    text-shadow:
+        0 0 3px rgba(91, 192, 190, 0.3),
+        0 0 8px rgba(91, 192, 190, 0.15);
+    transition: text-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Smoother button enhancement */
+.hero-interactive .btn-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-interactive .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hero-interactive .btn-primary:hover::before {
+    left: 100%;
+}
+
+.hero-interactive .btn-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 15px 35px rgba(111, 255, 233, 0.3),
+        0 5px 15px rgba(111, 255, 233, 0.2);
+}
+
+.hero-interactive .btn-secondary:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow:
+        0 15px 35px rgba(91, 192, 190, 0.3),
+        0 5px 15px rgba(91, 192, 190, 0.2);
+}
+
+/* Very subtle background animation */
+.hero-bg {
+    animation: gentle-bg-shift 30s ease-in-out infinite;
+}
+
+@keyframes gentle-bg-shift {
+
+    0%,
+    100% {
+        filter: hue-rotate(0deg) brightness(1) saturate(1);
+    }
+
+    50% {
+        filter: hue-rotate(2deg) brightness(1.02) saturate(1.05);
+    }
+}
+
+/* Smoother mouse trail effect */
+.mouse-trail {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: rgba(111, 255, 233, 0.6);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0;
+    animation: smooth-trail-fade 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    filter: blur(0.5px);
+}
+
+@keyframes smooth-trail-fade {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: scale(1.5);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+/* Enhanced particle interactions on hover */
+.hero-interactive:hover .floating-particle {
+    animation-play-state: running;
+    opacity: 0.6;
+    transition: opacity 0.6s ease-out;
+}
+
+/* Subtle additional visual enhancements */
+.hero-interactive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 80%, rgba(111, 255, 233, 0.02) 0%, transparent 60%),
+        radial-gradient(circle at 80% 20%, rgba(91, 192, 190, 0.02) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.8s ease-out;
+}
+
+.hero-interactive:hover::before {
+    opacity: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .cursor-light {
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle at center,
+                rgba(111, 255, 233, 0.1) 0%,
+                rgba(91, 192, 190, 0.08) 30%,
+                transparent 70%);
+    }
+
+    .floating-particle {
+        width: 1.5px;
+        height: 1.5px;
+        opacity: 0.4;
+    }
+
+    /* Reduce effects on mobile for performance */
+    .hero-interactive .btn-primary:hover,
+    .hero-interactive .btn-secondary:hover {
+        transform: scale(1.02);
+    }
+}
+
+/* Performance optimizations */
+.hero-interactive,
+.cursor-light,
+.floating-particle,
+.ripple-effect {
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    perspective: 1000px;
+}
+
+/* Ultra-smooth transitions for all interactive elements */
+.hero-interactive * {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Ensure smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Additional smoothness for cursor tracking */
+.cursor-light {
+    transition: transform 0.1s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-out;
+}

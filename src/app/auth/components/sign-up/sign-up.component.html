@@ -1,0 +1,252 @@
+<div
+    class="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
+    #homeContainer>
+
+    <div class="fixed inset-0 pointer-events-none z-0">
+        <div
+            class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
+        <div
+            class="absolute top-40 right-20 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
+        <div
+            class="absolute bottom-40 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
+                src="/images/Controller.png" alt></div>
+        <div
+            class="absolute top-1/2 right-10 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
+    </div>
+
+    <!-- Interactive Hero Section -->
+    <section #heroSection
+        class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden"
+        [@heroAnimation]>
+
+        <div class="flex items-center justify-center min-h-screen p-4 w-full">
+            <div
+                class="w-full max-w-1/2 bg-slate-800/90 rounded-2xl shadow-2xl p-8 border-white border-r-2 border-b-2 ">
+                <!-- Title -->
+                <h2
+                    class="text-2xl font-semibold text-white text-center mb-8">Sign
+                    Up</h2>
+
+                <!-- Form -->
+                <form [formGroup]="signUpForm"
+                    (ngSubmit)="onSubmit()" class="space-y-6">
+                    <div class="relative">
+                        @let displayName = signUpForm.get('displayName');
+                        <input
+                            type="text"
+                            id="username"
+                            name="username"
+                            formControlName="displayName"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="username"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Username
+                        </label>
+                    </div>
+
+                    @if (displayName?.errors &&
+                    displayName?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (displayName?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (displayName?.getError('minlength')) {
+                                <li>The min Lenght is 3 character</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    }
+                    <!-- Email Field -->
+                    <div class="relative">
+                        @let email = signUpForm.get('email');
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            formControlName="email"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="email"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Email
+                        </label>
+                    </div>
+                    @if (email?.errors &&
+                    email?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (email?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (email?.getError('email')) {
+                                <li>Please enter a valid email address. :)</li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Password Field -->
+                    <div class="relative">
+                        @let password = signUpForm.get('password');
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            formControlName="password"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="password"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Password
+                        </label>
+                    </div>
+
+                    @if (password?.errors &&
+                    password?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (password?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (password?.getError('minlength')) {
+                                <li>Please enter at least 8 characters.</li>
+                                }
+                                @else if (password?.getError('pattern')) {
+                                <li>Please ensure the first character is
+                                    uppercase,
+                                    followed by at least 7 characters that can
+                                    be
+                                    lowercase letters or numbers.</li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Repassword Field -->
+                    <div class="relative">
+                        @let repassword = signUpForm.get('repassword');
+                        <input
+                            type="password"
+                            id="repassword"
+                            name="repassword"
+                            formControlName="repassword"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="repassword"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Repassword
+                        </label>
+                    </div>
+
+                    @if (signUpForm.errors?.['notSame'] &&
+                    repassword?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (repassword?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (signUpForm.errors?.['notSame']) {
+                                <li>The passwords you entered do not match.
+                                    Please
+                                    re-enter your password.</li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Submit Button -->
+                    <button
+                        [ngClass]="{'disabled': signUpForm.invalid || signUpForm.pristine}"
+                        class="w-full py-3  cursor-pointer hover:scale-105 transition-all duration-300 
+                         bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-8 
+                         shadow-lg hover:shadow-cyan-400/25">
+                        Sign up
+                    </button>
+                </form>
+
+                <!-- Login Link -->
+                <p class="text-center text-gray-400 text-sm mt-6">
+                    Already have an Account?
+                    <a href="#"
+                        class="text-cyan-300 hover:text-cyan-400 transition-colors duration-200">Login
+                        Now</a>
+                </p>
+            </div>
+        </div>
+
+    </section>
+
+</div>
