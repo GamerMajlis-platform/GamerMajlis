@@ -6,17 +6,17 @@
     <div
       class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
     <div
-      class="absolute top-40 right-20 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
+      class="absolute top-40 right-10 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
     <div
-      class="absolute bottom-40 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
+      class="absolute bottom-20 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
         src="/images/Controller.png" alt></div>
     <div
-      class="absolute top-1/2 right-10 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
+      class="absolute bottom-20 right-20 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
   </div>
 
-  <!-- Interactive Hero Section -->
-  <section #heroSection
-    class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+    <!-- Interactive Hero Section -->
+    <section #heroSection
+    class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden"
     [@heroAnimation]>
 
     <!-- Interactive Background with Cursor Light Effect -->
@@ -48,11 +48,11 @@
       </div>
     </div>
 
-    <div class="relative z-10 text-center px-6 max-w-6xl mx-auto"
+    <div class="relative z-10 text-center !px-6 mx-auto"
       [@fadeInUp]>
       <div class="mb-8 animate-float">
         <h1
-          class="text-6xl md:text-8xl font-black mb-6 leading-tight font-alice hero-title">
+          class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight font-alice hero-title">
           <span class="text-gradient-mint">GAMER</span><span
             class="text-white">MAJLIS</span>
         </h1>
@@ -61,20 +61,20 @@
       </div>
 
       <p
-        class="text-xl md:text-2xl text-teal mb-12 max-w-3xl mx-auto leading-relaxed font-alice hero-subtitle">
-        Join the ultimate gaming community. Compete in tournaments,
+        class="text-md md:text-xl text-teal mb-12 max-w-3xl mx-auto leading-relaxed font-alice hero-subtitle">
+        Join the ultimate gaming community. Compete in tournaments,<br>
         connect with players, and dominate the leaderboards.
       </p>
 
       <div
         class="flex flex-col sm:flex-row gap-6 justify-center items-center">
         <button
-          class="btn-primary glow-mint hover:scale-105 transform transition-all duration-300">
+          class="btn-primary text-sm glow-mint hover:scale-105 transform transition-all duration-300">
           Start Gaming Now
         </button>
 
         <button
-          class="btn-secondary hover:scale-105 transform transition-all duration-300">
+          class="btn-secondary text-sm hover:scale-105 transform transition-all duration-300">
           Watch Tournaments
         </button>
       </div>

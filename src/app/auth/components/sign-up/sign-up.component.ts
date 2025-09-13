@@ -73,6 +73,10 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    console.log(this.signUpForm.value);
+    if (this.signUpForm.valid) {
+      const { repassword, ...formData } = this.signUpForm.value;
+      console.log('Form data to send to backend:', formData);
+      // this.authService.signUp(formData);
+    }
   }
 }

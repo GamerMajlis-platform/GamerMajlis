@@ -1,5 +1,11 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  HostListener,
+  inject,
+  OnInit,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { trigger, transition, style, animate } from '@angular/animations';
 
@@ -27,9 +33,23 @@ import { trigger, transition, style, animate } from '@angular/animations';
     ]),
   ],
 })
-export class NavbarComponent {
+export class NavbarComponent implements OnInit {
   isMobileMenuOpen = false;
   scrolled = false;
+  isMobileView = true;
+  _PLATFORM_ID = inject(PLATFORM_ID);
+
+  ngOnInit() {
+    if (isPlatformBrowser(this._PLATFORM_ID)) {
+      this.isMobileView = window.innerWidth <= 1150;
+      window.addEventListener('resize', () => {
+        this.isMobileView = window.innerWidth <= 1150;
+        if (!this.isMobileView) {
+          this.isMobileMenuOpen = false;
+        }
+      });
+    }
+  }
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
