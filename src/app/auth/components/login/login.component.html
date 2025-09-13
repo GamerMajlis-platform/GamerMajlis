@@ -1,5 +1,5 @@
 <div
-    class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
+    class="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
     #homeContainer>
 
     <div class="fixed inset-0 pointer-events-none z-0">
@@ -16,129 +16,150 @@
 
     <!-- Interactive Hero Section -->
     <section #heroSection
-        class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+        class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden"
         [@heroAnimation]>
 
-        <!-- Interactive Background with Cursor Light Effect -->
-        <div class="absolute inset-0 hero-bg">
-            <!-- Base gradient background -->
+        <div class="flex items-center justify-center min-h-screen p-4 w-full">
             <div
-                class="absolute inset-0 bg-gradient-to-br from-navy via-dark-blue/50 to-navy"></div>
+                class="w-full md:max-w-1/2 bg-slate-800/90 rounded-2xl shadow-2xl p-8 border-white border-r-2 border-b-2 ">
+                <!-- Title -->
+                <h2
+                    class="text-2xl font-semibold text-white text-center mb-8">Login</h2>
 
-            <!-- Main cursor light effect -->
-            <div #cursorLight
-                class="cursor-light absolute w-[600px] h-[600px] pointer-events-none opacity-0 transition-opacity duration-300 ease-out"></div>
+                <!-- Form -->
+                <form [formGroup]="loginForm"
+                    (ngSubmit)="onSubmit()" class="space-y-6">
 
-            <!-- Animated background orbs -->
-            <div
-                class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-mint/20 to-teal/20 rounded-full blur-3xl animate-pulse"></div>
-            <div
-                class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal/20 to-blue-gray/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+                    <!-- Email Field -->
+                    <div class="relative">
+                        @let email = loginForm.get('email');
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            formControlName="email"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="email"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Email
+                        </label>
+                    </div>
+                    @if (email?.errors &&
+                    email?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (email?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (email?.getError('email')) {
+                                <li>Please enter a valid email address. :)</li>
+                                }
 
-            <!-- Floating particles -->
-            <div class="absolute inset-0 pointer-events-none">
-                <div class="floating-particle particle-1"></div>
-                <div class="floating-particle particle-2"></div>
-                <div class="floating-particle particle-3"></div>
-                <div class="floating-particle particle-4"></div>
-                <div class="floating-particle particle-5"></div>
-                <div class="floating-particle particle-6"></div>
-                <div class="floating-particle particle-7"></div>
-                <div class="floating-particle particle-8"></div>
+                            </ul>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Password Field -->
+                    <div class="relative">
+                        @let password = loginForm.get('password');
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            formControlName="password"
+                            required
+                            class="block px-4 pb-2.5 pt-4 w-full text-sm text-white bg-transparent rounded-full border border-slate-600 appearance-none focus:outline-none focus:ring-0 focus:border-cyan-400 peer"
+                            placeholder=" " />
+                        <label
+                            for="password"
+                            class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
+                            Password
+                        </label>
+                    </div>
+
+                    @if (password?.errors &&
+                    password?.touched) {
+                    <div
+                        class="flex p-4 my-4 text-sm text-red-500 rounded-lg bg-main-000 "
+                        role="alert">
+                        <svg class="shrink-0 inline w-4 h-4 me-3 mt-[2px]"
+                            aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+                        </svg>
+                        <span class="sr-only">Danger</span>
+                        <div>
+                            <span class="font-medium">Ensure that these
+                                requirements are
+                                met:</span>
+                            <ul class="mt-1.5 list-disc list-inside capitalize">
+                                @if (password?.getError('required')) {
+                                <li>This Field is Required</li>
+                                }
+                                @else if (password?.getError('minlength')) {
+                                <li>Please enter at least 8 characters.</li>
+                                }
+                                @else if (password?.getError('pattern')) {
+                                <li>Please ensure the first character is
+                                    uppercase,
+                                    followed by at least 7 characters that can
+                                    be
+                                    lowercase letters or numbers.</li>
+                                }
+
+                            </ul>
+                        </div>
+                    </div>
+                    }
+
+                    <!-- Submit Button -->
+                    <button
+                        [ngClass]="{'disabled': loginForm.invalid || loginForm.pristine}"
+                        class="md:w-1/2 w-2/3 block mx-auto py-3 mb-4 cursor-pointer hover:scale-105 transition-all duration-300 
+                         bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-8 
+                         shadow-lg hover:shadow-cyan-400/25">
+                        Login
+                    </button>
+                    <p class="my-0 text-center text-2xl">or</p>
+                    <button
+                        class="md:w-1/2 w-2/3 block mx-auto py-3  cursor-pointer hover:scale-105 transition-all duration-300 
+                         bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-4 
+                         shadow-lg hover:shadow-cyan-400/25">
+                        Login Wtih Discord <i
+                            class="fa-brands fa-discord ms-2 text-dark-blue"></i>
+                    </button>
+                </form>
+
+                <!-- Login Link -->
+                <p class="text-center text-gray-400 text-sm mt-6">
+                    Don't Have Account?
+                    <a routerLink="/register"
+                        class="text-cyan-300 hover:text-cyan-400 transition-colors duration-200">
+                        Register Now</a>
+                </p>
             </div>
         </div>
 
     </section>
-    <div
-        class="w-full max-w-md bg-slate-800/90 rounded-2xl shadow-2xl p-8 border border-slate-700">
-        <!-- Title -->
-        <h2 class="text-2xl font-semibold text-white text-center mb-8">Sign
-            Up</h2>
 
-        <!-- Form -->
-        <form class="space-y-6">
-            <!-- Username Field -->
-            <div class="relative">
-                <input
-                    type="text"
-                    id="username"
-                    name="username"
-                    ngModel
-                    required
-                    placeholder=" "
-                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
-                <label
-                    for="username"
-                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
-                    Username
-                </label>
-            </div>
-
-            <!-- Email Field -->
-            <div class="relative">
-                <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    ngModel
-                    required
-                    placeholder=" "
-                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
-                <label
-                    for="email"
-                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
-                    Email
-                </label>
-            </div>
-
-            <!-- Password Field -->
-            <div class="relative">
-                <input
-                    type="password"
-                    id="password"
-                    name="password"
-                    ngModel
-                    required
-                    placeholder=" "
-                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
-                <label
-                    for="password"
-                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
-                    Password
-                </label>
-            </div>
-
-            <!-- Repassword Field -->
-            <div class="relative">
-                <input
-                    type="password"
-                    id="repassword"
-                    name="repassword"
-                    ngModel
-                    required
-                    placeholder=" "
-                    class="peer w-full px-4 py-3 bg-transparent border border-slate-600 rounded-full text-white placeholder-transparent focus:outline-none focus:border-cyan-400 transition-colors" />
-                <label
-                    for="repassword"
-                    class="absolute left-4 top-3 text-gray-400 transition-all duration-200 peer-placeholder-shown:top-3 peer-focus:-top-6 peer-focus:left-2 peer-focus:text-xs peer-focus:text-cyan-400 peer-[:not(:placeholder-shown)]:-top-6 peer-[:not(:placeholder-shown)]:left-2 peer-[:not(:placeholder-shown)]:text-xs">
-                    Repassword
-                </label>
-            </div>
-
-            <!-- Submit Button -->
-            <button
-                type="submit"
-                class="w-full py-3 bg-cyan-300 hover:bg-cyan-400 text-slate-800 font-medium rounded-full transition-colors duration-200 mt-8">
-                Sign up
-            </button>
-        </form>
-
-        <!-- Login Link -->
-        <p class="text-center text-gray-400 text-sm mt-6">
-            Already have an Account?
-            <a href="#"
-                class="text-cyan-300 hover:text-cyan-400 transition-colors">Login
-                Now</a>
-        </p>
-    </div>
 </div>

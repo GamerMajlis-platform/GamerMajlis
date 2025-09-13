@@ -19,10 +19,11 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, NgClass],
+  imports: [ReactiveFormsModule, NgClass, RouterLink],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
   animations: [

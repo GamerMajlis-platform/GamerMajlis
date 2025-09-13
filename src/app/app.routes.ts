@@ -63,7 +63,7 @@ export const routes: Routes = [
         path: 'home',
         loadComponent: () =>
           import('./pages/home/home.component').then((e) => e.HomeComponent),
-        title: 'Fast-Cart Home',
+        title: 'GamerMajlis - Home',
       },
       {
         path: 'products',
@@ -71,6 +71,7 @@ export const routes: Routes = [
           import('./pages/product-details/product-details.component').then(
             (e) => e.ProductDetailsComponent
           ),
+        title: 'Product Details',
       },
       {
         path: 'wishlist',
@@ -78,15 +79,40 @@ export const routes: Routes = [
           import('./pages/wishlist/wishlist.component').then(
             (e) => e.WishlistComponent
           ),
+        title: 'GamerMajlis - wishlist',
+      },
+      {
+        path: 'profile',
+        loadComponent: () =>
+          import('./pages/user-profile/user-profile.component').then(
+            (e) => e.UserProfileComponent
+          ),
+        title: 'GamerMajlis - Profile',
+      },
+      {
+        path: 'marketplace',
+        loadComponent: () =>
+          import('./pages/marketplace/marketplace.component').then(
+            (e) => e.MarketplaceComponent
+          ),
+        title: 'GamerMajlis - Marketplace',
+      },
+      {
+        path: 'events',
+        loadComponent: () =>
+          import('./pages/events/events.component').then(
+            (e) => e.EventsComponent
+          ),
+        title: 'GamerMajlis - Events',
       },
     ],
   },
-  //   {
-  //     path: '**',
-  //     loadComponent: () =>
-  //       import('./pages/notfound/notfound.component').then(
-  //         (e) => e.NotfoundComponent
-  //       ),
-  //     title: 'Not Found',
-  //   },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./pages/not-found/not-found.component').then(
+        (e) => e.NotFoundComponent
+      ),
+    title: 'Not Found',
+  },
 ];

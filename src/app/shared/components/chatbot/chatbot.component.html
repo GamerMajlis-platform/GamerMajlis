@@ -1,0 +1,204 @@
+<button
+    class="fixed cursor-pointer bottom-6 right-6 z-50 w-12 h-12 p-2 bg-mint rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 flex items-center justify-center group hover:scale-110"
+    (click)="toggleChatbot()"
+    [class.scale-0]="isOpen">
+    <img src="/images/chatbot.svg" alt="Chatbot">
+
+    <span
+        class="absolute inset-0 rounded-full bg-cyan-400 animate-ping opacity-75"></span>
+</button>
+
+<div
+    class="fixed bottom-24 right-6 z-40 w-96 max-w-[calc(100vw-3rem)] transform transition-all duration-300 origin-bottom-right"
+    [class.scale-0]="!isOpen"
+    [class.opacity-0]="!isOpen"
+    [class.scale-100]="isOpen"
+    [class.opacity-100]="isOpen">
+    <div
+        class="bg-slate-800 rounded-2xl shadow-2xl shadow-black/50 overflow-hidden border border-slate-700/50">
+
+        <div
+            class="bg-gradient-to-r from-slate-700 to-slate-800 px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 bg-cyan-500/20 rounded-lg flex items-center justify-center">
+                    <svg class="w-5 h-5 text-cyan-400" fill="currentColor"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M15 7v2a4 4 0 01-4 4H9.828l-1.766 1.767c.28.149.599.233.938.233h2l3 3v-3h3a2 2 0 002-2V9a2 2 0 00-2-2h-1z"></path>
+                        <path
+                            d="M5 5a2 2 0 00-2 2v6a2 2 0 002 2h1v3l3-3h4a2 2 0 002-2V7a2 2 0 00-2-2H5z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-white font-semibold">GamerMajlis chatbot</h3>
+            </div>
+
+            <div class="flex items-center gap-2">
+                <button
+                    (click)="clearChat()"
+                    class="text-slate-400 hover:text-white transition-colors duration-200 p-1"
+                    title="Clear chat">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                    </svg>
+                </button>
+
+                <button
+                    (click)="toggleChatbot()"
+                    class="text-slate-400 hover:text-white transition-colors duration-200">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div
+            class="h-96 bg-teal relative overflow-hidden">
+            <div class="absolute inset-0 opacity-10">
+                <div
+                    class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                <div
+                    class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl"></div>
+            </div>
+
+            <div
+                #messagesContainer
+                class="relative h-full overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-slate-600 scrollbar-track-transparent">
+
+                <!-- Game Controller Icon (show only if no messages) -->
+                @if (messages.length === 0) {
+                <div class="flex justify-center mb-6 mt-4">
+                    <div
+                        class="w-16 h-16 bg-slate-800/80 rounded-2xl flex items-center justify-center shadow-lg transform rotate-12 hover:rotate-0 transition-transform duration-300">
+                        <svg class="w-10 h-10 text-cyan-300" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M7.97,16L5,19C4.67,19.3 4.23,19.5 3.75,19.5C2.78,19.5 2,18.72 2,17.75V17.5L3,10.12C3.21,7.81 5.14,6 7.5,6H16.5C18.86,6 20.79,7.81 21,10.12L22,17.5V17.75C22,18.72 21.22,19.5 20.25,19.5C19.77,19.5 19.33,19.3 19,19L16.03,16H7.97M7,8V10H5V11H7V13H8V11H10V10H8V8H7M16.5,8C16.09,8 15.75,8.34 15.75,8.75C15.75,9.16 16.09,9.5 16.5,9.5C16.91,9.5 17.25,9.16 17.25,8.75C17.25,8.34 16.91,8 16.5,8M14.75,9.75C14.34,9.75 14,10.09 14,10.5C14,10.91 14.34,11.25 14.75,11.25C15.16,11.25 15.5,10.91 15.5,10.5C15.5,10.09 15.16,9.75 14.75,9.75M18.25,9.75C17.84,9.75 17.5,10.09 17.5,10.5C17.5,10.91 17.84,11.25 18.25,11.25C18.66,11.25 19,10.91 19,10.5C19,10.09 18.66,9.75 18.25,9.75M16.5,11.5C16.09,11.5 15.75,11.84 15.75,12.25C15.75,12.66 16.09,13 16.5,13C16.91,13 17.25,12.66 17.25,12.25C17.25,11.84 16.91,11.5 16.5,11.5Z"></path>
+                        </svg>
+                    </div>
+                </div>
+                }
+
+                <!-- Messages -->
+                @for (message of messages; track message.id; let i = $index) {
+
+                <!-- Timestamp -->
+                @if (shouldShowTimestamp(i)) {
+                <div class="flex justify-center my-4">
+                    <span
+                        class="text-xs text-slate-700/70 bg-slate-100/20 px-3 py-1 rounded-full">
+                        {{ formatTime(message.timestamp) }}
+                    </span>
+                </div>
+                }
+
+                <!-- Message -->
+                <div
+                    class="flex gap-3 message-bubble "
+                    [class.flex-row-reverse]="message.sender === 'user'"
+                    [class.justify-start]="message.sender === 'user'">
+
+                    <!-- Avatar (Bot only) -->
+                    @if (message.sender === 'bot') {
+                    <div
+                        class="w-8 h-8  rounded-full flex items-center justify-center flex-shrink-0">
+                        <img src="/images/Controller.png" alt>
+                    </div>
+                    }
+
+                    <!-- Message Content -->
+                    <div
+                        class="max-w-[80%] shadow-lg"
+                        [ngClass]="{
+                'bg-slate-800/80 text-white rounded-3xl rounded-tl-sm': message.sender === 'bot',
+                'bg-white text-slate-800 rounded-2xl rounded-tr-sm': message.sender === 'user'
+              }">
+
+                        <!-- Typing Animation -->
+                        @if (message.isTyping) {
+                        <div class="px-4 py-3">
+                            <div class="flex space-x-1">
+                                <div class="flex space-x-1 animate-pulse">
+                                    <div
+                                        class="w-2 h-2 bg-cyan-300 rounded-full animate-bounce"></div>
+                                    <div
+                                        class="w-2 h-2 bg-cyan-300 rounded-full animate-bounce"
+                                        style="animation-delay: 0.1s"></div>
+                                    <div
+                                        class="w-2 h-2 bg-cyan-300 rounded-full animate-bounce"
+                                        style="animation-delay: 0.2s"></div>
+                                </div>
+                                <span class="text-cyan-300 text-sm ml-2">AI is
+                                    typing...</span>
+                            </div>
+                        </div>
+                        }
+
+                        <!-- Actual Message -->
+                        @if (!message.isTyping) {
+                        <div class="px-4 py-3">
+                            <p
+                                class="text-sm leading-relaxed whitespace-pre-wrap">{{
+                                message.text }}</p>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+                }
+
+            </div>
+        </div>
+
+        <!-- Message Input Area -->
+        <div class="bg-white p-4 border-t border-slate-200">
+            <form (ngSubmit)="sendMessage($event)" class="flex gap-3">
+                <input
+                    #messageInput
+                    type="text"
+                    name="messageInput"
+                    [(ngModel)]="currentMessage"
+                    placeholder="Compose your Message..."
+                    class="flex-1 px-4 py-2.5 bg-slate-100 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent transition-all duration-200 text-slate-700 placeholder-slate-400"
+                    [disabled]="isTyping"
+                    (keydown.enter)="sendMessage($event)">
+
+                <!-- Action Buttons -->
+                <div class="flex gap-2">
+
+                    <button
+                        type="submit"
+                        [disabled]="!currentMessage.trim() || isTyping"
+                        class="p-2.5 bg-cyan-500 text-white rounded-lg hover:bg-cyan-600 transition-all duration-200 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg class="w-5 h-5" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </form>
+
+            <!-- Quick Actions (Optional) -->
+            @if (messages.length === 1) {
+            <div class="flex flex-wrap gap-2 mt-3">
+                @for (action of quickActions; track action) {
+                <button
+                    (click)="handleQuickAction(action)"
+                    class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm rounded-full transition-colors duration-200">
+                    {{ action }}
+                </button>
+                }
+            </div>
+            }
+
+        </div>
+
+    </div>
+</div>

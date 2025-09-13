@@ -21,7 +21,7 @@
 
         <div class="flex items-center justify-center min-h-screen p-4 w-full">
             <div
-                class="w-full max-w-1/2 bg-slate-800/90 rounded-2xl shadow-2xl p-8 border-white border-r-2 border-b-2 ">
+                class="w-full md:max-w-1/2 bg-slate-800/90 rounded-2xl shadow-2xl p-8 border-white border-r-2 border-b-2 ">
                 <!-- Title -->
                 <h2
                     class="text-2xl font-semibold text-white text-center mb-8">Sign
@@ -230,17 +230,18 @@
                     <!-- Submit Button -->
                     <button
                         [ngClass]="{'disabled': signUpForm.invalid || signUpForm.pristine}"
-                        class="w-full py-3  cursor-pointer hover:scale-105 transition-all duration-300 
+                        class="w-1/2 block mx-auto py-3  cursor-pointer hover:scale-105 transition-all duration-300 
                          bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-8 
                          shadow-lg hover:shadow-cyan-400/25">
                         Sign up
                     </button>
+
                 </form>
 
                 <!-- Login Link -->
                 <p class="text-center text-gray-400 text-sm mt-6">
                     Already have an Account?
-                    <a href="#"
+                    <a routerLink="/login"
                         class="text-cyan-300 hover:text-cyan-400 transition-colors duration-200">Login
                         Now</a>
                 </p>
