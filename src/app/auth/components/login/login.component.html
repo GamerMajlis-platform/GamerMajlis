@@ -1,18 +1,6 @@
 <div
-    class="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
+    class="min-h-screen text-white overflow-x-hidden"
     #homeContainer>
-
-    <div class="fixed inset-0 pointer-events-none z-0">
-        <div
-            class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
-        <div
-            class="absolute top-40 right-20 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
-        <div
-            class="absolute bottom-40 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
-                src="/images/Controller.png" alt></div>
-        <div
-            class="absolute top-1/2 right-10 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
-    </div>
 
     <!-- Interactive Hero Section -->
     <section #heroSection
@@ -24,7 +12,8 @@
                 class="w-full md:max-w-1/2 bg-slate-800/90 rounded-2xl shadow-2xl p-8 border-white border-r-2 border-b-2 ">
                 <!-- Title -->
                 <h2
-                    class="text-2xl font-semibold text-white text-center mb-8">Login</h2>
+                    class="text-2xl font-semibold text-white text-center mb-8">{{
+                    'AUTH.LOGIN.TITLE' | translate }}</h2>
 
                 <!-- Form -->
                 <form [formGroup]="loginForm"
@@ -44,7 +33,7 @@
                         <label
                             for="email"
                             class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
-                            Email
+                            {{ 'AUTH.LOGIN.EMAIL' | translate }}
                         </label>
                     </div>
                     @if (email?.errors &&
@@ -66,10 +55,12 @@
                                 met:</span>
                             <ul class="mt-1.5 list-disc list-inside capitalize">
                                 @if (email?.getError('required')) {
-                                <li>This Field is Required</li>
+                                <li>{{ 'AUTH.LOGIN.ERRORS.REQUIRED' | translate
+                                    }}</li>
                                 }
                                 @else if (email?.getError('email')) {
-                                <li>Please enter a valid email address. :)</li>
+                                <li>{{ 'AUTH.LOGIN.ERRORS.EMAIL' | translate
+                                    }}</li>
                                 }
 
                             </ul>
@@ -91,7 +82,7 @@
                         <label
                             for="password"
                             class="absolute text-sm text-white duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-transparent peer-focus:bg-cyan-400 peer-focus:rounded-4xl peer-focus:text-black px-2 peer-focus:px-2 pe  peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-3">
-                            Password
+                            {{ 'AUTH.LOGIN.PASSWORD' | translate }}
                         </label>
                     </div>
 
@@ -114,17 +105,16 @@
                                 met:</span>
                             <ul class="mt-1.5 list-disc list-inside capitalize">
                                 @if (password?.getError('required')) {
-                                <li>This Field is Required</li>
+                                <li>{{ 'AUTH.LOGIN.ERRORS.REQUIRED' | translate
+                                    }}</li>
                                 }
                                 @else if (password?.getError('minlength')) {
-                                <li>Please enter at least 8 characters.</li>
+                                <li>{{ 'AUTH.LOGIN.ERRORS.MIN_LENGTH' |
+                                    translate }}</li>
                                 }
                                 @else if (password?.getError('pattern')) {
-                                <li>Please ensure the first character is
-                                    uppercase,
-                                    followed by at least 7 characters that can
-                                    be
-                                    lowercase letters or numbers.</li>
+                                <li>{{ 'AUTH.LOGIN.ERRORS.PASSWORD_PATTERN' |
+                                    translate }}</li>
                                 }
 
                             </ul>
@@ -138,24 +128,25 @@
                         class="md:w-1/2 w-2/3 block mx-auto py-3 mb-4 cursor-pointer hover:scale-105 transition-all duration-300 
                          bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-8 
                          shadow-lg hover:shadow-cyan-400/25">
-                        Login
+                        {{ 'AUTH.LOGIN.SUBMIT' | translate }}
                     </button>
-                    <p class="my-0 text-center text-2xl">or</p>
-                    <button
+                    <p class="my-0 text-center text-2xl">{{ 'AUTH.LOGIN.OR' |
+                        translate }}</p>
+                    <button type="button" (click)="discordLogin()"
                         class="md:w-1/2 w-2/3 block mx-auto py-3  cursor-pointer hover:scale-105 transition-all duration-300 
                          bg-cyan-300 hover:bg-cyan-400 text-slate-900 font-medium rounded-full mt-4 
                          shadow-lg hover:shadow-cyan-400/25">
-                        Login Wtih Discord <i
+                        {{ 'AUTH.LOGIN.LOGIN_DISCORD' | translate }} <i
                             class="fa-brands fa-discord ms-2 text-dark-blue"></i>
                     </button>
                 </form>
 
                 <!-- Login Link -->
                 <p class="text-center text-gray-400 text-sm mt-6">
-                    Don't Have Account?
+                    {{ 'AUTH.LOGIN.DONT_HAVE' | translate }}
                     <a routerLink="/register"
                         class="text-cyan-300 hover:text-cyan-400 transition-colors duration-200">
-                        Register Now</a>
+                        {{ 'AUTH.LOGIN.REGISTER_NOW' | translate }}</a>
                 </p>
             </div>
         </div>

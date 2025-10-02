@@ -1,7 +1,7 @@
 import {
   ApplicationConfig,
-  importProvidersFrom,
   provideZoneChangeDetection,
+  importProvidersFrom,
 } from '@angular/core';
 import {
   provideRouter,
@@ -20,27 +20,40 @@ import {
   withInterceptors,
   withFetch,
 } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { IMAGE_CONFIG } from '@angular/common';
+import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { provideToastr } from 'ngx-toastr';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, '/i18n/', '.json');
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
-    provideClientHydration(withEventReplay()),
-    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(
       routes,
-      withHashLocation(),
+
       withViewTransitions(),
       withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
     ),
     provideClientHydration(withEventReplay()),
-    provideHttpClient(withFetch()),
-    provideAnimations(),
+    provideHttpClient(withFetch(), withInterceptors([authInterceptor])),
     provideAnimationsAsync(),
-    importProvidersFrom(BrowserAnimationsModule),
+    provideClientHydration(withEventReplay()), // Use only this for animations
+    provideToastr(),
+    importProvidersFrom(
+      TranslateModule.forRoot({
+        defaultLanguage: 'en',
+        loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient],
+        },
+      })
+    ),
   ],
 };

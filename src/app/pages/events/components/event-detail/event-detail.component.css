@@ -1,0 +1,648 @@
+/* Event Detail Modern UI - Enhanced Glassmorphism & Animations */
+
+/* ============================================
+   GLASSMORPHISM EFFECTS
+   ============================================ */
+
+.glass-card {
+    background: rgba(30, 41, 59, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card-hover {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card-hover:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(134, 239, 172, 0.3);
+    box-shadow: 0 12px 48px 0 rgba(134, 239, 172, 0.15),
+        0 0 0 1px rgba(134, 239, 172, 0.1);
+    transform: translateY(-4px) scale(1.01);
+}
+
+/* ============================================
+   HERO SECTION & BACKGROUNDS
+   ============================================ */
+
+.hero-gradient-bg {
+    background: linear-gradient(135deg,
+            rgba(15, 23, 42, 0.95) 0%,
+            rgba(30, 41, 59, 0.9) 50%,
+            rgba(15, 23, 42, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-gradient-bg::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(134, 239, 172, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: backgroundMove 60s linear infinite;
+}
+
+@keyframes backgroundMove {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50px, -50px) rotate(360deg);
+    }
+}
+
+.floating-orbs {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(134, 239, 172, 0.4), transparent);
+    top: -150px;
+    left: -150px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.3), transparent);
+    bottom: -200px;
+    right: -200px;
+    animation-delay: 7s;
+}
+
+.orb-3 {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.3), transparent);
+    top: 40%;
+    right: 10%;
+    animation-delay: 14s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    25% {
+        transform: translate(30px, -30px) scale(1.1);
+    }
+
+    50% {
+        transform: translate(-20px, 20px) scale(0.9);
+    }
+
+    75% {
+        transform: translate(20px, 10px) scale(1.05);
+    }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -1000px 0;
+    }
+
+    100% {
+        background-position: 1000px 0;
+    }
+}
+
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 20px rgba(134, 239, 172, 0.4);
+    }
+
+    50% {
+        box-shadow: 0 0 40px rgba(134, 239, 172, 0.8);
+    }
+}
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-slide-in-left {
+    animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+    animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.5s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.delay-100 {
+    animation-delay: 0.1s;
+}
+
+.delay-200 {
+    animation-delay: 0.2s;
+}
+
+.delay-300 {
+    animation-delay: 0.3s;
+}
+
+.delay-400 {
+    animation-delay: 0.4s;
+}
+
+.delay-500 {
+    animation-delay: 0.5s;
+}
+
+/* ============================================
+   BUTTONS & INTERACTIVE ELEMENTS
+   ============================================ */
+
+.btn-glass {
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-glass::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    transition: left 0.6s;
+}
+
+.btn-glass:hover::before {
+    left: 100%;
+}
+
+.btn-glass:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.btn-glass:active {
+    transform: translateY(0);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Primary action button */
+.btn-primary-glass {
+    background: linear-gradient(135deg,
+            rgba(134, 239, 172, 0.9) 0%,
+            rgba(16, 185, 129, 0.9) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary-glass::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    bottom: -50%;
+    left: -50%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transform: rotateZ(60deg) translate(-5em, 7.5em);
+}
+
+.btn-primary-glass:hover::after {
+    animation: shimmer 1.5s infinite;
+}
+
+/* ============================================
+   BADGES & TAGS
+   ============================================ */
+
+.badge-glass {
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.badge-glass:hover {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: rgba(134, 239, 172, 0.4);
+    transform: scale(1.05);
+}
+
+.badge-animated {
+    animation: pulse-glow 2s infinite;
+}
+
+/* Status badges with glow */
+.status-open {
+    background: linear-gradient(135deg,
+            rgba(16, 185, 129, 0.2) 0%,
+            rgba(5, 150, 105, 0.2) 100%);
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+}
+
+.status-closed {
+    background: linear-gradient(135deg,
+            rgba(251, 191, 36, 0.2) 0%,
+            rgba(245, 158, 11, 0.2) 100%);
+    border-color: rgba(251, 191, 36, 0.5);
+    box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+}
+
+.status-live {
+    background: linear-gradient(135deg,
+            rgba(59, 130, 246, 0.2) 0%,
+            rgba(37, 99, 235, 0.2) 100%);
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+    animation: pulse-glow 1.5s infinite;
+}
+
+.status-cancelled {
+    background: linear-gradient(135deg,
+            rgba(239, 68, 68, 0.2) 0%,
+            rgba(220, 38, 38, 0.2) 100%);
+    border-color: rgba(239, 68, 68, 0.5);
+}
+
+/* ============================================
+   CARDS & CONTAINERS
+   ============================================ */
+
+.info-card {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(134, 239, 172, 0.1), transparent);
+    transition: left 0.5s;
+}
+
+.info-card:hover::before {
+    left: 100%;
+}
+
+.info-card:hover {
+    background: rgba(30, 41, 59, 0.5);
+    border-color: rgba(134, 239, 172, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+/* Icon containers */
+.icon-glass {
+    background: linear-gradient(135deg,
+            rgba(134, 239, 172, 0.2) 0%,
+            rgba(16, 185, 129, 0.2) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(134, 239, 172, 0.3);
+    transition: all 0.3s ease;
+}
+
+.icon-glass:hover {
+    background: linear-gradient(135deg,
+            rgba(134, 239, 172, 0.3) 0%,
+            rgba(16, 185, 129, 0.3) 100%);
+    border-color: rgba(134, 239, 172, 0.5);
+    transform: rotate(5deg) scale(1.1);
+    box-shadow: 0 0 30px rgba(134, 239, 172, 0.4);
+}
+
+/* ============================================
+   PROGRESS BARS
+   ============================================ */
+
+.progress-glass-container {
+    background: rgba(51, 65, 85, 0.4);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-glass-fill {
+    background: linear-gradient(90deg,
+            rgba(16, 185, 129, 0.8) 0%,
+            rgba(134, 239, 172, 0.9) 50%,
+            rgba(16, 185, 129, 0.8) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s linear infinite;
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-glass-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.3),
+            transparent);
+    animation: shimmer 2s linear infinite;
+}
+
+/* ============================================
+   ATTENDEES & AVATARS
+   ============================================ */
+
+.attendee-glass {
+    background: rgba(30, 41, 59, 0.3);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.attendee-glass:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(134, 239, 172, 0.3);
+    transform: translateX(8px);
+    box-shadow: 0 4px 20px rgba(134, 239, 172, 0.2);
+}
+
+.avatar-ring {
+    position: relative;
+}
+
+.avatar-ring::before {
+    content: '';
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    padding: 3px;
+    background: linear-gradient(135deg, rgba(134, 239, 172, 0.8), rgba(6, 182, 212, 0.8));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.attendee-glass:hover .avatar-ring::before {
+    opacity: 1;
+}
+
+/* ============================================
+   SCROLLBAR STYLING
+   ============================================ */
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.3);
+    border-radius: 10px;
+    backdrop-filter: blur(5px);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg,
+            rgba(134, 239, 172, 0.6),
+            rgba(16, 185, 129, 0.6));
+    border-radius: 10px;
+    border: 2px solid rgba(30, 41, 59, 0.3);
+    transition: all 0.3s;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg,
+            rgba(134, 239, 172, 0.9),
+            rgba(16, 185, 129, 0.9));
+    box-shadow: 0 0 10px rgba(134, 239, 172, 0.5);
+}
+
+/* ============================================
+   TEXT EFFECTS
+   ============================================ */
+
+.text-glow {
+    text-shadow: 0 0 20px rgba(134, 239, 172, 0.5),
+        0 0 30px rgba(134, 239, 172, 0.3);
+}
+
+.gradient-text {
+    background: linear-gradient(135deg,
+            rgb(134, 239, 172) 0%,
+            rgb(6, 182, 212) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ============================================
+   ORGANIZER CARD SPECIAL
+   ============================================ */
+
+.organizer-card-glass {
+    background: linear-gradient(135deg,
+            rgba(30, 41, 59, 0.4) 0%,
+            rgba(15, 23, 42, 0.6) 100%);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(134, 239, 172, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.organizer-card-glass::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(134, 239, 172, 0.1) 0%, transparent 70%);
+    animation: rotate 10s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.organizer-card-glass:hover {
+    border-color: rgba(134, 239, 172, 0.5);
+    box-shadow: 0 0 40px rgba(134, 239, 172, 0.3);
+}
+
+/* ============================================
+   LOADING STATES
+   ============================================ */
+
+.spinner-glass {
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-top-color: rgba(134, 239, 172, 0.8);
+    animation: spin 1s linear infinite;
+    backdrop-filter: blur(5px);
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.skeleton-glass {
+    background: linear-gradient(90deg,
+            rgba(30, 41, 59, 0.3) 25%,
+            rgba(51, 65, 85, 0.5) 50%,
+            rgba(30, 41, 59, 0.3) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .glass-card-hover:hover {
+        transform: translateY(-2px) scale(1.005);
+    }
+
+    .icon-glass:hover {
+        transform: rotate(3deg) scale(1.05);
+    }
+}
+
+@media (max-width: 768px) {
+    .glass-card {
+        backdrop-filter: blur(15px) saturate(160%);
+    }
+
+    .hero-gradient-bg::before {
+        background-size: 30px 30px;
+    }
+
+    .orb {
+        filter: blur(40px);
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Focus states for accessibility */
+.btn-glass:focus-visible,
+.info-card:focus-visible {
+    outline: 2px solid rgba(134, 239, 172, 0.8);
+    outline-offset: 2px;
+}

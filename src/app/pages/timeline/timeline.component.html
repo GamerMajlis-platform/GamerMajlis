@@ -1,0 +1,340 @@
+<!-- Timeline Content Section -->
+<section class="timeline-section relative min-h-screen flex justify-center">
+    <!-- Content -->
+    <div
+        class="timeline-wrapper relative w-2/3 mx-auto max-w-7xl px-4 sm:px-6 md:px-10 py-10">
+        <!-- Ambient gradient orbs -->
+        <div class="pointer-events-none absolute inset-0 overflow-hidden">
+            <div
+                class="absolute -top-24 -left-24 w-80 h-80 bg-mint/10 rounded-full blur-3xl animate-pulse"></div>
+            <div
+                class="absolute top-1/3 -right-32 w-96 h-96 bg-teal/10 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+        </div>
+
+        <div
+            class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 md:px-10 py-20">
+            <!-- Heading -->
+            <div class="text-center mb-14">
+                <h1
+                    class="text-4xl sm:text-5xl font-black tracking-tight mb-4 text-white">{{
+                    'TIMELINE.TITLE' | translate }}</h1>
+                <p
+                    class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">{{
+                    'TIMELINE.SUBTITLE' | translate }}</p>
+            </div>
+
+            <!-- Content Type Filters -->
+            <div class="flex justify-center mb-8">
+                <div
+                    class="relative flex p-1 bg-slate-900/50 border border-slate-700/60 rounded-xl backdrop-blur-sm">
+                    <ng-container *ngFor="let t of tabs; trackBy: trackTab">
+                        <button type="button" (click)="toggleFilter(t.key)"
+                            [attr.aria-selected]="isFilterActive(t.key) ? 'true' : 'false'"
+                            [attr.id]="'filter-' + t.key"
+                            class="relative flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-all duration-300 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60 border-0"
+                            [class.text-slate-900]="isFilterActive(t.key)"
+                            [class.text-slate-400]="!isFilterActive(t.key)"
+                            [class.hover:text-slate-300]="!isFilterActive(t.key)"
+                            role="button">
+                            <i [class]="'fa-solid ' + t.icon"></i>
+                            <span>{{ t.label }}</span>
+                            <span *ngIf="isFilterActive(t.key)"
+                                class="absolute inset-0 rounded-full bg-gradient-to-r from-mint to-teal text-slate-900 font-semibold animate-fade-in active-pill-overlay"
+                                aria-hidden="true"></span>
+                            <span *ngIf="isFilterActive(t.key)"
+                                class="tab-underline"
+                                aria-hidden="true"></span>
+                        </button>
+                    </ng-container>
+                </div>
+            </div>
+
+            <!-- Unified Feed -->
+            <div class="timeline-feed space-y-4" role="list"
+                aria-label="Timeline feed">
+                <!-- Loading skeletons -->
+                <ng-container *ngIf="!loadedOnce() && isLoading()">
+                    <div
+                        *ngFor="let s of skeletons"
+                        class="skeleton-shimmer rounded-xl bg-slate-800/60 border border-slate-700/40 p-4 h-32"></div>
+                </ng-container>
+
+                <!-- Feed items -->
+                <div
+                    *ngFor="let item of feedItems(); trackBy: trackFeedItem; let i = index"
+                    class="feed-item"
+                    [style.animationDelay.ms]="i * 45">
+
+                    <!-- Post item -->
+                    <div
+                        *ngIf="item.type === 'post'"
+                        role="listitem"
+                        class="tl-card group rounded-xl border border-slate-700/50 bg-slate-800/60 backdrop-blur-sm p-4 flex flex-col gap-3 hover:border-mint/60 hover:bg-slate-800/80 transition-all duration-400 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60"
+                        (click)="openPost(getPostData(item))"
+                        tabindex="0"
+                        (keydown.enter)="openPost(getPostData(item))">
+
+                        <!-- Creator and Date Header -->
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="flex-shrink-0">
+                                <!-- @let ProfileImageUrl = 'localhost:8080/api' +
+                                getPostData(item).author?.profilePictureUrl; -->
+
+                                <img
+                                    [src]="getPostCreatorProfileImageUrl(getPostData(item))"
+                                    [alt]="getPostData(item).author?.displayName || 'Unknown User'"
+                                    class="w-10 h-10 rounded-full object-cover border border-slate-600">
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span
+                                    class="font-semibold text-sm text-slate-100 truncate">
+                                    {{ getPostData(item).author?.displayName ||
+                                    'Unknown User' }}
+                                </span>
+                                <span class="text-xs text-slate-400">
+                                    {{
+                                    formatRelativeTime(getPostData(item).createdAt)
+                                    }}
+                                </span>
+                            </div>
+                            <span
+                                class="ml-auto shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-slate-700/70 text-slate-300 tracking-wide">
+                                {{ getPostData(item).type || 'POST' }}
+                            </span>
+                        </div>
+
+                        <!-- Post Content -->
+                        <div class="space-y-3">
+                            <h3
+                                class="font-semibold text-base leading-snug text-slate-100 group-hover:text-mint transition-colors">
+                                {{ item.data.title }}
+                            </h3>
+                            <p class="text-sm text-slate-300 leading-relaxed"
+                                *ngIf="getPostData(item).content">
+                                {{ getPostData(item).content }}
+                            </p>
+
+                            <!-- Attached Media for Posts -->
+                            <div
+                                *ngIf="getPostData(item).attachedMedia && getPostData(item).attachedMedia!.length > 0"
+                                class="grid gap-2"
+                                [class.grid-cols-1]="getPostData(item).attachedMedia!.length === 1"
+                                [class.grid-cols-2]="getPostData(item).attachedMedia!.length > 1">
+                                <div
+                                    *ngFor="let media of getPostData(item).attachedMedia"
+                                    class="relative rounded-lg overflow-hidden bg-slate-700/30">
+                                    <img [src]="media.thumbnailPath"
+                                        [alt]="media.title"
+                                        class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                                        loading="lazy">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Post Interactions -->
+                        <div
+                            class="flex items-center gap-6 pt-2 border-t border-slate-700/50">
+                            <ng-container
+                                *ngIf="augmentPost(getPostData(item)) as ap">
+                                <button
+                                    type="button"
+                                    class="flex items-center gap-2 text-slate-400 hover:text-mint transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60 rounded px-1 -ml-1"
+                                    (click)="$event.stopPropagation(); toggleLike(ap)"
+                                    [attr.aria-pressed]="ap.__liked ? 'true' : 'false'"
+                                    [disabled]="ap.__likeBusy"
+                                    [class.opacity-60]="ap.__likeBusy"
+                                    [class.text-mint]="ap.__liked"
+                                    [title]="ap.__liked ? 'Unlike' : 'Like'">
+                                    <i class="fa-heart text-base"
+                                        [class.fa-solid]="ap.__liked"
+                                        [class.fa-regular]="!ap.__liked"></i>
+                                    <span class="text-sm">{{ ap.likeCount || 0
+                                        }}</span>
+                                </button>
+                                <span
+                                    class="flex items-center gap-2 text-slate-400">
+                                    <i class="fa-regular fa-eye"></i>
+                                    <span class="text-sm">{{ ap.viewCount || 0
+                                        }}</span>
+                                </span>
+                                <span
+                                    class="flex items-center gap-2 text-slate-400">
+                                    <i class="fa-regular fa-comment"></i>
+                                    <span class="text-sm">{{ ap.commentCount ||
+                                        0 }}</span>
+                                </span>
+                            </ng-container>
+                        </div>
+                    </div>
+
+                    <!-- Media item -->
+                    <div
+                        *ngIf="item.type === 'media'"
+                        role="listitem"
+                        class="tl-card group rounded-xl border border-slate-700/50 bg-slate-800/60 backdrop-blur-sm overflow-hidden hover:border-mint/60 hover:bg-slate-800/80 transition-all duration-400 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60"
+                        (click)="openMedia(getMediaData(item))"
+                        tabindex="0"
+                        (keydown.enter)="openMedia(getMediaData(item))">
+
+                        <!-- Creator and Date Header -->
+                        <div class="flex items-center gap-3 p-4 pb-2">
+                            <div class="flex-shrink-0">
+                                <img
+                                    [src]="getMediaData(item).uploader?.profilePictureUrl || '/images/user4.jpg'"
+                                    [alt]="getMediaData(item).uploader?.displayName || 'Unknown User'"
+                                    class="w-10 h-10 rounded-full object-cover border border-slate-600">
+                            </div>
+                            <div class="flex flex-col min-w-0">
+                                <span
+                                    class="font-semibold text-sm text-slate-100 truncate">
+                                    {{ getMediaData(item).uploader?.displayName
+                                    || 'Unknown User' }}
+                                </span>
+                                <span class="text-xs text-slate-400">
+                                    {{
+                                    formatRelativeTime(getMediaData(item).createdAt)
+                                    }}
+                                </span>
+                            </div>
+                            <span
+                                class="ml-auto shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-slate-700/70 text-slate-300 tracking-wide">
+                                {{ getMediaData(item).mediaType || 'MEDIA' }}
+                            </span>
+                        </div>
+
+                        <!-- Media Title -->
+                        <div class="px-4 pb-2" *ngIf="item.data.title">
+                            <h3
+                                class="font-semibold text-base leading-snug text-slate-100 group-hover:text-mint transition-colors">
+                                {{ item.data.title }}
+                            </h3>
+                        </div>
+
+                        <!-- Real Media Content -->
+                        <div class="relative overflow-hidden">
+                            <!-- Video Content -->
+                            <video
+                                *ngIf="getMediaData(item).mediaType === 'VIDEO' && getMediaData(item).filePath"
+                                class="w-full max-h-96 object-cover"
+                                controls
+                                preload="metadata"
+                                [poster]="getMediaData(item).thumbnailPath">
+                                <source [src]="getMediaData(item).filePath"
+                                    type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+
+                            <!-- Image Content -->
+                            <img
+                                *ngIf="getMediaData(item).mediaType === 'IMAGE' && getMediaData(item).filePath"
+                                [src]="getMediaData(item).filePath"
+                                [alt]="item.data.title"
+                                class="w-full max-h-96 object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                                loading="lazy" />
+
+                            <!-- Fallback for missing media -->
+                            <div
+                                *ngIf="!getMediaData(item).filePath"
+                                class="flex items-center justify-center h-48 text-slate-500 text-sm bg-slate-700/30">
+                                <i class="fa-solid fa-image text-2xl"></i>
+                                <span class="ml-2">Media not available</span>
+                            </div>
+                        </div>
+
+                        <!-- Media Description and Interactions -->
+                        <div class="p-4 space-y-3">
+                            <!-- Description -->
+                            <p *ngIf="getMediaData(item).description"
+                                class="text-sm text-slate-300 leading-relaxed">
+                                {{ getMediaData(item).description }}
+                            </p>
+
+                            <!-- Media Stats -->
+                            <div
+                                class="flex items-center gap-6 pt-2 border-t border-slate-700/50">
+                                <span
+                                    class="flex items-center gap-2 text-slate-400">
+                                    <i class="fa-regular fa-eye"></i>
+                                    <span class="text-sm">{{ item.data.viewCount
+                                        || 0 }}</span>
+                                </span>
+                                <span
+                                    class="flex items-center gap-2 text-slate-400">
+                                    <i class="fa-regular fa-download"></i>
+                                    <span class="text-sm">{{
+                                        getMediaData(item).downloadCount || 0
+                                        }}</span>
+                                </span>
+                                <span *ngIf="getMediaData(item).fileSize"
+                                    class="flex items-center gap-2 text-slate-400">
+                                    <i class="fa-regular fa-file"></i>
+                                    <span class="text-sm">{{
+                                        formatFileSize(getMediaData(item).fileSize)
+                                        }}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading indicator -->
+                <div
+                    class="flex items-center justify-center py-6"
+                    *ngIf="loadedOnce() && isLoading()">
+                    <div
+                        class="w-6 h-6 border-2 border-mint/30 border-t-mint rounded-full animate-spin"></div>
+                </div>
+
+                <!-- Empty state -->
+                <div
+                    class="text-center text-slate-500 text-sm py-10"
+                    *ngIf="!isLoading() && feedItems().length === 0">
+                    No content yet.
+                </div>
+
+                <!-- Infinite scroll sentinel -->
+                <div #sentinel class="h-2 w-full" aria-hidden="true"></div>
+            </div>
+        </div>
+        <!-- Primary Create FAB (ergonomic bottom-right) -->
+        <button
+            class="create-fab group fixed bottom-6 right-6 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-slate-950/85 border border-slate-700/70 backdrop-blur-md shadow-2xl shadow-teal/20 flex flex-col items-center justify-center gap-1 text-[10px] sm:text-xs font-medium tracking-wide text-slate-200 hover:text-white focus:outline-none focus-visible:ring-4 focus-visible:ring-mint/40 transition-all overflow-hidden"
+            (click)="openCreate()" type="button"
+            [attr.aria-label]="createLabel()">
+            <span
+                class="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-br from-mint to-teal text-slate-900 shadow-inner shadow-mint/40 transition-transform group-active:scale-90">
+                <i class="fa-solid text-base sm:text-lg"
+                    [class.fa-pen]="isFilterActive('posts')"
+                    [class.fa-upload]="isFilterActive('media')"></i>
+                <span
+                    class="absolute inset-0 rounded-xl ring-2 ring-transparent group-hover:ring-mint/40 transition-all"></span>
+            </span>
+            <span class="hidden sm:inline leading-none">{{ createLabel()
+                }}</span>
+            <!-- Pulse ring -->
+            <span
+                class="absolute inset-0 rounded-2xl pointer-events-none create-fab-pulse"
+                aria-hidden="true"></span>
+        </button>
+
+        <!-- Secondary Scroll / Switch FAB (stacked above) -->
+        <button
+            class="timeline-fab group fixed bottom-[6.5rem] right-7 sm:bottom-[7.5rem] sm:right-9 w-12 h-12 rounded-xl bg-gradient-to-br from-mint to-teal text-slate-900 shadow-xl shadow-teal/30 flex items-center justify-center font-semibold outline-none focus-visible:ring-4 focus-visible:ring-mint/40 transition-all"
+            [class.opacity-0]="!showFab()"
+            [class.pointer-events-none]="!showFab()"
+            (click)="handleFabClick()"
+            (contextmenu)="$event.preventDefault(); cycleFilters();"
+            (mousedown)="startHold()" (mouseup)="endHold()"
+            (mouseleave)="endHold()"
+            (touchstart)="startHold()" (touchend)="endHold()"
+            [attr.aria-label]="'TIMELINE.SCROLL_OR_SWITCH' | translate"
+            type="button">
+            <span
+                class="fab-icon relative w-5 h-5 flex items-center justify-center">
+                <i class="fa-solid" [class]="'fa-solid ' + fabIcon()"></i>
+                <span
+                    class="absolute inset-0 rounded-xl border-2 border-slate-900/10 group-active:scale-90 transition-transform"></span>
+            </span>
+        </button>
+    </div>
+</section>

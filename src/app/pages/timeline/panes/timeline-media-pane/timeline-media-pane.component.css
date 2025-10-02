@@ -1,0 +1,105 @@
+:host {
+    display: block;
+}
+
+/* Media grid specific styles */
+.tl-card {
+    aspect-ratio: 16 / 9;
+    transition-property: border-color, transform, box-shadow;
+}
+
+.tl-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.4);
+}
+
+/* Image hover effects */
+.tl-card img {
+    transition: transform 0.7s ease-out;
+}
+
+.tl-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Overlay gradients */
+.tl-card .absolute.inset-0 {
+    transition: opacity 0.3s ease;
+}
+
+/* Text overlay positioning */
+.tl-card .absolute.bottom-1\.5 {
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Loading spinner */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Line clamp for titles */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Focus states for accessibility */
+.tl-card:focus-visible {
+    outline: 2px solid rgb(var(--mint) / 0.6);
+    outline-offset: 2px;
+}
+
+/* Responsive grid adjustments */
+@media (max-width: 640px) {
+    .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.5rem;
+    }
+}
+
+@media (min-width: 640px) and (max-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.75rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+    }
+}
+
+/* Skeleton shimmer - inherited from parent timeline component */
+.skeleton-shimmer {
+    background: linear-gradient(90deg,
+            rgb(30, 41, 59) 0%,
+            rgb(39, 51, 70) 50%,
+            rgb(30, 41, 59) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}

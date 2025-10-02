@@ -8,6 +8,7 @@ import {
   query,
 } from '@angular/animations';
 import { NgClass } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Component, inject } from '@angular/core';
 import {
@@ -19,11 +20,15 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { SignUpService } from '../../services/sign-up.service';
+import { AuthApiService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
+import { timeout } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
-  imports: [ReactiveFormsModule, NgClass, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, RouterLink, TranslateModule],
   templateUrl: './sign-up.component.html',
   styleUrl: './sign-up.component.css',
   animations: [
@@ -48,10 +53,16 @@ import { RouterLink } from '@angular/router';
   ],
 })
 export class SignUpComponent {
+  _ToastrService = inject(ToastrService);
+  successMessage = '';
+  errorMessage = '';
+
+  _SignUpService = inject(SignUpService);
+  authApi = inject(AuthApiService);
+  router = inject(Router);
   fb = inject(FormBuilder);
   signUpForm: FormGroup = this.fb.group(
     {
-      displayName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: [
         '',
@@ -61,6 +72,7 @@ export class SignUpComponent {
           Validators.pattern(/^[A-Z][A-Za-z0-9]{7,}$/),
         ],
       ],
+      displayName: ['', [Validators.required, Validators.minLength(3)]],
       repassword: ['', [Validators.required]],
     },
     { validators: this.checkPasswords }
@@ -73,10 +85,37 @@ export class SignUpComponent {
   }
 
   onSubmit() {
-    if (this.signUpForm.valid) {
-      const { repassword, ...formData } = this.signUpForm.value;
-      console.log('Form data to send to backend:', formData);
-      // this.authService.signUp(formData);
-    }
+    this.successMessage = '';
+    this.errorMessage = '';
+    if (this.signUpForm.invalid) return;
+    const form = new FormData();
+    const Email = new FormData();
+    Email.append('email', this.signUpForm.value.email);
+    form.append('email', this.signUpForm.value.email);
+    form.append('password', this.signUpForm.value.password);
+    form.append('displayName', this.signUpForm.value.displayName);
+    this.authApi.signUp(form).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.successMessage = res.message;
+        this._ToastrService.success(this.successMessage);
+        this.authApi.sendEmailVerification(Email).subscribe({
+          next: (res) => {
+            console.log(res);
+          },
+          error: (err) => {
+            console.error('Send email verification error', err);
+          },
+        });
+        setTimeout(() => {
+          this.router.navigate(['/login']);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Signup error', err);
+        this.errorMessage = err.error.message;
+        this._ToastrService.error(this.errorMessage);
+      },
+    });
   }
 }

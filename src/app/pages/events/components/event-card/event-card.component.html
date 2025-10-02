@@ -1,0 +1,59 @@
+﻿<div
+    class="group relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl border border-slate-700/50 rounded-3xl overflow-hidden transition-all duration-500 hover:scale-[1.03] hover:shadow-2xl hover:shadow-mint-500/20 hover:border-mint-500/50 animate-fadeIn">
+    <div
+        class="absolute inset-0 bg-gradient-to-br from-mint-500/0 via-teal-500/0 to-mint-500/0 group-hover:from-mint-500/5 group-hover:via-teal-500/5 group-hover:to-mint-500/5 transition-all duration-700"></div>
+    <div
+        class="absolute -inset-0.5 bg-gradient-to-r from-mint-500 to-teal-500 rounded-3xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500"></div>
+
+    <div class="relative p-6 space-y-4">
+        <div class="flex items-start justify-between gap-3">
+            <div
+                class="w-14 h-14 bg-gradient-to-br from-mint-500/30 to-teal-500/30 rounded-2xl flex items-center justify-center text-2xl border border-mint-500/40 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300">
+                {{getEventTypeIcon()}}
+            </div>
+
+            <div class="flex-1 min-w-0">
+                <h3
+                    class="text-lg font-bold text-white line-clamp-2 group-hover:text-mint-400 transition-colors">{{event.title}}</h3>
+                <p class="text-sm text-slate-300 mt-1">{{event.locationType |
+                    titlecase}}</p>
+            </div>
+
+            <span
+                [class]="'text-xs font-semibold px-3 py-1 rounded-full ' + getStatusColor()">{{getStatusText()}}</span>
+        </div>
+
+        <p class="text-slate-300 text-sm line-clamp-2">{{event.description}}</p>
+
+        <div class="grid grid-cols-2 gap-3">
+            <div class="bg-slate-700/40 rounded-xl p-3">
+                <div class="text-mint-400 text-xs font-semibold mb-1">{{
+                    'EVENTS.CARD.DATE' | translate }}</div>
+                <div class="text-white text-sm">{{eventDate()}}</div>
+            </div>
+            <div class="bg-slate-700/40 rounded-xl p-3">
+                <div
+                    class="text-mint-400 text-xs font-semibold mb-1">{{
+                    'EVENTS.CARD.ATTENDEES' | translate }}</div>
+                <div class="text-white text-sm">{{event.currentAttendees}} /
+                    {{event.maxAttendees}}</div>
+            </div>
+        </div>
+
+        <div class="flex gap-2">
+            @if(!event.isUserRegistered && event.canRegister){
+            <button (click)="onRegisterClick()"
+                class="flex-1 bg-gradient-to-r from-mint-500 to-teal-500 hover:from-mint-600 hover:to-teal-600 text-white font-bold py-3 rounded-xl transition-all duration-300 hover:scale-105">{{
+                'EVENTS.CARD.JOIN_EVENT' | translate }}</button>
+            }
+            @if(event.isUserRegistered){
+            <button (click)="onUnregisterClick()"
+                class="flex-1 bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 rounded-xl transition-all duration-300 hover:scale-105">{{
+                'EVENTS.CARD.LEAVE_EVENT' | translate }}</button>
+            }
+            <button (click)="onViewDetails()"
+                class="bg-slate-700 hover:bg-slate-600 text-white py-3 px-5 rounded-xl transition-all">{{
+                'EVENTS.CARD.VIEW' | translate }}</button>
+        </div>
+    </div>
+</div>

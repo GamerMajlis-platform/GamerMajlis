@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ChatbotService } from '../../../core/services/chatbot.service';
 
 interface Message {
   id: string;
@@ -17,11 +18,6 @@ interface Message {
   sender: 'user' | 'bot';
   timestamp: Date;
   isTyping?: boolean;
-}
-
-interface ChatbotResponse {
-  message: string;
-  suggestions?: string[];
 }
 
 @Component({
@@ -41,28 +37,7 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   isTyping = false;
   typingTimeout: any;
   _PLATFORM_ID = inject(PLATFORM_ID);
-
-  private botResponses: { [key: string]: ChatbotResponse } = {
-    hello: {
-      message: 'Hey there, gamer! 👋 How can I help you today?',
-      suggestions: ['Tournament info', 'Account help', 'Report issue'],
-    },
-    tournament: {
-      message:
-        'We have several tournaments running! Would you like to see upcoming events or join one?',
-      suggestions: ['View tournaments', 'Register', 'Tournament rules'],
-    },
-    help: {
-      message:
-        "I'm here to help! You can ask me about:\n• Tournaments & Events\n• Account issues\n• Game marketplace\n• Technical support",
-      suggestions: ['Account', 'Tournaments', 'Marketplace'],
-    },
-    default: {
-      message:
-        "I'm not sure about that, but I can help you with tournaments, account issues, or marketplace questions!",
-      suggestions: ['Get help', 'Contact support', 'FAQs'],
-    },
-  };
+  _ChatbotService = inject(ChatbotService);
 
   ngOnInit(): void {
     // Load chat history from localStorage
@@ -98,7 +73,6 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   }
   quickActions: string[] = ['Tournament info', 'Account help', 'Report issue'];
 
-
   trackByMessageId(index: number, message: Message): string {
     return message.id;
   }
@@ -111,16 +85,36 @@ export class ChatbotComponent implements OnInit, OnDestroy {
     const messageText = this.currentMessage.trim();
     if (!messageText) return;
 
+    // Add user message
     this.addMessage({
       text: messageText,
       sender: 'user',
     });
 
     this.currentMessage = '';
-
     this.showTypingIndicator();
 
-    this.generateBotResponse(messageText);
+    // Send message to chatbot service and get response
+    this._ChatbotService.sendMessageAndGetResponse(messageText).subscribe({
+      next: (response) => {
+        // Only process non-empty responses (when status is 'done')
+        if (response && response.trim()) {
+          this.hideTypingIndicator();
+          this.addMessage({
+            text: response,
+            sender: 'bot',
+          });
+        }
+      },
+      error: (error) => {
+        console.error('Chatbot error:', error);
+        this.hideTypingIndicator();
+        this.addMessage({
+          text: 'Sorry, I encountered an error. Please try again.',
+          sender: 'bot',
+        });
+      },
+    });
   }
 
   private addMessage(messageData: Partial<Message>): void {
@@ -158,41 +152,6 @@ export class ChatbotComponent implements OnInit, OnDestroy {
   private hideTypingIndicator(): void {
     this.isTyping = false;
     this.messages = this.messages.filter((msg) => msg.id !== 'typing');
-  }
-
-  private generateBotResponse(userMessage: string): void {
-    // Simulate processing delay
-    const delay = Math.random() * 1000 + 1000; // 1-2 seconds
-
-    this.typingTimeout = setTimeout(() => {
-      this.hideTypingIndicator();
-
-      // Find appropriate response
-      const response = this.findResponse(userMessage);
-
-      this.addMessage({
-        text: response.message,
-        sender: 'bot',
-      });
-
-      // Add suggestion chips if available
-      if (response.suggestions && response.suggestions.length > 0) {
-        // You can emit these suggestions to show as quick action buttons
-      }
-    }, delay);
-  }
-
-  private findResponse(message: string): ChatbotResponse {
-    const lowercaseMessage = message.toLowerCase();
-
-    // Check for keywords
-    for (const key in this.botResponses) {
-      if (lowercaseMessage.includes(key)) {
-        return this.botResponses[key];
-      }
-    }
-
-    return this.botResponses['default'];
   }
 
   private generateId(): string {

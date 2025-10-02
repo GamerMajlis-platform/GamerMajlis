@@ -1,0 +1,59 @@
+<div
+    class="group relative bg-slate-800/60 border border-slate-700 rounded-xl p-4 flex flex-col gap-3 hover:border-fuchsia-500/50 transition">
+    <div class="flex items-start gap-3">
+        @let profileImage = 'http://localhost:8080/api' +
+        (post.author?.profilePictureUrl || '/images/user4.jpg');
+        <img
+            [src]="profileImage"
+            [alt]="post.author?.displayName || 'User'"
+            class="w-10 h-10 rounded-lg object-cover" />
+        <div class="flex-1 space-y-1">
+            <div class="flex items-center gap-2 text-sm">
+                <span class="font-semibold">{{ post.author?.displayName ||
+                    'User' }}</span>
+                <span class="text-[11px] text-slate-400">{{ post.createdAt |
+                    date : 'short' }}</span>
+            </div>
+            <h3 class="text-base font-bold leading-tight line-clamp-2"
+                *ngIf="post.title">
+                {{ post.title }}
+            </h3>
+        </div>
+    </div>
+    <p class="text-sm text-slate-300 leading-relaxed line-clamp-4"
+        *ngIf="post.content">
+        {{ post.content }}
+    </p>
+    <div *ngIf="post.attachedMedia?.length" class="grid gap-2 grid-cols-3">
+        <div
+            *ngFor="let m of post.attachedMedia; track: m.id"
+            class="relative aspect-video rounded-lg overflow-hidden bg-slate-900">
+            <img
+                *ngIf="m.thumbnailPath"
+                [src]="profileImage"
+                [alt]="m.title"
+                class="w-full h-full object-cover" />
+            <div
+                class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-[10px] text-white px-2 text-center">
+                {{ m.title }}
+            </div>
+        </div>
+    </div>
+    <div class="flex items-center gap-4 text-[11px] text-slate-400 pt-1">
+        <span class="inline-flex items-center gap-1"><i
+                class="fa-solid fa-eye text-cyan-400"></i>{{ post.viewCount
+            }}</span>
+        <span class="inline-flex items-center gap-1"><i
+                class="fa-solid fa-heart text-rose-400"></i>{{ post.likeCount
+            }}</span>
+        <span class="inline-flex items-center gap-1"><i
+                class="fa-solid fa-comments text-amber-400"></i>{{
+            post.commentCount }}</span>
+        <span class="inline-flex items-center gap-1"><i
+                class="fa-solid fa-share text-fuchsia-400"></i>{{
+            post.shareCount }}</span>
+        <a
+            [routerLink]="['/posts', post.id]"
+            class="ml-auto text-cyan-300 hover:underline">Open</a>
+    </div>
+</div>

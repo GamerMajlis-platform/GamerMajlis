@@ -9,6 +9,8 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
+import { AuthService } from '../../core/services/auth.service';
 import {
   trigger,
   state,
@@ -35,7 +37,7 @@ interface Tournament {
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, TranslateModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   animations: [
@@ -139,7 +141,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     { label: 'Games Available', value: '25+', icon: '🎮' },
   ];
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, public auth: AuthService) {}
 
   @HostListener('window:scroll', [])
   onWindowScroll() {
@@ -211,10 +213,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
           const y = e.clientY - rect.top;
 
           // Smoother cursor light position with easing
+          const half = 300;
           this.renderer.setStyle(
             cursorElement,
             'transform',
-            `translate3d(${x - 300}px, ${y - 300}px, 0)`
+            `translate3d(${x - half}px, ${y - half}px, 0)`
           );
           this.renderer.setStyle(cursorElement, 'opacity', '1');
 

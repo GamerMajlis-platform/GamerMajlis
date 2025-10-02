@@ -1,0 +1,152 @@
+/* Shared hero and background styles */
+.hero-interactive {
+    background: transparent;
+}
+
+.hero-bg {
+    background: transparent;
+}
+
+.cursor-light {
+    background: radial-gradient(circle at 50% 50%, rgba(111, 255, 233, 0.15), rgba(91, 192, 190, 0.05) 40%, transparent 70%);
+    mix-blend-mode: screen;
+    border-radius: 50%;
+    filter: blur(1px);
+}
+
+/* Floating particles */
+.floating-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: linear-gradient(45deg, rgba(111, 255, 233, 0.8), rgba(91, 192, 190, 0.6));
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(111, 255, 233, 0.4);
+    animation: float 8s linear infinite;
+}
+
+.particle-1 {
+    top: 20%;
+    left: 10%;
+    animation-delay: 0s;
+    animation-duration: 12s;
+}
+
+.particle-2 {
+    top: 40%;
+    left: 80%;
+    animation-delay: -2s;
+    animation-duration: 10s;
+}
+
+.particle-3 {
+    top: 60%;
+    left: 20%;
+    animation-delay: -4s;
+    animation-duration: 14s;
+}
+
+.particle-4 {
+    top: 80%;
+    left: 70%;
+    animation-delay: -6s;
+    animation-duration: 9s;
+}
+
+.particle-5 {
+    top: 30%;
+    left: 60%;
+    animation-delay: -1s;
+    animation-duration: 11s;
+}
+
+.particle-6 {
+    top: 70%;
+    left: 40%;
+    animation-delay: -3s;
+    animation-duration: 13s;
+}
+
+.particle-7 {
+    top: 10%;
+    left: 50%;
+    animation-delay: -5s;
+    animation-duration: 8s;
+}
+
+.particle-8 {
+    top: 90%;
+    left: 30%;
+    animation-delay: -7s;
+    animation-duration: 15s;
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0px) rotate(0deg);
+        opacity: 0.6;
+    }
+
+    25% {
+        transform: translateY(-20px) rotate(90deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(180deg);
+        opacity: 0.8;
+    }
+
+    75% {
+        transform: translateY(-30px) rotate(270deg);
+        opacity: 1;
+    }
+}
+
+/* Animation delay utilities */
+.animation-delay-1000 {
+    animation-delay: 1s;
+}
+
+/* Hover effects for particles */
+.hero-interactive:hover .floating-particle {
+    animation-play-state: paused;
+    transform: scale(1.2);
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .floating-particle {
+        animation: none !important;
+        opacity: 0.3;
+    }
+
+    .cursor-light {
+        display: none;
+    }
+
+    .animate-spin-slow,
+    .animate-bounce-slow,
+    .animate-pulse,
+    .animate-ping {
+        animation: none !important;
+    }
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .floating-particle {
+        width: 4px;
+        height: 4px;
+        box-shadow: 0 0 8px rgba(111, 255, 233, 0.3);
+    }
+
+    .cursor-light {
+        width: 400px;
+        height: 400px;
+    }
+}

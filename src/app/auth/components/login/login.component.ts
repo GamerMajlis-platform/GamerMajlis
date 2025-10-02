@@ -8,6 +8,7 @@ import {
   query,
 } from '@angular/animations';
 import { NgClass } from '@angular/common';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { Component, inject } from '@angular/core';
 import {
@@ -19,10 +20,12 @@ import {
   ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthApiService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, NgClass, RouterLink],
+  imports: [ReactiveFormsModule, NgClass, RouterLink, TranslateModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   animations: [
@@ -47,13 +50,44 @@ import { RouterLink } from '@angular/router';
   ],
 })
 export class LoginComponent {
+  _ToastrService = inject(ToastrService);
+  successMessage = '';
+  errorMessage = '';
   fb = inject(FormBuilder);
+  authApi = inject(AuthApiService);
+  router = inject(Router);
   loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
+  discordLogin() {
+    // Redirect directly to Discord OAuth URL
+    const discordUrl = this.authApi.getDiscordAuthUrl();
+    window.location.href = discordUrl;
+  }
+
   onSubmit() {
-    console.log(this.loginForm.value);
+    this.successMessage = '';
+    this.errorMessage = '';
+    if (this.loginForm.invalid) return;
+    const form = new FormData();
+    form.append('identifier', this.loginForm.value.email);
+    form.append('password', this.loginForm.value.password);
+    this.authApi.login(form).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.successMessage = res.message;
+        this._ToastrService.success(this.successMessage);
+        setTimeout(() => {
+          this.router.navigate(['/home']);
+        }, 1000);
+      },
+      error: (err) => {
+        console.error('Login error', err);
+        this.errorMessage = err.error.message;
+        this._ToastrService.error(this.errorMessage);
+      },
+    });
   }
 }

@@ -1,21 +1,9 @@
 <div
-  class="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
+  class="min-h-screen  text-white overflow-x-hidden"
   #homeContainer>
 
-  <div class="fixed inset-0 pointer-events-none z-0">
-    <div
-      class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
-    <div
-      class="absolute top-40 right-10 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
-    <div
-      class="absolute bottom-20 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
-        src="/images/Controller.png" alt></div>
-    <div
-      class="absolute bottom-20 right-20 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
-  </div>
-
-    <!-- Interactive Hero Section -->
-    <section #heroSection
+  <!-- Interactive Hero Section -->
+  <section #heroSection
     class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden"
     [@heroAnimation]>
 
@@ -52,7 +40,7 @@
       [@fadeInUp]>
       <div class="mb-8 animate-float">
         <h1
-          class="text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight font-alice hero-title">
+          class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black mb-6 leading-tight font-alice hero-title">
           <span class="text-gradient-mint">GAMER</span><span
             class="text-white">MAJLIS</span>
         </h1>
@@ -61,527 +49,581 @@
       </div>
 
       <p
-        class="text-md md:text-xl text-teal mb-12 max-w-3xl mx-auto leading-relaxed font-alice hero-subtitle">
-        Join the ultimate gaming community. Compete in tournaments,<br>
-        connect with players, and dominate the leaderboards.
+        class="text-md md:text-xl text-teal mb-8 sm:mb-10 md:mb-12 max-w-3xl mx-auto leading-relaxed font-alice hero-subtitle">
+        {{ 'HOME.HERO_SUBTITLE' | translate }}
       </p>
 
       <div
-        class="flex flex-col sm:flex-row gap-6 justify-center items-center">
-        <button
-          class="btn-primary text-sm glow-mint hover:scale-105 transform transition-all duration-300">
-          Start Gaming Now
-        </button>
-
-        <button
-          class="btn-secondary text-sm hover:scale-105 transform transition-all duration-300">
-          Watch Tournaments
-        </button>
+        class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        @if (!auth.isAuthenticated()) {
+        <a routerLink="/register"
+          class="btn-primary text-sm w-full sm:w-auto glow-mint hover:scale-105 transform transition-all duration-300">
+          {{ 'HOME.AUTH.PRIMARY' | translate }}
+        </a>
+        <a routerLink="/login"
+          class="btn-secondary text-sm w-full sm:w-auto hover:scale-105 transform transition-all duration-300">
+          {{ 'HOME.AUTH.SECONDARY' | translate }}
+        </a>
+        } @else {
+        <a routerLink="/tournaments"
+          class="btn-primary text-sm w-full sm:w-auto glow-mint hover:scale-105 transform transition-all duration-300">
+          {{ 'HOME.POST_AUTH.PRIMARY' | translate }}
+        </a>
+        <a routerLink="/events"
+          class="btn-secondary text-sm w-full sm:w-auto hover:scale-105 transform transition-all duration-300">
+          {{ 'HOME.POST_AUTH.SECONDARY' | translate }}
+        </a>
+        }
       </div>
     </div>
 
-    <!-- Scroll Indicator -->
-    <div
-      class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-10">
-      <svg class="w-6 h-6 text-mint" fill="none" stroke="currentColor"
-        viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round"
-          stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-      </svg>
-    </div>
   </section>
 
-  <section class="relative z-10 py-24 w-full bg-slate-900/50"
-    id="tournaments" appScrollAnimation>
-    <!-- Background Pattern -->
+  <!-- 🎮 EPIC BATTLES SECTION - Revolutionary Tournament Showcase -->
+  <section
+    class="relative z-10 py-20 md:py-32 w-full overflow-hidden bg-gradient-to-b from-slate-900 via-navy-900 to-slate-900"
+    id="tournaments" appscrollanimation>
 
-    <div class="w-full relative md:px-20 px-10">
-      <!-- Section Header -->
-      <div class="text-center mb-16">
-        <span
-          class="inline-block px-4 py-1.5 mb-4 text-sm font-semibold text-teal-300 
-                 bg-teal-500/10 border border-teal-500/20 rounded-full">
-          Competitive Gaming
-        </span>
-        <h2 class="text-4xl md:text-6xl font-black mb-6">
+    <!-- Animated Background Effects -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+      <div
+        class="absolute top-0 left-1/4 w-96 h-96 bg-mint-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div
+        class="absolute bottom-0 right-1/4 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+      <div
+        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-mint-500/5 to-teal-500/5 rounded-full blur-3xl"></div>
+    </div>
+
+    <div
+      class="w-full relative px-4 sm:px-6 md:px-12 lg:px-20 max-w-[1600px] mx-auto">
+
+      <!-- 🏆 Epic Header with Live Stats -->
+      <div class="text-center mb-16 md:mb-20 relative">
+        <!-- Floating Badge -->
+        <div
+          class="inline-flex items-center space-x-2 px-6 py-3 mb-6 bg-gradient-to-r from-mint-500/20 via-teal-500/20 to-mint-500/20 border border-mint-500/30 rounded-full backdrop-blur-sm animate-float">
+          <div class="w-2 h-2 bg-mint-400 rounded-full animate-pulse"></div>
+          <span class="text-sm font-bold text-mint-300 tracking-wider">🔥 LIVE
+            TOURNAMENTS</span>
+          <div class="w-2 h-2 bg-mint-400 rounded-full animate-pulse"></div>
+        </div>
+
+        <!-- Epic Title -->
+        <h2
+          class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black mb-8 leading-tight">
           <span
-            class="bg-gradient-to-r from-teal-300 to-mint-300 bg-clip-text text-transparent">
-            Tournament Arena
+            class="bg-gradient-to-r from-mint-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl">
+            BATTLE ARENA
           </span>
         </h2>
-        <p class="text-xl text-slate-300 max-w-3xl mx-auto mb-8">
-          Join professionally organized tournaments with verified prize pools,
-          fair-play enforcement, and real-time bracket tracking.
+
+        <!-- Subtitle with Glow -->
+        <p
+          class="text-lg md:text-2xl text-slate-300 max-w-4xl mx-auto mb-12 leading-relaxed font-light">
+          Where <span class="text-mint-400 font-bold">legends</span> are forged,
+          <span class="text-teal-400 font-bold">champions</span> rise, and
+          <span class="text-cyan-400 font-bold">glory</span> awaits! 💪⚔️
         </p>
 
-        <!-- Tournament Stats Bar -->
-        <div class="flex flex-wrap justify-center gap-8 mb-12">
-          <div class="text-center">
-            <div class="text-3xl font-bold text-mint-400 mb-1">$2.5M+</div>
-            <div class="text-sm text-slate-400">Total Prize Pool</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-teal-400 mb-1">15,000+</div>
-            <div class="text-sm text-slate-400">Tournaments Hosted</div>
-          </div>
-          <div class="text-center">
-            <div class="text-3xl font-bold text-navy-400 mb-1">98%</div>
-            <div class="text-sm text-slate-400">Payout Success</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Featured Tournaments -->
-      <div class="mb-16">
-        <div class="flex items-center justify-between mb-8">
-          <h3 class="text-2xl font-bold text-white">Featured
-            Championships</h3>
-          <button
-            class="text-mint-400 hover:text-mint-300 flex items-center space-x-2 text-sm font-semibold">
-            <span>View Calendar</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-          </button>
-        </div>
-
-        <div class="grid lg:grid-cols-2 gap-8">
-          <!-- Premium Tournament Card 1 -->
-          <div
-            class="group relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl 
-                  rounded-3xl overflow-hidden border border-slate-700/50 hover:border-mint-500/50 
-                  transition-all duration-500 hover:shadow-2xl hover:shadow-mint-500/10">
-
-            <!-- Tournament Status Badge -->
-            <div class="absolute top-6 left-6 z-20">
-              <span
-                class="px-3 py-1 bg-mint-500/90 text-white text-xs font-bold rounded-full 
-                       flex items-center space-x-1">
-                <div
-                  class="w-2 h-2 bg-white rounded-full animate-pulse"></div>
-                <span>REGISTERING</span>
-              </span>
-            </div>
-
-            <!-- Tournament Image/Banner Area -->
-            <div
-              class="relative h-48 bg-gradient-to-br from-mint-500/20 to-teal-500/20 overflow-hidden">
-              <div
-                class="absolute inset-0 bg-[url('/api/placeholder/800/400')] bg-cover bg-center opacity-20"></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-
-              <!-- Game Logo -->
-              <div class="absolute bottom-4 left-6 flex items-end space-x-4">
-                <div
-                  class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center 
-                        border border-slate-700">
-                  <span class="text-2xl font-bold text-mint-400">AL</span>
-                </div>
-                <div>
-                  <h4 class="text-sm text-slate-400">Apex Legends</h4>
-                  <p class="text-xs text-slate-500">Battle Royale</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tournament Details -->
-            <div class="p-6">
-              <div class="mb-6">
-                <h3
-                  class="text-2xl font-bold mb-2 group-hover:text-mint-300 transition-colors duration-300">
-                  Winter Championship Series
-                </h3>
-                <p class="text-slate-400 text-sm mb-4">
-                  The ultimate test of skill with top teams competing for
-                  glory and massive prizes.
-                </p>
-
-                <!-- Tournament Info Grid -->
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Prize Pool</div>
-                    <div class="text-xl font-bold text-mint-400">$50,000</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Start Date</div>
-                    <div class="text-xl font-bold">Dec 25</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Format</div>
-                    <div class="font-semibold">3v3 Teams</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Entry Fee</div>
-                    <div class="font-semibold">Free</div>
-                  </div>
-                </div>
-
-                <!-- Registration Progress -->
-                <div class="mb-6">
-                  <div class="flex justify-between text-sm mb-2">
-                    <span class="text-slate-400">Teams Registered</span>
-                    <span class="text-mint-400 font-semibold">342/512</span>
-                  </div>
-                  <div
-                    class="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                    <div
-                      class="bg-gradient-to-r from-mint-500 to-teal-500 h-2 rounded-full 
-                            transition-all duration-1000 ease-out"></div>
-                  </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex space-x-3">
-                  <button
-                    class="flex-1 bg-gradient-to-r from-mint-500 to-teal-500 
-                           hover:from-mint-600 hover:to-teal-600 
-                           py-3 rounded-xl font-semibold transition-all duration-300 
-                           transform group-hover:scale-105">
-                    Register Now
-                  </button>
-                  <button
-                    class="px-4 py-3 bg-slate-700/50 hover:bg-slate-700 
-                           rounded-xl transition-all duration-300 border border-slate-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                      viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Tournament Tags -->
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Skill-Based Matchmaking
-                </span>
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Live Streaming
-                </span>
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Anti-Cheat Protected
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Premium Tournament Card 2 -->
-          <div
-            class="group relative bg-gradient-to-br from-slate-800/90 to-slate-900/90 backdrop-blur-xl 
-                  rounded-3xl overflow-hidden border border-slate-700/50 hover:border-teal-500/50 
-                  transition-all duration-500 hover:shadow-2xl hover:shadow-teal-500/10">
-
-            <!-- Tournament Status Badge -->
-            <div class="absolute top-6 left-6 z-20">
-              <span
-                class="px-3 py-1 bg-yellow-500/90 text-slate-900 text-xs font-bold rounded-full 
-                       flex items-center space-x-1">
-                <div
-                  class="w-2 h-2 bg-slate-900 rounded-full animate-pulse"></div>
-                <span>FILLING FAST</span>
-              </span>
-            </div>
-
-            <!-- Tournament Image/Banner Area -->
-            <div
-              class="relative h-48 bg-gradient-to-br from-teal-500/20 to-navy-500/20 overflow-hidden">
-              <div
-                class="absolute inset-0 bg-[url('/api/placeholder/800/400')] bg-cover bg-center opacity-20"></div>
-              <div
-                class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-
-              <!-- Game Logo -->
-              <div class="absolute bottom-4 left-6 flex items-end space-x-4">
-                <div
-                  class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center 
-                        border border-slate-700">
-                  <span class="text-2xl font-bold text-teal-400">VL</span>
-                </div>
-                <div>
-                  <h4 class="text-sm text-slate-400">Valorant</h4>
-                  <p class="text-xs text-slate-500">Tactical FPS</p>
-                </div>
-              </div>
-            </div>
-
-            <!-- Tournament Details -->
-            <div class="p-6">
-              <div class="mb-6">
-                <h3
-                  class="text-2xl font-bold mb-2 group-hover:text-teal-300 transition-colors duration-300">
-                  Masters Cup - Season 3
-                </h3>
-                <p class="text-slate-400 text-sm mb-4">
-                  Elite competition featuring the best Valorant teams from
-                  around the globe.
-                </p>
-
-                <!-- Tournament Info Grid -->
-                <div class="grid grid-cols-2 gap-4 mb-6">
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Prize Pool</div>
-                    <div class="text-xl font-bold text-teal-400">$75,000</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Start Date</div>
-                    <div class="text-xl font-bold">Jan 15</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Format</div>
-                    <div class="font-semibold">5v5 Teams</div>
-                  </div>
-                  <div>
-                    <div class="text-xs text-slate-500 mb-1">Entry Fee</div>
-                    <div class="font-semibold">$25/team</div>
-                  </div>
-                </div>
-
-                <!-- Registration Progress -->
-                <div class="mb-6">
-                  <div class="flex justify-between text-sm mb-2">
-                    <span class="text-slate-400">Teams Registered</span>
-                    <span class="text-teal-400 font-semibold">189/256</span>
-                  </div>
-                  <div
-                    class="w-full bg-slate-700/50 rounded-full h-2 overflow-hidden">
-                    <div
-                      class="bg-gradient-to-r from-teal-500 to-mint-500 h-2 rounded-full 
-                            transition-all duration-1000 ease-out"></div>
-                  </div>
-                </div>
-
-                <!-- Action Buttons -->
-                <div class="flex space-x-3">
-                  <button
-                    class="flex-1 bg-gradient-to-r from-teal-500 to-mint-500 
-                           hover:from-teal-600 hover:to-mint-600 
-                           py-3 rounded-xl font-semibold transition-all duration-300 
-                           transform group-hover:scale-105">
-                    Register Now
-                  </button>
-                  <button
-                    class="px-4 py-3 bg-slate-700/50 hover:bg-slate-700 
-                           rounded-xl transition-all duration-300 border border-slate-600">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                      viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                    </svg>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Tournament Tags -->
-              <div class="flex flex-wrap gap-2">
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Pro League Qualified
-                </span>
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Official Riot Partnership
-                </span>
-                <span
-                  class="px-3 py-1 bg-slate-700/50 text-xs rounded-full text-slate-300">
-                  Verified Teams Only
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tournament Categories -->
-      <div class="mb-16">
-        <h3 class="text-2xl font-bold text-white mb-8">Tournament
-          Categories</h3>
-        <div class="grid md:grid-cols-3 gap-6">
-          <!-- Beginner Tournaments -->
-          <div
-            class="bg-gradient-to-br from-green-500/10 to-mint-500/10 backdrop-blur-sm 
-                            rounded-2xl p-6 border border-green-500/20">
-            <div class="flex items-center space-x-3 mb-4">
-              <div
-                class="w-12 h-12 bg-green-500/20 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-green-400" fill="none"
-                  stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="text-lg font-bold text-white">Rookie League</h4>
-                <p class="text-sm text-slate-400">For new players</p>
-              </div>
-            </div>
-            <p class="text-slate-300 mb-4">Perfect for beginners looking to
-              get competitive experience.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-green-400 font-semibold">$500-2,500
-                prizes</span>
-              <span class="text-xs text-slate-400">Weekly</span>
-            </div>
-          </div>
-
-          <!-- Intermediate Tournaments -->
-          <div
-            class="bg-gradient-to-br from-blue-500/10 to-teal-500/10 backdrop-blur-sm 
-                            rounded-2xl p-6 border border-blue-500/20">
-            <div class="flex items-center space-x-3 mb-4">
-              <div
-                class="w-12 h-12 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-blue-400" fill="none"
-                  stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="text-lg font-bold text-white">Elite Series</h4>
-                <p class="text-sm text-slate-400">Skilled competitors</p>
-              </div>
-            </div>
-            <p class="text-slate-300 mb-4">For experienced players ready for
-              serious competition.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-blue-400 font-semibold">$5,000-15,000
-                prizes</span>
-              <span class="text-xs text-slate-400">Monthly</span>
-            </div>
-          </div>
-
-          <!-- Professional Tournaments -->
-          <div
-            class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 backdrop-blur-sm 
-                            rounded-2xl p-6 border border-purple-500/20">
-            <div class="flex items-center space-x-3 mb-4">
-              <div
-                class="w-12 h-12 bg-purple-500/20 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-purple-400" fill="none"
-                  stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
-                </svg>
-              </div>
-              <div>
-                <h4 class="text-lg font-bold text-white">Champions
-                  Circuit</h4>
-                <p class="text-sm text-slate-400">Pro level only</p>
-              </div>
-            </div>
-            <p class="text-slate-300 mb-4">Premier tournaments for
-              professional esports athletes.</p>
-            <div class="flex justify-between items-center">
-              <span class="text-purple-400 font-semibold">$25,000+
-                prizes</span>
-              <span class="text-xs text-slate-400">Seasonal</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- How Tournaments Work -->
-      <div class="mb-16">
-        <h3 class="text-2xl font-bold text-white mb-8">How Our Tournaments
-          Work</h3>
-        <div class="grid md:grid-cols-4 gap-6">
-          <!-- Step 1 -->
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-gradient-to-br from-mint-500 to-teal-500 rounded-full 
-                              flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">1</span>
-            </div>
-            <h4 class="text-lg font-semibold mb-2">Register</h4>
-            <p class="text-slate-400 text-sm">Sign up for tournaments that
-              match your skill level</p>
-          </div>
-
-          <!-- Step 2 -->
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-gradient-to-br from-teal-500 to-navy-500 rounded-full 
-                              flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">2</span>
-            </div>
-            <h4 class="text-lg font-semibold mb-2">Compete</h4>
-            <p class="text-slate-400 text-sm">Play matches according to the
-              tournament bracket</p>
-          </div>
-
-          <!-- Step 3 -->
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-gradient-to-br from-navy-500 to-mint-500 rounded-full 
-                              flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">3</span>
-            </div>
-            <h4 class="text-lg font-semibold mb-2">Track Progress</h4>
-            <p class="text-slate-400 text-sm">Monitor your performance and
-              bracket advancement</p>
-          </div>
-
-          <!-- Step 4 -->
-          <div class="text-center">
-            <div
-              class="w-16 h-16 bg-gradient-to-br from-mint-500 to-teal-500 rounded-full 
-                              flex items-center justify-center mx-auto mb-4">
-              <span class="text-2xl font-bold text-white">4</span>
-            </div>
-            <h4 class="text-lg font-semibold mb-2">Win Prizes</h4>
-            <p class="text-slate-400 text-sm">Claim your rewards and build
-              your reputation</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Action Section -->
-      <div class="text-center">
+        <!-- Live Stats Counter - Ultra Modern -->
         <div
-          class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button
-            class="group relative px-8 py-4 bg-gradient-to-r from-mint-500 to-teal-500 
-                               rounded-full font-bold text-lg text-white overflow-hidden 
-                               transform transition-all duration-500 hover:scale-105 
-                               hover:shadow-2xl hover:shadow-mint-500/25">
-            <span class="relative z-10 flex items-center space-x-2">
-              <span>Browse All Tournaments</span>
-              <svg
-                class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300"
-                fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 max-w-5xl mx-auto">
+          <div class="relative group">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-mint-500 to-teal-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 border border-mint-500/20 hover:border-mint-500/50 transition-all duration-500 hover:scale-105">
+              <div
+                class="text-4xl md:text-5xl font-black bg-gradient-to-r from-mint-400 to-teal-400 bg-clip-text text-transparent mb-2">
+                $3.2M+
+              </div>
+              <div
+                class="text-sm md:text-base text-slate-400 font-semibold">Total
+                Prize Pool 💰</div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-teal-500 to-cyan-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 border border-teal-500/20 hover:border-teal-500/50 transition-all duration-500 hover:scale-105">
+              <div
+                class="text-4xl md:text-5xl font-black bg-gradient-to-r from-teal-400 to-cyan-400 bg-clip-text text-transparent mb-2">
+                24.7K+
+              </div>
+              <div
+                class="text-sm md:text-base text-slate-400 font-semibold">Active
+                Players 🎮</div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-mint-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105">
+              <div
+                class="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-400 to-mint-400 bg-clip-text text-transparent mb-2">
+                1,247
+              </div>
+              <div
+                class="text-sm md:text-base text-slate-400 font-semibold">Live
+                Matches 🔴</div>
+            </div>
+          </div>
+
+          <div class="relative group">
+            <div
+              class="absolute inset-0 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl blur opacity-25 group-hover:opacity-50 transition-opacity duration-500"></div>
+            <div
+              class="relative bg-slate-800/90 backdrop-blur-xl rounded-2xl p-6 border border-yellow-500/20 hover:border-yellow-500/50 transition-all duration-500 hover:scale-105">
+              <div
+                class="text-4xl md:text-5xl font-black bg-gradient-to-r from-yellow-400 to-orange-400 bg-clip-text text-transparent mb-2">
+                99.8%
+              </div>
+              <div
+                class="text-sm md:text-base text-slate-400 font-semibold">Payout
+                Rate 🏆</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🎯 MEGA TOURNAMENT CARDS - Premium Showcase -->
+      <div class="mb-20">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between mb-10 gap-4">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-1 h-8 bg-gradient-to-b from-mint-500 to-teal-500 rounded-full"></div>
+            <h3 class="text-3xl md:text-4xl font-black text-white">🏆 PREMIUM
+              CHAMPIONSHIPS</h3>
+          </div>
+          <a routerLink="/tournaments"
+            class="group flex items-center space-x-3 px-6 py-3 bg-gradient-to-r from-slate-800 to-slate-700 hover:from-mint-500/20 hover:to-teal-500/20 border border-slate-600 hover:border-mint-500/50 rounded-xl transition-all duration-300">
+            <span class="text-mint-400 font-bold">View All Tournaments</span>
+            <svg
+              class="w-5 h-5 text-mint-400 group-hover:translate-x-1 transition-transform"
+              fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+            </svg>
+          </a>
+        </div>
+
+        <!-- Tournament Mega Cards Grid -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-12">
+
+          <!-- 🎮 FORTNITE MEGASTAR SHOWDOWN -->
+          <div
+            class="group relative bg-gradient-to-br from-purple-900/40 via-slate-900/40 to-pink-900/40 backdrop-blur-2xl rounded-3xl overflow-hidden border-2 border-purple-500/30 hover:border-purple-400/60 transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(168,85,247,0.4)]">
+
+            <!-- Pulsing Live Indicator -->
+            <div
+              class="absolute top-6 right-6 z-30 flex items-center space-x-2 px-4 py-2 bg-red-500/90 backdrop-blur-sm rounded-full animate-pulse">
+              <div class="w-3 h-3 bg-white rounded-full"></div>
+              <span class="text-white text-xs font-black">🔴 LIVE NOW</span>
+            </div>
+
+            <!-- Epic Banner -->
+            <div class="relative h-64 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-purple-600/30 to-pink-600/30"></div>
+              <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(168,85,247,0.3),transparent_70%)]"></div>
+
+              <!-- Animated Particles -->
+              <div class="absolute inset-0">
+                <div
+                  class="absolute top-10 left-10 w-2 h-2 bg-purple-400 rounded-full animate-ping"></div>
+                <div
+                  class="absolute top-20 right-20 w-3 h-3 bg-pink-400 rounded-full animate-bounce"></div>
+                <div
+                  class="absolute bottom-10 left-1/3 w-2 h-2 bg-purple-300 rounded-full animate-pulse"></div>
+              </div>
+
+              <!-- Game Badge -->
+              <div class="absolute bottom-6 left-6 flex items-center space-x-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center shadow-2xl border-4 border-white/20">
+                  <span class="text-3xl">🎯</span>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-black text-white drop-shadow-lg">FORTNITE</h4>
+                  <p class="text-sm text-purple-200 font-semibold">Battle Royale
+                    👑</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+              <div class="mb-6">
+                <div class="flex items-start justify-between mb-4">
+                  <h3
+                    class="text-3xl font-black text-white group-hover:text-purple-300 transition-colors duration-300 leading-tight">
+                    MEGASTAR SHOWDOWN 💫
+                  </h3>
+                  <span
+                    class="px-3 py-1 bg-yellow-500 text-slate-900 text-xs font-black rounded-full">HOT
+                    🔥</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                  The biggest Fortnite competition of the year! Epic 100-player
+                  battle royale with insane building mechanics and clutch plays.
+                  🏗️⚡
+                </p>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div
+                    class="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
+                    <div class="text-xs text-purple-300 mb-1 font-semibold">💰
+                      Prize Pool</div>
+                    <div
+                      class="text-2xl font-black bg-gradient-to-r from-purple-300 to-pink-300 bg-clip-text text-transparent">$125,000</div>
+                  </div>
+                  <div
+                    class="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
+                    <div class="text-xs text-purple-300 mb-1 font-semibold">📅
+                      Starts In</div>
+                    <div class="text-2xl font-black text-white">2 Days</div>
+                  </div>
+                  <div
+                    class="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
+                    <div class="text-xs text-purple-300 mb-1 font-semibold">👥
+                      Format</div>
+                    <div class="text-lg font-bold text-white">Solo Battle</div>
+                  </div>
+                  <div
+                    class="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
+                    <div class="text-xs text-purple-300 mb-1 font-semibold">🎫
+                      Entry</div>
+                    <div class="text-lg font-bold text-mint-400">FREE</div>
+                  </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-purple-300 font-semibold">🎮 Players
+                      Registered</span>
+                    <span class="text-white font-black">4,892 / 5,000</span>
+                  </div>
+                  <div
+                    class="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden">
+                    <div
+                      class="bg-gradient-to-r from-purple-500 via-pink-500 to-purple-500 h-3 rounded-full"
+                      style="width: 97.84%">
+                      <div
+                        class="w-full h-full animate-pulse bg-white/20"></div>
+                    </div>
+                  </div>
+                  <p class="text-xs text-yellow-400 mt-2 font-bold">⚡ Only 108
+                    spots left!</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3 mb-6">
+                  <button
+                    class="flex-1 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 py-4 rounded-xl font-black text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50">
+                    JOIN BATTLE 🚀
+                  </button>
+                  <button
+                    class="px-6 bg-slate-700/50 hover:bg-slate-600 rounded-xl transition-all duration-300 border border-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                      viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold rounded-full">🛡️
+                    Anti-Cheat</span>
+                  <span
+                    class="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold rounded-full">📺
+                    Streamed</span>
+                  <span
+                    class="px-3 py-1.5 bg-purple-500/20 border border-purple-500/30 text-purple-300 text-xs font-bold rounded-full">🏆
+                    Ranked</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 🎯 CS2 GLOBAL CHAMPIONSHIP -->
+          <div
+            class="group relative bg-gradient-to-br from-orange-900/40 via-slate-900/40 to-red-900/40 backdrop-blur-2xl rounded-3xl overflow-hidden border-2 border-orange-500/30 hover:border-orange-400/60 transition-all duration-700 hover:scale-[1.02] hover:shadow-[0_0_50px_rgba(249,115,22,0.4)]">
+
+            <!-- Status Badge -->
+            <div
+              class="absolute top-6 right-6 z-30 flex items-center space-x-2 px-4 py-2 bg-gradient-to-r from-orange-500 to-red-500 backdrop-blur-sm rounded-full">
+              <div class="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+              <span class="text-white text-xs font-black">⚔️ EPIC PRIZES</span>
+            </div>
+
+            <!-- Epic Banner -->
+            <div class="relative h-64 overflow-hidden">
+              <div
+                class="absolute inset-0 bg-gradient-to-br from-orange-600/30 to-red-600/30"></div>
+              <div
+                class="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(249,115,22,0.3),transparent_70%)]"></div>
+
+              <!-- Game Badge -->
+              <div class="absolute bottom-6 left-6 flex items-center space-x-4">
+                <div
+                  class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-500 rounded-2xl flex items-center justify-center shadow-2xl border-4 border-white/20">
+                  <span class="text-3xl">🎯</span>
+                </div>
+                <div>
+                  <h4
+                    class="text-xl font-black text-white drop-shadow-lg">CS2</h4>
+                  <p class="text-sm text-orange-200 font-semibold">Tactical FPS
+                    🔫</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Content -->
+            <div class="p-8">
+              <div class="mb-6">
+                <div class="flex items-start justify-between mb-4">
+                  <h3
+                    class="text-3xl font-black text-white group-hover:text-orange-300 transition-colors duration-300 leading-tight">
+                    GLOBAL CHAMPIONSHIP ⚔️
+                  </h3>
+                  <span
+                    class="px-3 py-1 bg-mint-500 text-slate-900 text-xs font-black rounded-full">NEW
+                    ✨</span>
+                </div>
+                <p class="text-slate-300 leading-relaxed mb-6">
+                  Elite tactical warfare! Strategic 5v5 showdown featuring the
+                  world's best CS2 teams. Precision, teamwork, victory! 🎖️🔥
+                </p>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                  <div
+                    class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
+                    <div class="text-xs text-orange-300 mb-1 font-semibold">💰
+                      Prize Pool</div>
+                    <div
+                      class="text-2xl font-black bg-gradient-to-r from-orange-300 to-red-300 bg-clip-text text-transparent">$250,000</div>
+                  </div>
+                  <div
+                    class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
+                    <div class="text-xs text-orange-300 mb-1 font-semibold">📅
+                      Starts In</div>
+                    <div class="text-2xl font-black text-white">5 Days</div>
+                  </div>
+                  <div
+                    class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
+                    <div class="text-xs text-orange-300 mb-1 font-semibold">👥
+                      Format</div>
+                    <div class="text-lg font-bold text-white">5v5 Teams</div>
+                  </div>
+                  <div
+                    class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
+                    <div class="text-xs text-orange-300 mb-1 font-semibold">🎫
+                      Entry</div>
+                    <div class="text-lg font-bold text-white">$50/team</div>
+                  </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="mb-6">
+                  <div class="flex justify-between text-sm mb-2">
+                    <span class="text-orange-300 font-semibold">🎮 Teams
+                      Registered</span>
+                    <span class="text-white font-black">184 / 256</span>
+                  </div>
+                  <div
+                    class="w-full bg-slate-700/50 rounded-full h-3 overflow-hidden">
+                    <div
+                      class="bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 h-3 rounded-full"
+                      style="width: 71.875%">
+                      <div
+                        class="w-full h-full animate-pulse bg-white/20"></div>
+                    </div>
+                  </div>
+                  <p class="text-xs text-mint-400 mt-2 font-bold">🔥 Filling up
+                    fast!</p>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex space-x-3 mb-6">
+                  <button
+                    class="flex-1 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 py-4 rounded-xl font-black text-lg transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/50">
+                    REGISTER TEAM ⚡
+                  </button>
+                  <button
+                    class="px-6 bg-slate-700/50 hover:bg-slate-600 rounded-xl transition-all duration-300 border border-slate-600">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
+                      viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                  </button>
+                </div>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2">
+                  <span
+                    class="px-3 py-1.5 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold rounded-full">🛡️
+                    VAC Secured</span>
+                  <span
+                    class="px-3 py-1.5 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold rounded-full">📺
+                    Live Cast</span>
+                  <span
+                    class="px-3 py-1.5 bg-orange-500/20 border border-orange-500/30 text-orange-300 text-xs font-bold rounded-full">💎
+                    Pro League</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Quick Tournament Glimpse Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+          <!-- Valorant Mini Card -->
+          <div
+            class="group relative bg-gradient-to-br from-red-500/10 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-red-500/20 hover:border-red-500/50 transition-all duration-500 hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-red-500 to-pink-500 rounded-xl flex items-center justify-center">
+                <span class="text-2xl">💥</span>
+              </div>
+              <span
+                class="px-2 py-1 bg-red-500/20 text-red-300 text-xs font-bold rounded-full">SOON</span>
+            </div>
+            <h4 class="text-lg font-black text-white mb-2">VALORANT MASTERS</h4>
+            <p class="text-sm text-slate-400 mb-4">5v5 Tactical Showdown</p>
+            <div class="flex items-center justify-between">
+              <span class="text-red-400 font-black">$180K</span>
+              <span class="text-xs text-slate-500">Dec 15</span>
+            </div>
+          </div>
+
+          <!-- League of Legends Mini Card -->
+          <div
+            class="group relative bg-gradient-to-br from-blue-500/10 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-blue-500/20 hover:border-blue-500/50 transition-all duration-500 hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl flex items-center justify-center">
+                <span class="text-2xl">⚡</span>
+              </div>
+              <span
+                class="px-2 py-1 bg-blue-500/20 text-blue-300 text-xs font-bold rounded-full">OPEN</span>
+            </div>
+            <h4 class="text-lg font-black text-white mb-2">LOL LEGENDS CUP</h4>
+            <p class="text-sm text-slate-400 mb-4">MOBA Championship</p>
+            <div class="flex items-center justify-between">
+              <span class="text-blue-400 font-black">$320K</span>
+              <span class="text-xs text-slate-500">Jan 5</span>
+            </div>
+          </div>
+
+          <!-- Rocket League Mini Card -->
+          <div
+            class="group relative bg-gradient-to-br from-cyan-500/10 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-cyan-500/20 hover:border-cyan-500/50 transition-all duration-500 hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-teal-500 rounded-xl flex items-center justify-center">
+                <span class="text-2xl">🚀</span>
+              </div>
+              <span
+                class="px-2 py-1 bg-cyan-500/20 text-cyan-300 text-xs font-bold rounded-full">HOT</span>
+            </div>
+            <h4 class="text-lg font-black text-white mb-2">ROCKET LEAGUE
+              PRO</h4>
+            <p class="text-sm text-slate-400 mb-4">3v3 Car Soccer</p>
+            <div class="flex items-center justify-between">
+              <span class="text-cyan-400 font-black">$95K</span>
+              <span class="text-xs text-slate-500">Nov 28</span>
+            </div>
+          </div>
+
+          <!-- Apex Legends Mini Card -->
+          <div
+            class="group relative bg-gradient-to-br from-mint-500/10 to-slate-900/90 backdrop-blur-xl rounded-2xl p-6 border border-mint-500/20 hover:border-mint-500/50 transition-all duration-500 hover:scale-105 cursor-pointer">
+            <div class="flex items-center justify-between mb-4">
+              <div
+                class="w-12 h-12 bg-gradient-to-br from-mint-500 to-green-500 rounded-xl flex items-center justify-center">
+                <span class="text-2xl">🎯</span>
+              </div>
+              <span
+                class="px-2 py-1 bg-mint-500/20 text-mint-300 text-xs font-bold rounded-full">LIVE</span>
+            </div>
+            <h4 class="text-lg font-black text-white mb-2">APEX ARENA ELITE</h4>
+            <p class="text-sm text-slate-400 mb-4">Battle Royale Squads</p>
+            <div class="flex items-center justify-between">
+              <span class="text-mint-400 font-black">$145K</span>
+              <span class="text-xs text-slate-500">Dec 1</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 🎪 EPIC CTA SECTION -->
+      <div class="relative">
+        <div
+          class="absolute inset-0 bg-gradient-to-r from-mint-500/20 via-teal-500/20 to-cyan-500/20 rounded-3xl blur-xl"></div>
+        <div
+          class="relative bg-gradient-to-r from-slate-800/90 to-slate-900/90 backdrop-blur-2xl rounded-3xl p-12 md:p-16 border-2 border-mint-500/30 text-center">
+          <h3
+            class="text-4xl md:text-5xl font-black mb-6 bg-gradient-to-r from-mint-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent">
+            READY TO DOMINATE? 💪
+          </h3>
+          <p class="text-xl text-slate-300 mb-10 max-w-3xl mx-auto">
+            Join thousands of elite gamers competing for glory and massive
+            prizes. Your journey to legendary status starts here! 🏆✨
+          </p>
+
+          <div
+            class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+            <a routerLink="/tournaments"
+              class="group relative px-10 py-5 bg-gradient-to-r from-mint-500 via-teal-500 to-cyan-500 rounded-2xl font-black text-xl text-white overflow-hidden transform transition-all duration-500 hover:scale-110 hover:shadow-[0_0_60px_rgba(16,185,129,0.6)]">
+              <span class="relative z-10 flex items-center space-x-3">
+                <span>BROWSE ALL TOURNAMENTS</span>
+                <svg
+                  class="w-6 h-6 group-hover:translate-x-2 transition-transform"
+                  fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                </svg>
+              </span>
+              <div
+                class="absolute inset-0 bg-gradient-to-r from-mint-400 to-teal-400 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </a>
+
+            <a routerLink="/events"
+              class="group px-10 py-5 border-3 border-slate-600 hover:border-mint-400 bg-slate-800/50 hover:bg-mint-400/10 rounded-2xl font-black text-xl transition-all duration-500 hover:scale-105 flex items-center space-x-3">
+              <svg class="w-6 h-6 text-mint-400" fill="none"
+                stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
                   stroke-width="2"
-                  d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
               </svg>
-            </span>
-          </button>
-
-          <button
-            class="group border-2 border-slate-600 hover:border-mint-400 hover:bg-mint-400/10 
-                               px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300
-                               flex items-center space-x-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor"
-              viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2"
-                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-            </svg>
-            <span>Tournament Calendar</span>
-          </button>
+              <span class="text-white">EVENT CALENDAR</span>
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
   </section>
 

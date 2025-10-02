@@ -1,5 +1,5 @@
 <button
-    class="fixed cursor-pointer bottom-6 right-6 z-50 w-12 h-12 p-2 bg-mint rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 flex items-center justify-center group hover:scale-110"
+    class="fixed cursor-pointer bottom-6 left-6 z-50 w-12 h-12 p-2 bg-mint rounded-full shadow-lg shadow-cyan-500/30 hover:shadow-xl hover:shadow-cyan-500/40 transition-all duration-300 flex items-center justify-center group hover:scale-110"
     (click)="toggleChatbot()"
     [class.scale-0]="isOpen">
     <img src="/images/chatbot.svg" alt="Chatbot">
@@ -9,7 +9,7 @@
 </button>
 
 <div
-    class="fixed bottom-24 right-6 z-40 w-96 max-w-[calc(100vw-3rem)] transform transition-all duration-300 origin-bottom-right"
+    class="fixed bottom-24 left-6 z-40 w-96 max-w-[calc(100vw-3rem)] transform transition-all duration-300 origin-bottom-left"
     [class.scale-0]="!isOpen"
     [class.opacity-0]="!isOpen"
     [class.scale-100]="isOpen"

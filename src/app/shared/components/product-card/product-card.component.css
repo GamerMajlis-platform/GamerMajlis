@@ -1,0 +1,115 @@
+:host {
+    display: block;
+}
+
+/* Entrance animation (fade + translate up) */
+@keyframes gmFadeUp {
+    0% {
+        opacity: 0;
+        transform: translateY(18px) scale(.98);
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(-2px) scale(1.005);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.gm-card-animate {
+    animation: gmFadeUp .75s cubic-bezier(.16, .8, .3, 1) both;
+    will-change: transform, opacity;
+}
+
+/* Shimmer overlay for image on hover */
+.gm-image-wrap {
+    position: relative;
+}
+
+.gm-image-wrap::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(115deg, rgba(255, 255, 255, 0) 20%, rgba(255, 255, 255, .18) 45%, rgba(255, 255, 255, 0) 70%);
+    transform: translateX(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .4s ease;
+}
+
+.gm-image-wrap:hover::after,
+.gm-image-wrap:focus-within::after,
+.gm-card-hover:hover .gm-image-wrap::after {
+    opacity: 1;
+    animation: gmShimmer 1.4s ease forwards;
+}
+
+@keyframes gmShimmer {
+    0% {
+        transform: translateX(-120%);
+    }
+
+    55% {
+        transform: translateX(5%);
+    }
+
+    100% {
+        transform: translateX(110%);
+    }
+}
+
+/* Focus ring override for accessibility */
+.gm-focusable:focus-visible {
+    outline: 2px solid #6FFFE9;
+    outline-offset: 3px;
+    box-shadow: 0 0 0 4px rgba(111, 255, 233, 0.25), 0 0 0 1px rgba(11, 19, 43, 0.7) inset;
+    border-radius: .75rem;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+    .gm-card-animate {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .gm-image-wrap:hover::after {
+        animation: none;
+    }
+
+    .gm-image-wrap::after {
+        display: none;
+    }
+}
+
+/* Extracted utility classes for reuse */
+.gm-shadow-deep {
+    box-shadow: 0 8px 32px -8px rgba(0, 0, 0, .65), 0 2px 6px -2px rgba(0, 0, 0, .4);
+}
+
+.gm-gradient-frame {
+    background-image: linear-gradient(135deg, #0B132B, #1C2541 45%, #3A506B 70%);
+}
+
+.gm-accent-glow {
+    box-shadow: 0 0 0 1px rgba(111, 255, 233, 0.25), 0 0 14px -4px rgba(111, 255, 233, 0.5);
+}
+
+/* Utility for hover lift */
+.gm-hover-lift {
+    transition: transform .5s cubic-bezier(.16, .8, .3, 1), box-shadow .5s;
+}
+
+.gm-hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+/* Apply enhancements to root card (progressive enhancement) */
+:host ::ng-deep .gm-card-root {
+    position: relative;
+}

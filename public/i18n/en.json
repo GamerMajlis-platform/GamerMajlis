@@ -1,0 +1,719 @@
+{
+  "NAV": {
+    "HOME": "Home",
+    "TOURNAMENTS": "Tournaments",
+    "MARKETPLACE": "Marketplace",
+    "EVENTS": "Events",
+    "MESSAGES": "Messages",
+    "PROFILE": "Profile",
+    "WISHLIST": "Wishlist",
+    "LOGOUT": "Logout"
+  },
+  "TIMELINE": {
+    "TITLE": "Timeline",
+    "SUBTITLE": "A unified stream of community activity. Switch between posts & media without losing context.",
+    "CREATE_POST": "Create Post",
+    "UPLOAD_MEDIA": "Upload Media",
+    "SCROLL_OR_SWITCH": "Scroll to top or switch tab"
+  },
+  "LANG": {
+    "TOGGLE": "العربية"
+  },
+  "FOOTER": {
+    "ABOUT": "The ultimate gaming community platform where legends are born, tournaments are won, and friendships are forged. Join millions of gamers worldwide.",
+    "QUICK_LINKS": "Quick Links",
+    "HOME": "Home",
+    "TOURNAMENTS": "Tournaments",
+    "GAMES": "Games",
+    "COMMUNITY": "Community",
+    "LEADERBOARDS": "Leaderboards",
+    "SUPPORT": "Support",
+    "HELP_CENTER": "Help Center",
+    "CONTACT_US": "Contact Us",
+    "FAQ": "FAQ",
+    "PRIVACY": "Privacy Policy",
+    "TERMS": "Terms of Service",
+    "COOKIES": "Cookie Policy",
+    "STAY_UPDATED": "Stay Updated",
+    "NEWSLETTER_DESC": "Get the latest gaming news, tournament updates, and exclusive offers delivered to your inbox.",
+    "EMAIL_PLACEHOLDER": "Enter your email",
+    "SUBSCRIBE": "Subscribe",
+    "COPYRIGHT": "© 2025 GamerMajlis. All rights reserved. Built with ❤️ for gamers worldwide.",
+    "SYSTEMS_OPERATIONAL": "All systems operational",
+    "SYSTEM_STATUS": "System Status"
+  },
+  "HOME": {
+    "HERO_SUBTITLE": "Join the ultimate gaming community. Compete in tournaments, connect with players, and dominate the leaderboards.",
+    "CTA_START": "Start Gaming Now",
+    "CTA_WATCH": "Watch Tournaments",
+    "AUTH": {
+      "PRIMARY": "Create your free account",
+      "PRIMARY_DESC": "Start your journey in seconds",
+      "SECONDARY": "I already have an account"
+    },
+    "POST_AUTH": {
+      "PRIMARY": "Explore Tournaments",
+      "SECONDARY": "Discover Events"
+    },
+    "COMPETITIVE_GAMING": "Competitive Gaming",
+    "TOURNAMENT_ARENA": "Tournament Arena",
+    "TOURNAMENTS_HEADER": "Tournaments",
+    "COMPETE_WIN": "Compete, Win, and Become a Legend",
+    "STATS_TOTAL_PRIZE": "Total Prize Pool",
+    "STATS_HOSTED": "Tournaments Hosted",
+    "STATS_PAYOUT": "Payout Success",
+    "FEATURED_CHAMPIONSHIPS": "Featured Championships",
+    "VIEW_CALENDAR": "View Calendar",
+    "CATEGORIES": "Tournament Categories",
+    "ROOKIE_LEAGUE": "Rookie League",
+    "FOR_NEW_PLAYERS": "For new players",
+    "PERFECT_FOR_BEG": "Perfect for beginners looking to get competitive experience.",
+    "ELITE_SERIES": "Elite Series",
+    "SKILLED_COMP": "Skilled competitors",
+    "SERIOUS_COMP": "For experienced players ready for serious competition.",
+    "CHAMPIONS_CIRCUIT": "Champions Circuit",
+    "PRO_LEVEL_ONLY": "Pro level only",
+    "PREMIER_TOURN": "Premier tournaments for professional esports athletes.",
+    "HOW_WORK": "How Our Tournaments Work",
+    "STEP_REGISTER": "Register",
+    "STEP_REGISTER_DESC": "Sign up for tournaments that match your skill level",
+    "STEP_COMPETE": "Compete",
+    "STEP_COMPETE_DESC": "Play matches according to the tournament bracket",
+    "STEP_TRACK": "Track Progress",
+    "STEP_TRACK_DESC": "Monitor your performance and bracket advancement",
+    "STEP_WIN": "Win Prizes",
+    "STEP_WIN_DESC": "Claim your rewards and build your reputation",
+    "BROWSE_ALL": "Browse All Tournaments",
+    "TOURNAMENT_CAL": "Tournament Calendar",
+    "EMPTY_TITLE": "No tournaments found",
+    "EMPTY_DESC": "Try adjusting your search or filters",
+    "LOAD_MORE": "Load More Tournaments",
+    "SEARCH_PLACEHOLDER": "Search tournaments...",
+    "SORT_DATE": "Sort by Date",
+    "SORT_PRIZE": "Sort by Prize",
+    "SORT_PLAYERS": "Sort by Players",
+    "UPCOMING": "Upcoming",
+    "ONGOING": "Ongoing",
+    "PAST": "Past",
+    "START": "Start:",
+    "PRIZE": "Prize:",
+    "PLAYERS": "Players:",
+    "STARTS_IN": "Starts in:",
+    "JOIN_TOURNAMENT": "Join Tournament",
+    "WATCH_LIVE": "Watch Live",
+    "VIEW_RESULTS": "View Results"
+  },
+  "TOURN": {
+    "TITLE": "Tournaments",
+    "SUBTITLE": "Compete, Win, and Become a Legend",
+    "TABS": {
+      "UPCOMING": "Upcoming",
+      "ONGOING": "Ongoing",
+      "PAST": "Past"
+    },
+    "SEARCH_PLACEHOLDER": "Search tournaments...",
+    "SORT_DATE": "Sort by Date",
+    "SORT_PRIZE": "Sort by Prize",
+    "SORT_PLAYERS": "Sort by Players",
+    "FEATURED": "Featured Championships",
+    "VIEW_CALENDAR": "View Calendar",
+    "STATS_TOTAL_PRIZE": "Total Prize Pool",
+    "STATS_HOSTED": "Tournaments Hosted",
+    "STATS_PAYOUT": "Payout Success",
+    "REGISTERING": "REGISTERING",
+    "FILLING_FAST": "FILLING FAST",
+    "PRIZE_POOL": "Prize Pool",
+    "START_DATE": "Start Date",
+    "FORMAT": "Format",
+    "ENTRY_FEE": "Entry Fee",
+    "TEAMS_REGISTERED": "Teams Registered",
+    "REGISTER_NOW": "Register Now",
+    "CATEGORIES": "Tournament Categories",
+    "BEGINNER": "Rookie League",
+    "BEGINNER_DESC": "Perfect for beginners looking to get competitive experience.",
+    "INTERMEDIATE": "Elite Series",
+    "INTERMEDIATE_DESC": "For experienced players ready for serious competition.",
+    "PROFESSIONAL": "Champions Circuit",
+    "PROFESSIONAL_DESC": "Premier tournaments for professional esports athletes.",
+    "HOW_WORK": "How Our Tournaments Work",
+    "STEP_REGISTER": "Register",
+    "STEP_REGISTER_DESC": "Sign up for tournaments that match your skill level",
+    "STEP_COMPETE": "Compete",
+    "STEP_COMPETE_DESC": "Play matches according to the tournament bracket",
+    "STEP_TRACK": "Track Progress",
+    "STEP_TRACK_DESC": "Monitor your performance and bracket advancement",
+    "STEP_WIN": "Win Prizes",
+    "STEP_WIN_DESC": "Claim your rewards and build your reputation",
+    "LABELS": {
+      "START": "Start:",
+      "PRIZE": "Prize:",
+      "PLAYERS": "Players:",
+      "STARTS_IN": "Starts in:"
+    },
+    "ACTIONS": {
+      "JOIN": "Join Tournament",
+      "WATCH_LIVE": "Watch Live",
+      "VIEW_RESULTS": "View Results",
+      "LOAD_MORE": "Load More Tournaments"
+    },
+    "CREATE_TOURNAMENT": "Create Tournament",
+    "EMPTY_TITLE": "No tournaments found",
+    "EMPTY_DESC": "Try adjusting your search or filters"
+  },
+  "TOURNAMENTS": {
+    "TITLE": "Tournaments",
+    "SUBTITLE": "Compete in professional gaming tournaments",
+    "CREATE": "Create Tournament",
+    "SEARCH": "Search",
+    "SEARCH_PLACEHOLDER": "Search tournaments...",
+    "STATUS": "Status",
+    "GAME": "Game",
+    "MIN_PRIZE": "Min Prize Pool",
+    "MAX_PRIZE": "Max Prize Pool",
+    "PRIZE_POOL": "Prize Pool",
+    "PARTICIPANTS": "Participants",
+    "REGISTRATION": "Registration",
+    "START_DATE": "Start Date",
+    "ORGANIZER": "Organizer",
+    "VIEW_DETAILS": "View Details",
+    "REGISTER": "Register",
+    "NO_TOURNAMENTS": "No tournaments found",
+    "NO_TOURNAMENTS_DESC": "Try adjusting your search filters or create a new tournament",
+    "CREATE_FIRST": "Create First Tournament",
+    "LOADING": "Loading tournaments...",
+    "ERROR": "Failed to load tournaments",
+    "STATUS_OPTIONS": {
+      "ALL": "All Status",
+      "DRAFT": "Draft",
+      "REGISTRATION_OPEN": "Registration Open",
+      "REGISTRATION_CLOSED": "Registration Closed",
+      "IN_PROGRESS": "In Progress",
+      "COMPLETED": "Completed",
+      "CANCELLED": "Cancelled"
+    },
+    "FORM": {
+      "CREATE_TITLE": "Create New Tournament",
+      "EDIT_TITLE": "Edit Tournament",
+      "BASIC_INFO": "Basic Information",
+      "TOURNAMENT_NAME": "Tournament Name",
+      "DESCRIPTION": "Description",
+      "GAME_SETTINGS": "Game Settings",
+      "GAME_TITLE": "Game Title",
+      "GAME_MODE": "Game Mode",
+      "TOURNAMENT_TYPE": "Tournament Type",
+      "PARTICIPANT_SETTINGS": "Participant Settings",
+      "MAX_PARTICIPANTS": "Maximum Participants",
+      "ENTRY_FEE": "Entry Fee",
+      "CURRENCY": "Currency",
+      "PRIZE_SETTINGS": "Prize Settings",
+      "SCHEDULING": "Scheduling",
+      "END_DATE": "End Date",
+      "REGISTRATION_DEADLINE": "Registration Deadline",
+      "RULES_SETTINGS": "Rules & Settings",
+      "RULES": "Tournament Rules",
+      "PUBLIC": "Public Tournament",
+      "REQUIRES_APPROVAL": "Requires Approval",
+      "SAVE": "Save Tournament",
+      "CANCEL": "Cancel",
+      "SAVING": "Saving...",
+      "VALIDATION": {
+        "NAME_REQUIRED": "Tournament name is required",
+        "DESCRIPTION_REQUIRED": "Description is required",
+        "GAME_TITLE_REQUIRED": "Game title is required",
+        "INVALID_DATES": "End date must be after start date",
+        "INVALID_REGISTRATION": "Registration deadline must be before start date",
+        "MIN_PARTICIPANTS": "Must have at least 2 participants",
+        "INVALID_PRIZE": "Prize pool must be a positive number"
+      }
+    }
+  },
+  "EVENTS": {
+    "TITLE": "Events",
+    "SUBTITLE": "Discover, join, and create amazing gaming events. Connect with fellow gamers and compete in tournaments.",
+    "HERO": {
+      "TITLE": "Events",
+      "DESCRIPTION": "Discover, join, and create amazing gaming events. Connect with fellow gamers and compete in tournaments."
+    },
+    "VIEWS": {
+      "UPCOMING": "Upcoming Events",
+      "ONGOING": "Ongoing Events",
+      "PAST": "Past Events"
+    },
+    "SEARCH": {
+      "PLACEHOLDER": "Search events...",
+      "LOADING": "Loading..."
+    },
+    "RESULTS": {
+      "UPCOMING_COUNT": "upcoming event",
+      "UPCOMING_COUNT_PLURAL": "upcoming events",
+      "ONGOING_COUNT": "ongoing event",
+      "ONGOING_COUNT_PLURAL": "ongoing events",
+      "PAST_COUNT": "past event",
+      "PAST_COUNT_PLURAL": "past events",
+      "PAGE_OF": "Page"
+    },
+    "EMPTY": {
+      "TITLE": "No Events Found",
+      "UPCOMING": "No upcoming events at the moment.",
+      "ONGOING": "You haven't registered for any ongoing events yet.",
+      "PAST": "No past events found.",
+      "CREATE_CTA": "Create Your First Event"
+    },
+    "PAGINATION": {
+      "PREVIOUS": "Previous",
+      "NEXT": "Next",
+      "PAGE": "Page",
+      "OF": "of"
+    },
+    "CARD": {
+      "DATE": "Date",
+      "ATTENDEES": "Attendees",
+      "JOIN_EVENT": "Join Event",
+      "LEAVE_EVENT": "Leave Event",
+      "VIEW": "View"
+    },
+    "DETAIL": {
+      "LOADING": "Loading event details...",
+      "BACK": "Back to Events",
+      "ABOUT": "About This Event",
+      "READ_MORE": "Read more",
+      "SHOW_LESS": "Show less",
+      "TOTAL_VIEWS": "Total Views",
+      "INTERESTED": "Interested",
+      "UNTIL_EVENT": "Until Event",
+      "LIVE_NOW": "Live Now",
+      "ENDED": "Ended",
+      "EVENT_IS_LIVE": "Event is Live",
+      "EVENT_ENDED": "Event Ended",
+      "DAYS": "days",
+      "EVENT_ACTIONS": "Event Actions",
+      "REGISTER_FOR_EVENT": "Register for Event",
+      "UNREGISTER": "Unregister",
+      "CHECK_IN_NOW": "Check In Now",
+      "SHARE_EVENT": "Share Event",
+      "EDIT_EVENT": "Edit Event",
+      "DELETE_EVENT": "Delete Event",
+      "EVENT_INFO": "Event Information",
+      "DATE_TIME": "Date & Time",
+      "START": "Start",
+      "END": "End",
+      "DURATION": "Duration",
+      "REGISTRATION_DEADLINE": "Registration deadline",
+      "PASSED": "Passed",
+      "LOCATION": "Location",
+      "VIRTUAL_PLATFORM": "Virtual Platform",
+      "JOIN_VIRTUAL_EVENT": "Join Virtual Event",
+      "VENUE": "Venue",
+      "GAME": "Game",
+      "ENTRY_FEE": "Entry Fee",
+      "FREE": "FREE",
+      "EVENT_FEATURES": "Event Features",
+      "COMPETITIVE": "Competitive",
+      "ONLY": "Only",
+      "REGISTRATION_REQUIRED": "Registration Required",
+      "REGISTRATION_REQUIREMENTS": "Registration Requirements",
+      "EVENT_ORGANIZER": "Event Organizer",
+      "VIEW_PROFILE": "View Profile",
+      "CREATED": "Created",
+      "LAST_UPDATED": "Last Updated",
+      "EVENT_ID": "Event ID",
+      "VISIBILITY": "Visibility",
+      "PUBLIC": "Public",
+      "PRIVATE": "Private",
+      "ATTENDANCE": "Attendance",
+      "REGISTERED": "registered",
+      "OF": "of",
+      "FULL": "full",
+      "SPOTS_LEFT": "spots left",
+      "ATTENDEES_LIST": "Attendees",
+      "LOADING_ATTENDEES": "Loading attendees...",
+      "NO_ATTENDEES": "No attendees yet",
+      "BE_FIRST": "Be the first to register!",
+      "NOT_FOUND_TITLE": "Event Not Found",
+      "NOT_FOUND_DESC": "The event you're looking for doesn't exist or has been removed.",
+      "BACK_TO_EVENTS": "Back to Events"
+    },
+    "CARD1": {
+      "TITLE": "Community Meetup",
+      "DESC": "Connect with local players and form teams."
+    },
+    "CARD2": {
+      "TITLE": "LAN Party Night",
+      "DESC": "Bring your rig and join the ultimate LAN party."
+    },
+    "CARD3": {
+      "TITLE": "Developers Talk",
+      "DESC": "Hear from game devs about upcoming titles."
+    },
+    "ACTIONS": {
+      "REGISTER": "Register",
+      "CREATE": "Create Event"
+    }
+  },
+  "MARKET": {
+    "TITLE": "Marketplace",
+    "SUBTITLE": "Discover the best gaming gear from verified sellers",
+    "SEARCH": {
+      "LABEL": "Search",
+      "PLACEHOLDER": "Search products..."
+    },
+    "CATEGORY": {
+      "LABEL": "Category",
+      "ALL": "All Categories"
+    },
+    "PRICE_RANGE": {
+      "LABEL": "Price Range",
+      "MIN": "Min",
+      "MAX": "Max"
+    },
+    "CONDITION": {
+      "LABEL": "Condition",
+      "NEW": "New",
+      "USED_LIKE_NEW": "Used - Like New",
+      "USED_GOOD": "Used - Good",
+      "USED_FAIR": "Used - Fair",
+      "FOR_PARTS": "For Parts"
+    },
+    "LOCATION": {
+      "LABEL": "Location",
+      "PLACEHOLDER": "City, State or Country"
+    },
+    "FILTERS": {
+      "FREE_SHIPPING": "Free shipping only",
+      "VERIFIED_SELLERS": "Verified sellers only",
+      "AVAILABLE_ONLY": "Available items only",
+      "APPLY": "Apply Filters",
+      "CLEAR": "Clear",
+      "BUTTON_LABEL": "Filters",
+      "CLEAR_ALL": "Clear all filters"
+    },
+    "RESULTS": {
+      "LOADING": "Loading products...",
+      "SHOWING": "Showing",
+      "OF": "of",
+      "PRODUCTS": "products"
+    },
+    "SORT": {
+      "LABEL": "Sort by:",
+      "NEWEST": "Newest First",
+      "OLDEST": "Oldest First",
+      "PRICE_LOW": "Price: Low to High",
+      "PRICE_HIGH": "Price: High to Low",
+      "NAME_ASC": "Name: A to Z",
+      "NAME_DESC": "Name: Z to A",
+      "RATING": "Highest Rated",
+      "POPULAR": "Most Popular"
+    },
+    "VIEW": {
+      "LIST": "List View",
+      "GRID": "Grid View"
+    },
+    "ACTIONS": {
+      "VIEW_DETAILS": "View Details",
+      "CONTACT": "Contact",
+      "ADD_TO_CART": "Add to Cart"
+    },
+    "PAGINATION": {
+      "PREVIOUS": "Previous",
+      "NEXT": "Next"
+    },
+    "EMPTY": {
+      "TITLE": "No products found",
+      "DESCRIPTION": "Try adjusting your search criteria or filters.",
+      "CLEAR_BUTTON": "Clear all filters"
+    },
+    "REVIEWS": "reviews"
+  },
+  "PROFILE": {
+    "TITLE": "Profile",
+    "EDIT": "Edit Profile",
+    "BIO": "Bio",
+    "PREFERENCES": "Gaming Preferences",
+    "STATS": "Gaming Statistics",
+    "WIN_RATE": "Win Rate",
+    "TOURN_WON": "Tournaments Won",
+    "TOTAL_MATCHES": "Total Matches"
+  },
+  "WISHLIST": {
+    "TITLE": "My Wishlist",
+    "SUBTITLE": "Your carefully curated collection of favorite products",
+    "STATS": {
+      "TOTAL_ITEMS": "Total Items",
+      "TOTAL_VALUE": "Total Value",
+      "ON_SALE": "On Sale"
+    },
+    "ACTIONS": {
+      "ADD_ALL": "Add All to Cart",
+      "CLEAR_ALL": "Clear All",
+      "ADD_TO_CART": "Add to Cart",
+      "ADD_TO_WISHLIST": "Add to Wishlist",
+      "BROWSE_PRODUCTS": "Browse Products"
+    },
+    "FILTERS": {
+      "ALL": "All Items",
+      "ON_SALE": "On Sale",
+      "IN_STOCK": "In Stock",
+      "RECENT": "Recently Added"
+    },
+    "SORT": {
+      "LABEL": "Sort by:",
+      "DATE": "Date Added",
+      "PRICE_ASC": "Price: Low to High",
+      "PRICE_DESC": "Price: High to Low",
+      "NAME_ASC": "Name A-Z",
+      "NAME_DESC": "Name Z-A"
+    },
+    "EMPTY": {
+      "TITLE": "Your Wishlist is Empty",
+      "DESC": "Start adding products you love to keep track of them and purchase later."
+    },
+    "BADGES": {
+      "SALE_25": "25% OFF",
+      "SALE_50": "50% OFF",
+      "NEW": "New",
+      "LIMITED": "Limited",
+      "IN_STOCK": "In Stock",
+      "LOW_STOCK": "Low Stock",
+      "OUT_STOCK": "Out of Stock"
+    }
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "Login",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "SUBMIT": "Login",
+      "OR": "or",
+      "LOGIN_DISCORD": "Login With Discord",
+      "DONT_HAVE": "Don't Have Account?",
+      "REGISTER_NOW": "Register Now",
+      "ERRORS": {
+        "REQUIRED": "This Field is Required",
+        "EMAIL": "Please enter a valid email address. :)",
+        "MIN_LENGTH": "Please enter at least 8 characters.",
+        "PASSWORD_PATTERN": "First letter uppercase, then 7+ letters or numbers."
+      }
+    },
+    "DISCORD": {
+      "PROCESSING": "Processing Discord authentication..."
+    },
+    "SIGNUP": {
+      "TITLE": "Sign Up",
+      "USERNAME": "Username",
+      "EMAIL": "Email",
+      "PASSWORD": "Password",
+      "CONFIRM_PASSWORD": "Confirm Password",
+      "SUBMIT": "Sign up",
+      "ALREADY": "Already have an Account?",
+      "LOGIN_NOW": "Login Now",
+      "ERRORS": {
+        "REQUIRED": "This Field is Required",
+        "EMAIL": "Please enter a valid email address. :)",
+        "MIN_LENGTH": "Please enter at least 8 characters.",
+        "USERNAME_MIN": "The min Lenght is 3 character",
+        "PASSWORD_PATTERN": "First letter uppercase, then 7+ letters or numbers.",
+        "NOT_SAME": "The passwords you entered do not match. Please re-enter your password."
+      }
+    }
+  },
+  "CHAT": {
+    "SEARCH": "Search",
+    "EMPTY": "Ready to connect? Start a conversation with fellow gamers :)",
+    "TYPE": "Type a message...",
+    "SEND": "Send",
+    "USER": "Username",
+    "TITLE": "Gamer Majlis",
+    "SEARCH_PLACEHOLDER": "Search rooms...",
+    "FILTER_ALL": "All",
+    "FILTER_GROUPS": "Groups",
+    "FILTER_DMS": "DMs",
+    "NEW_ROOM": "New Room",
+    "NEW_MESSAGE": "New Message",
+    "NO_ROOMS": "No rooms found",
+    "SELECT_ROOM_TITLE": "Select a Chat Room",
+    "SELECT_ROOM_DESC": "Choose a room from the sidebar to start chatting",
+    "MEMBERS": "Members",
+    "MEMBERS_COUNT": "{{count}} members",
+    "MEMBERS_LIST_COMING_SOON": "Members list coming soon",
+    "ONLINE_USERS": "Online Users",
+    "NO_DESCRIPTION": "No description",
+    "CONNECTION_STATUS": {
+      "CONNECTED": "CONNECTED",
+      "CONNECTING": "CONNECTING",
+      "RECONNECTING": "RECONNECTING",
+      "DISCONNECTED": "DISCONNECTED",
+      "FAILED": "FAILED"
+    },
+    "MESSAGE": {
+      "TYPE_PLACEHOLDER": "Type a message...",
+      "SEND": "Send",
+      "REPLY": "Reply",
+      "DELETE": "Delete",
+      "REACT": "React",
+      "REPLYING_TO": "Replying to {{name}}",
+      "FILE_ATTACHED": "[File]",
+      "TYPING": "{{name}} is typing",
+      "TODAY": "Today",
+      "YESTERDAY": "Yesterday"
+    },
+    "CREATE_ROOM": {
+      "TITLE": "Create New Room",
+      "NAME_LABEL": "Room Name *",
+      "NAME_PLACEHOLDER": "Enter room name...",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_PLACEHOLDER": "What's this room about...",
+      "TYPE_LABEL": "Room Type",
+      "TYPE_GROUP": "Group Chat",
+      "TYPE_DM": "Direct Message",
+      "GAME_LABEL": "Game Title (Optional)",
+      "GAME_PLACEHOLDER": "e.g., League of Legends, Valorant...",
+      "MAX_MEMBERS_LABEL": "Max Members",
+      "CANCEL": "Cancel",
+      "CREATE": "Create Room",
+      "CREATING": "Creating..."
+    },
+    "NEW_DM": {
+      "TITLE": "Start New Message",
+      "DESCRIPTION": "Select a user from the online users list to start a direct message.",
+      "CANCEL": "Cancel"
+    }
+  },
+  "NOT_FOUND": {
+    "TITLE": "Page not found",
+    "BACK": "Back to Home"
+  },
+  "PROFILE_PAGE": {
+    "LOADING": "Loading profile...",
+    "STATUS": { "LIVE": "LIVE", "ONLINE": "Online", "OFFLINE": "Offline" },
+    "ACTIONS": {
+      "CHANGE": "Change",
+      "REFRESH": "Refresh",
+      "CANCEL": "Cancel",
+      "SAVE_PROFILE": "Save Profile",
+      "SAVE_STATS": "Save Stats",
+      "SAVE_PRIVACY": "Save Privacy",
+      "REMOVE": "Remove",
+      "UPLOAD": "Upload",
+      "VIEW_PROFILE": "View Profile",
+      "SEARCH": "Search"
+    },
+    "TABS": {
+      "OVERVIEW": "Overview",
+      "EDIT": "Edit",
+      "EDITING": "Editing",
+      "STATS": "Stats",
+      "PRIVACY": "Privacy",
+      "SEARCH": "Discover"
+    },
+    "HEADERS": {
+      "BASIC_INFO": "Basic Information",
+      "GAMING_STATS": "Gaming Statistics",
+      "ABOUT_ME": "About Me",
+      "SOCIAL_LINKS": "Social Links",
+      "EDIT_PROFILE": "Edit Profile",
+      "PRIVACY_SETTINGS": "Privacy Settings",
+      "CHANGE_PICTURE": "Change Profile Picture",
+      "SEARCH_RESULTS": "Search Results",
+      "SUGGESTED_PLAYERS": "Suggested Players"
+    },
+    "FIELDS": {
+      "DISPLAY_NAME": "Display Name",
+      "EMAIL": "Email",
+      "JOINED": "Joined",
+      "BIO": "Bio",
+      "PLAY_STYLE": "Play Style",
+      "SKILL_LEVEL": "Skill Level",
+      "FAVORITE_MAP": "Favorite Map",
+      "TOTAL_GAMES": "Total Games",
+      "WIN_RATE": "Win Rate",
+      "WINS": "Wins",
+      "LOSSES": "Losses",
+      "AVG_KDA": "Avg KDA",
+      "HOURS": "Hours",
+      "HOURS_PLAYED": "Hours Played",
+      "TOTAL_WINS": "Total Wins",
+      "TOTAL_LOSSES": "Total Losses",
+      "AVERAGE_KDA": "Average KDA"
+    },
+    "SKILL": {
+      "BEGINNER": "Beginner",
+      "INTERMEDIATE": "Intermediate",
+      "ADVANCED": "Advanced",
+      "PROFESSIONAL": "Pro"
+    },
+    "PRIVACY": {
+      "PROFILE_VISIBLE": "Profile visible to other users",
+      "SHOW_EMAIL": "Show my email address",
+      "SHOW_STATS": "Show gaming statistics",
+      "SHOW_LINKS": "Show social links",
+      "ALLOW_DM": "Allow direct messages",
+      "SHOW_ONLINE": "Show when I'm online"
+    },
+    "SEARCH": {
+      "PLACEHOLDER": "Search players by name or game...",
+      "NO_RESULTS": "No players found for \"{{term}}\"",
+      "MATCH": "Match:"
+    },
+    "MODAL": { "PREVIEW": "Preview", "CURRENT_PICTURE": "Current Picture" },
+    "MESSAGES": {
+      "NO_STATS": "No gaming statistics yet.",
+      "CONNECT": "Connect"
+    }
+  },
+  "CHAT": {
+    "TITLE": "Gamer Majlis",
+    "SEARCH_PLACEHOLDER": "Search rooms...",
+    "FILTER_ALL": "All",
+    "FILTER_GROUPS": "Groups",
+    "FILTER_DMS": "DMs",
+    "NEW_ROOM": "New Room",
+    "NEW_MESSAGE": "New Message",
+    "NO_ROOMS": "No rooms found",
+    "SELECT_ROOM_TITLE": "Select a Chat Room",
+    "SELECT_ROOM_DESC": "Choose a room from the sidebar to start chatting",
+    "MEMBERS": "Members",
+    "MEMBERS_COUNT": "{{count}} members",
+    "ONLINE_USERS": "Online Users",
+    "CONNECTION_STATUS": {
+      "CONNECTED": "CONNECTED",
+      "CONNECTING": "CONNECTING",
+      "RECONNECTING": "RECONNECTING",
+      "DISCONNECTED": "DISCONNECTED",
+      "FAILED": "FAILED"
+    },
+    "MESSAGE": {
+      "TYPE_PLACEHOLDER": "Type a message...",
+      "SEND": "Send",
+      "REPLY": "Reply",
+      "DELETE": "Delete",
+      "REACT": "React",
+      "REPLYING_TO": "Replying to {{name}}",
+      "FILE_ATTACHED": "[File]",
+      "TYPING": "{{name}} is typing",
+      "TODAY": "Today",
+      "YESTERDAY": "Yesterday"
+    },
+    "CREATE_ROOM": {
+      "TITLE": "Create New Room",
+      "NAME_LABEL": "Room Name *",
+      "NAME_PLACEHOLDER": "Enter room name...",
+      "DESCRIPTION_LABEL": "Description",
+      "DESCRIPTION_PLACEHOLDER": "What's this room about...",
+      "TYPE_LABEL": "Room Type",
+      "TYPE_GROUP": "Group Chat",
+      "TYPE_DM": "Direct Message",
+      "GAME_LABEL": "Game Title (Optional)",
+      "GAME_PLACEHOLDER": "e.g., League of Legends, Valorant...",
+      "MAX_MEMBERS_LABEL": "Max Members",
+      "CANCEL": "Cancel",
+      "CREATE": "Create Room",
+      "CREATING": "Creating..."
+    },
+    "NEW_DM": {
+      "TITLE": "Start New Message",
+      "DESCRIPTION": "Select a user from the online users list to start a direct message.",
+      "CANCEL": "Cancel"
+    },
+    "NO_DESCRIPTION": "No description"
+  }
+}

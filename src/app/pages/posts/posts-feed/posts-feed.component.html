@@ -1,0 +1,82 @@
+<div class="max-w-5xl mx-auto px-4 py-8 space-y-8">
+    <div class="flex flex-col md:flex-row md:items-end gap-6">
+        <div class="flex-1 space-y-3">
+            <h1
+                class="text-2xl md:text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-fuchsia-300">
+                Community Posts
+            </h1>
+            <p class="text-sm text-slate-400">
+                Engage with the latest discussions, clips & updates.
+            </p>
+        </div>
+        <div class="flex flex-wrap gap-3">
+            <button
+                routerLink="/posts/create"
+                class="px-4 py-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 text-sm font-medium flex items-center gap-2 shadow shadow-fuchsia-900/40">
+                <i class="fa-solid fa-pen"></i> New Post
+            </button>
+            <div class="relative">
+                <input
+                    [(ngModel)]="searchTerm"
+                    (keyup.enter)="onSearch()"
+                    placeholder="Search posts..."
+                    class="px-3 py-2 pr-8 text-sm rounded-lg bg-slate-800 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
+                <button
+                    (click)="onSearch()"
+                    class="absolute top-0 right-0 h-full px-2 text-slate-400 hover:text-fuchsia-300">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div class="flex flex-wrap gap-4 items-center text-xs">
+        <label class="flex items-center gap-1">Type:
+            <input
+                [(ngModel)]="typeFilter"
+                (change)="refresh()"
+                placeholder="TEXT"
+                class="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs w-24" />
+        </label>
+        <label class="flex items-center gap-1">Category:
+            <input
+                [(ngModel)]="gameCategoryFilter"
+                (change)="refresh()"
+                placeholder="FPS..."
+                class="bg-slate-800 border border-slate-600 rounded px-2 py-1 text-xs" />
+        </label>
+        <label class="flex items-center gap-1">My Posts:
+            <input type="checkbox" [(ngModel)]="myPosts" (change)="refresh()" />
+        </label>
+    </div>
+
+    <div class="space-y-5" (window:scroll)="onWindowScroll()">
+        <div *ngIf="isLoading() && posts().length === 0" class="space-y-4">
+            <div
+                *ngFor="let s of skeletons"
+                class="h-40 rounded-xl bg-slate-800/70 border border-slate-700 animate-pulse"></div>
+        </div>
+
+        <div
+            *ngIf="!isLoading() && posts().length === 0"
+            class="p-10 text-center text-slate-400 border border-dashed border-slate-600 rounded-xl">
+            No posts found.
+        </div>
+
+        <gm-post-card
+            *ngFor="let p of posts(); trackBy: trackPost"
+            [post]="p"></gm-post-card>
+
+        <div class="flex justify-center pt-6" *ngIf="hasMore() && !isLoading()">
+            <button
+                (click)="loadMore()"
+                class="px-5 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm">
+                Load More
+            </button>
+        </div>
+        <div class="flex justify-center pt-6"
+            *ngIf="isLoading() && posts().length > 0">
+            <span class="text-slate-400 text-xs">Loading...</span>
+        </div>
+    </div>
+</div>

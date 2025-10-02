@@ -1,0 +1,44 @@
+<div
+    class="group relative bg-slate-800/60 border border-slate-700 rounded-xl overflow-hidden flex flex-col hover:border-cyan-500/60 transition">
+    <div
+        class="aspect-video w-full bg-slate-900 flex items-center justify-center text-slate-600 text-xs font-mono relative">
+        <ng-container *ngIf="media.thumbnailPath; else noThumb">
+            <img
+                [src]="media.thumbnailPath"
+                [alt]="media.title"
+                class="w-full h-full object-cover group-hover:scale-[1.02] transition" />
+        </ng-container>
+        <ng-template #noThumb>
+            <span class="opacity-60">{{ media.mediaType }} • {{ media.resolution
+                || '—' }}</span>
+        </ng-template>
+        <div
+            *ngIf="media.mediaType === 'VIDEO'"
+            class="absolute bottom-1 right-1 text-[10px] px-1.5 py-0.5 rounded bg-black/60 text-white font-medium">
+            {{ media.duration || 0 }}s
+        </div>
+    </div>
+    <div class="p-3 flex flex-col gap-2 flex-1">
+        <h3
+            class="text-sm font-semibold leading-tight line-clamp-2"
+            [title]="media.title">
+            {{ media.title }}
+        </h3>
+        <div class="flex items-center gap-2 text-[11px] text-slate-400 mt-auto">
+            <span class="inline-flex items-center gap-1"><i
+                    class="fa-solid fa-eye text-cyan-400"></i>{{ media.viewCount
+                }}</span>
+            <span
+                *ngIf="media.gameCategory"
+                class="px-1.5 py-0.5 rounded bg-slate-700/60 text-slate-300">{{
+                media.gameCategory }}</span>
+            <span class="ml-auto" *ngIf="media.createdAt as d">{{
+                d | date : 'MMM d'
+                }}</span>
+        </div>
+        <a
+            [routerLink]="['/media', media.id]"
+            class="absolute inset-0"
+            aria-label="Open media"></a>
+    </div>
+</div>

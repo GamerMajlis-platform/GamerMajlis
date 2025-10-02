@@ -1,0 +1,82 @@
+<div class="max-w-4xl min-h-screen items-center mx-auto px-4 py-10"
+    *ngIf="loaded() && post(); else loadingTpl">
+    <div class="space-y-6">
+        <div class="flex items-start justify-between gap-4">
+            <div>
+                <h1 class="text-2xl font-bold leading-tight"
+                    [innerHTML]="safeTitle()"></h1>
+                <p class="text-xs text-slate-400 mt-1">{{ post()?.createdAt |
+                    date : 'medium' }}</p>
+            </div>
+            <div class="flex items-center gap-2 text-xs text-slate-400">
+                <span class="px-2 py-1 rounded bg-slate-700/60">{{
+                    post()?.visibility }}</span>
+                <span
+                    class="px-2 py-1 rounded bg-fuchsia-600/20 text-fuchsia-300"
+                    *ngIf="post()?.gameCategory">{{ post()?.gameCategory
+                    }}</span>
+            </div>
+        </div>
+
+        <article class="prose prose-invert max-w-none"
+            [innerHTML]="safeContent()"></article>
+
+        <div class="flex flex-wrap gap-2 pt-4" *ngIf="tags().length">
+            <span *ngFor="let t of tags()"
+                class="px-2 py-1 rounded bg-slate-700/60 text-xs">{{ t }}</span>
+        </div>
+
+        <div class="flex flex-wrap gap-2" *ngIf="hashtags().length">
+            <span *ngFor="let h of hashtags()"
+                class="px-2 py-1 rounded bg-fuchsia-700/40 text-xs">#{{ h
+                }}</span>
+        </div>
+
+        <section class="pt-6 border-t border-slate-700/60">
+            <h2 class="font-semibold mb-4">Comments</h2>
+            <form (submit)="addComment($event)" class="flex gap-2 mb-6">
+                <input
+                    [(ngModel)]="newComment"
+                    name="comment"
+                    required
+                    placeholder="Add a comment"
+                    class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
+                <button
+                    class="px-4 py-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 disabled:opacity-60"
+                    [disabled]="!newComment.trim() || addingComment()">
+                    Post
+                </button>
+            </form>
+            <div class="space-y-4"
+                *ngIf="comments().length; else noCommentsTpl">
+                <div *ngFor="let c of comments()"
+                    class="bg-slate-800/70 rounded-lg p-4 flex flex-col gap-2">
+                    <div
+                        class="flex items-center justify-between text-xs text-slate-400">
+                        <span>{{ c.author.displayName || 'User' }}</span>
+                        <span>{{ c.createdAt | date : 'short' }}</span>
+                    </div>
+                    <p class="text-sm leading-relaxed">{{ c.content }}</p>
+                    <button *ngIf="canDelete(c)" (click)="deleteComment(c)"
+                        class="self-end text-[10px] uppercase tracking-wider text-red-400 hover:text-red-300">
+                        Delete
+                    </button>
+                </div>
+            </div>
+            <ng-template #noCommentsTpl>
+                <p class="text-sm text-slate-500">No comments yet.</p>
+            </ng-template>
+        </section>
+    </div>
+</div>
+<ng-template #loadingTpl>
+    <div class="max-w-4xl mx-auto px-4 py-10 space-y-6 animate-pulse">
+        <div class="h-8 w-1/2 bg-slate-700 rounded"></div>
+        <div class="space-y-2">
+            <div class="h-4 w-full bg-slate-700 rounded"></div>
+            <div class="h-4 w-5/6 bg-slate-700 rounded"></div>
+            <div class="h-4 w-4/6 bg-slate-700 rounded"></div>
+        </div>
+        <div class="h-40 w-full bg-slate-700/60 rounded"></div>
+    </div>
+</ng-template>

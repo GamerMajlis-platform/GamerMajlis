@@ -1,0 +1,667 @@
+{
+  "NAV": {
+    "HOME": "الرئيسية",
+    "TOURNAMENTS": "البطولات",
+    "MARKETPLACE": "السوق",
+    "EVENTS": "الفعاليات",
+    "MESSAGES": "الرسائل",
+    "PROFILE": "الملف الشخصي",
+    "WISHLIST": "قائمة الأمنيات",
+    "LOGOUT": "تسجيل الخروج"
+  },
+  "LANG": {
+    "TOGGLE": "English"
+  },
+  "FOOTER": {
+    "ABOUT": "منصة مجتمع الألعاب الأمثل حيث تُصنع الأساطير، وتُحسم البطولات، وتُبنى الصداقات. انضم إلى ملايين اللاعبين حول العالم.",
+    "QUICK_LINKS": "روابط سريعة",
+    "HOME": "الرئيسية",
+    "TOURNAMENTS": "البطولات",
+    "GAMES": "الألعاب",
+    "COMMUNITY": "المجتمع",
+    "TIMELINE": {
+      "TITLE": "الخط الزمني",
+      "SUBTITLE": "سجل موحد لنشاط المجتمع. تنقل بين المنشورات والوسائط دون فقدان السياق."
+    },
+    "LEADERBOARDS": "لوائح الصدارة",
+    "SUPPORT": "الدعم",
+    "HELP_CENTER": "مركز المساعدة",
+    "CONTACT_US": "اتصل بنا",
+    "FAQ": "الأسئلة الشائعة",
+    "PRIVACY": "سياسة الخصوصية",
+    "TERMS": "شروط الخدمة",
+    "COOKIES": "سياسة الكوكيز",
+    "STAY_UPDATED": "ابقَ على اطلاع",
+    "NEWSLETTER_DESC": "احصل على أحدث أخبار الألعاب وتحديثات البطولات والعروض الحصرية إلى بريدك.",
+    "EMAIL_PLACEHOLDER": "أدخل بريدك الإلكتروني",
+    "SUBSCRIBE": "اشترك",
+    "COPYRIGHT": "© 2025 جيمر مجلس. جميع الحقوق محفوظة. صُنعت بحب للاعبين حول العالم.",
+    "SYSTEMS_OPERATIONAL": "جميع الأنظمة تعمل",
+    "SYSTEM_STATUS": "حالة النظام"
+  },
+  "TIMELINE": {
+    "TITLE": "الخط الزمني",
+    "SUBTITLE": "سجل موحد لنشاط المجتمع. تنقل بين المنشورات والوسائط دون فقدان السياق.",
+    "CREATE_POST": "إنشاء منشور",
+    "UPLOAD_MEDIA": "رفع وسائط",
+    "SCROLL_OR_SWITCH": "التمرير للأعلى أو تبديل التبويب"
+  },
+  "HOME": {
+    "HERO_SUBTITLE": "انضم إلى أقوى مجتمع للألعاب. نافس في البطولات، تواصل مع اللاعبين، وتصدر القوائم.",
+    "CTA_START": "ابدأ اللعب الآن",
+    "CTA_WATCH": "شاهد البطولات",
+    "AUTH": {
+      "PRIMARY": "أنشئ حسابك مجاناً",
+      "PRIMARY_DESC": "ابدأ رحلتك خلال ثوانٍ",
+      "SECONDARY": "لديّ حساب بالفعل"
+    },
+    "POST_AUTH": {
+      "PRIMARY": "استكشف البطولات",
+      "SECONDARY": "اكتشف الفعاليات"
+    },
+    "COMPETITIVE_GAMING": "ألعاب تنافسية",
+    "TOURNAMENT_ARENA": "ساحة البطولات",
+    "TOURNAMENTS_HEADER": "البطولات",
+    "COMPETE_WIN": "تنافس، اربح، واصنع مجدك",
+    "STATS_TOTAL_PRIZE": "إجمالي الجوائز",
+    "STATS_HOSTED": "عدد البطولات",
+    "STATS_PAYOUT": "نسبة دفع الجوائز",
+    "FEATURED_CHAMPIONSHIPS": "بطولات مميزة",
+    "VIEW_CALENDAR": "عرض التقويم",
+    "CATEGORIES": "تصنيفات البطولات",
+    "ROOKIE_LEAGUE": "دوري المبتدئين",
+    "FOR_NEW_PLAYERS": "للاعبين الجدد",
+    "PERFECT_FOR_BEG": "مثالي للمبتدئين لاكتساب خبرة تنافسية.",
+    "ELITE_SERIES": "سلسلة النخبة",
+    "SKILLED_COMP": "لاعبون مهرة",
+    "SERIOUS_COMP": "للاعبين ذوي الخبرة الجاهزين للمنافسة الجادة.",
+    "CHAMPIONS_CIRCUIT": "دائرة الأبطال",
+    "PRO_LEVEL_ONLY": "مستوى احترافي فقط",
+    "PREMIER_TOURN": "بطولات للمحترفين في الرياضات الإلكترونية.",
+    "HOW_WORK": "كيف تعمل بطولاتنا",
+    "STEP_REGISTER": "التسجيل",
+    "STEP_REGISTER_DESC": "سجل في البطولات المناسبة لمستواك",
+    "STEP_COMPETE": "تنافس",
+    "STEP_COMPETE_DESC": "العب المباريات حسب نظام البطولة",
+    "STEP_TRACK": "تتبع التقدم",
+    "STEP_TRACK_DESC": "راقب أداءك وتقدمك في الجدول",
+    "STEP_WIN": "اربح الجوائز",
+    "STEP_WIN_DESC": "احصل على مكافآتك وابنِ سمعتك",
+    "BROWSE_ALL": "تصفح جميع البطولات",
+    "TOURNAMENT_CAL": "تقويم البطولات",
+    "EMPTY_TITLE": "لا توجد بطولات",
+    "EMPTY_DESC": "جرّب تعديل البحث أو الفلاتر",
+    "LOAD_MORE": "عرض المزيد من البطولات",
+    "SEARCH_PLACEHOLDER": "ابحث عن البطولات...",
+    "SORT_DATE": "الفرز حسب التاريخ",
+    "SORT_PRIZE": "الفرز حسب الجائزة",
+    "SORT_PLAYERS": "الفرز حسب اللاعبين",
+    "UPCOMING": "قريباً",
+    "ONGOING": "جارية",
+    "PAST": "منتهية",
+    "START": "البداية:",
+    "PRIZE": "الجائزة:",
+    "PLAYERS": "اللاعبون:",
+    "STARTS_IN": "تبدأ خلال:",
+    "JOIN_TOURNAMENT": "انضم للبطولة",
+    "WATCH_LIVE": "شاهد البث المباشر",
+    "VIEW_RESULTS": "عرض النتائج"
+  },
+  "TOURN": {
+    "TITLE": "البطولات",
+    "SUBTITLE": "تنافس، اربح، واصنع مجدك",
+    "TABS": {
+      "UPCOMING": "قريباً",
+      "ONGOING": "جارية",
+      "PAST": "منتهية"
+    },
+    "SEARCH_PLACEHOLDER": "ابحث عن البطولات...",
+    "SORT_DATE": "الفرز حسب التاريخ",
+    "SORT_PRIZE": "الفرز حسب الجائزة",
+    "SORT_PLAYERS": "الفرز حسب اللاعبين",
+    "FEATURED": "بطولات مميزة",
+    "VIEW_CALENDAR": "عرض التقويم",
+    "STATS_TOTAL_PRIZE": "إجمالي الجوائز",
+    "STATS_HOSTED": "عدد البطولات",
+    "STATS_PAYOUT": "نسبة دفع الجوائز",
+    "REGISTERING": "تسجيل مفتوح",
+    "FILLING_FAST": "تمتلئ بسرعة",
+    "PRIZE_POOL": "مجموع الجوائز",
+    "START_DATE": "تاريخ البداية",
+    "FORMAT": "النظام",
+    "ENTRY_FEE": "رسوم الاشتراك",
+    "TEAMS_REGISTERED": "الفرق المسجلة",
+    "REGISTER_NOW": "سجل الآن",
+    "CATEGORIES": "تصنيفات البطولات",
+    "BEGINNER": "دوري المبتدئين",
+    "BEGINNER_DESC": "مثالي للمبتدئين لاكتساب خبرة تنافسية.",
+    "INTERMEDIATE": "سلسلة النخبة",
+    "INTERMEDIATE_DESC": "للاعبين ذوي الخبرة الجاهزين للمنافسة الجادة.",
+    "PROFESSIONAL": "دائرة الأبطال",
+    "PROFESSIONAL_DESC": "بطولات للمحترفين في الرياضات الإلكترونية.",
+    "HOW_WORK": "كيف تعمل بطولاتنا",
+    "STEP_REGISTER": "التسجيل",
+    "STEP_REGISTER_DESC": "سجل في البطولات المناسبة لمستواك",
+    "STEP_COMPETE": "تنافس",
+    "STEP_COMPETE_DESC": "العب المباريات حسب نظام البطولة",
+    "STEP_TRACK": "تتبع التقدم",
+    "STEP_TRACK_DESC": "راقب أداءك وتقدمك في الجدول",
+    "STEP_WIN": "اربح الجوائز",
+    "STEP_WIN_DESC": "احصل على مكافآتك وابنِ سمعتك",
+    "LABELS": {
+      "START": "البداية:",
+      "PRIZE": "الجائزة:",
+      "PLAYERS": "اللاعبون:",
+      "STARTS_IN": "تبدأ خلال:"
+    },
+    "ACTIONS": {
+      "JOIN": "انضم للبطولة",
+      "WATCH_LIVE": "شاهد البث المباشر",
+      "VIEW_RESULTS": "عرض النتائج",
+      "LOAD_MORE": "عرض المزيد من البطولات"
+    },
+    "CREATE_TOURNAMENT": "إنشاء بطولة",
+    "EMPTY_TITLE": "لا توجد بطولات",
+    "EMPTY_DESC": "جرّب تعديل البحث أو الفلاتر"
+  },
+  "TOURNAMENTS": {
+    "TITLE": "البطولات",
+    "SUBTITLE": "شارك في بطولات الألعاب الاحترافية",
+    "CREATE": "إنشاء بطولة",
+    "SEARCH": "بحث",
+    "SEARCH_PLACEHOLDER": "ابحث عن البطولات...",
+    "STATUS": "الحالة",
+    "GAME": "اللعبة",
+    "MIN_PRIZE": "أقل مجموع جوائز",
+    "MAX_PRIZE": "أكبر مجموع جوائز",
+    "PRIZE_POOL": "مجموع الجوائز",
+    "PARTICIPANTS": "المشاركون",
+    "REGISTRATION": "التسجيل",
+    "START_DATE": "تاريخ البداية",
+    "ORGANIZER": "المنظم",
+    "VIEW_DETAILS": "عرض التفاصيل",
+    "REGISTER": "سجل",
+    "NO_TOURNAMENTS": "لا توجد بطولات",
+    "NO_TOURNAMENTS_DESC": "جرّب تعديل فلاتر البحث أو أنشئ بطولة جديدة",
+    "CREATE_FIRST": "أنشئ أول بطولة",
+    "LOADING": "جاري تحميل البطولات...",
+    "ERROR": "فشل في تحميل البطولات",
+    "STATUS_OPTIONS": {
+      "ALL": "جميع الحالات",
+      "DRAFT": "مسودة",
+      "REGISTRATION_OPEN": "التسجيل مفتوح",
+      "REGISTRATION_CLOSED": "التسجيل مغلق",
+      "IN_PROGRESS": "جارية",
+      "COMPLETED": "مكتملة",
+      "CANCELLED": "ملغية"
+    },
+    "FORM": {
+      "CREATE_TITLE": "إنشاء بطولة جديدة",
+      "EDIT_TITLE": "تعديل البطولة",
+      "BASIC_INFO": "المعلومات الأساسية",
+      "TOURNAMENT_NAME": "اسم البطولة",
+      "DESCRIPTION": "الوصف",
+      "GAME_SETTINGS": "إعدادات اللعبة",
+      "GAME_TITLE": "عنوان اللعبة",
+      "GAME_MODE": "وضع اللعبة",
+      "TOURNAMENT_TYPE": "نوع البطولة",
+      "PARTICIPANT_SETTINGS": "إعدادات المشاركين",
+      "MAX_PARTICIPANTS": "أقصى عدد مشاركين",
+      "ENTRY_FEE": "رسوم الدخول",
+      "CURRENCY": "العملة",
+      "PRIZE_SETTINGS": "إعدادات الجوائز",
+      "SCHEDULING": "الجدولة",
+      "END_DATE": "تاريخ الانتهاء",
+      "REGISTRATION_DEADLINE": "آخر موعد للتسجيل",
+      "RULES_SETTINGS": "القواعد والإعدادات",
+      "RULES": "قواعد البطولة",
+      "PUBLIC": "بطولة عامة",
+      "REQUIRES_APPROVAL": "تحتاج موافقة",
+      "SAVE": "حفظ البطولة",
+      "CANCEL": "إلغاء",
+      "SAVING": "جاري الحفظ...",
+      "VALIDATION": {
+        "NAME_REQUIRED": "اسم البطولة مطلوب",
+        "DESCRIPTION_REQUIRED": "الوصف مطلوب",
+        "GAME_TITLE_REQUIRED": "عنوان اللعبة مطلوب",
+        "INVALID_DATES": "تاريخ الانتهاء يجب أن يكون بعد تاريخ البداية",
+        "INVALID_REGISTRATION": "آخر موعد للتسجيل يجب أن يكون قبل تاريخ البداية",
+        "MIN_PARTICIPANTS": "يجب أن يكون هناك مشاركان على الأقل",
+        "INVALID_PRIZE": "مجموع الجوائز يجب أن يكون رقماً موجباً"
+      }
+    }
+  },
+  "EVENTS": {
+    "TITLE": "الفعاليات",
+    "SUBTITLE": "اكتشف، انضم، وأنشئ فعاليات ألعاب مذهلة. تواصل مع زملاء اللاعبين وتنافس في البطولات.",
+    "HERO": {
+      "TITLE": "الفعاليات",
+      "DESCRIPTION": "اكتشف، انضم، وأنشئ فعاليات ألعاب مذهلة. تواصل مع زملاء اللاعبين وتنافس في البطولات."
+    },
+    "VIEWS": {
+      "UPCOMING": "الفعاليات القادمة",
+      "ONGOING": "الفعاليات الجارية",
+      "PAST": "الفعاليات السابقة"
+    },
+    "SEARCH": {
+      "PLACEHOLDER": "ابحث عن الفعاليات...",
+      "LOADING": "جاري التحميل..."
+    },
+    "RESULTS": {
+      "UPCOMING_COUNT": "فعالية قادمة",
+      "UPCOMING_COUNT_PLURAL": "فعاليات قادمة",
+      "ONGOING_COUNT": "فعالية جارية",
+      "ONGOING_COUNT_PLURAL": "فعاليات جارية",
+      "PAST_COUNT": "فعالية سابقة",
+      "PAST_COUNT_PLURAL": "فعاليات سابقة",
+      "PAGE_OF": "صفحة"
+    },
+    "EMPTY": {
+      "TITLE": "لا توجد فعاليات",
+      "UPCOMING": "لا توجد فعاليات قادمة في الوقت الحالي.",
+      "ONGOING": "لم تسجل في أي فعاليات جارية بعد.",
+      "PAST": "لا توجد فعاليات سابقة.",
+      "CREATE_CTA": "أنشئ فعاليتك الأولى"
+    },
+    "PAGINATION": {
+      "PREVIOUS": "السابق",
+      "NEXT": "التالي",
+      "PAGE": "صفحة",
+      "OF": "من"
+    },
+    "CARD": {
+      "DATE": "التاريخ",
+      "ATTENDEES": "الحضور",
+      "JOIN_EVENT": "انضم للفعالية",
+      "LEAVE_EVENT": "مغادرة الفعالية",
+      "VIEW": "عرض"
+    },
+    "DETAIL": {
+      "LOADING": "جاري تحميل تفاصيل الفعالية...",
+      "BACK": "العودة للفعاليات",
+      "ABOUT": "حول هذه الفعالية",
+      "READ_MORE": "اقرأ المزيد",
+      "SHOW_LESS": "عرض أقل",
+      "TOTAL_VIEWS": "إجمالي المشاهدات",
+      "INTERESTED": "مهتم",
+      "UNTIL_EVENT": "حتى الفعالية",
+      "LIVE_NOW": "مباشر الآن",
+      "ENDED": "انتهت",
+      "EVENT_IS_LIVE": "الفعالية مباشرة",
+      "EVENT_ENDED": "انتهت الفعالية",
+      "DAYS": "أيام",
+      "EVENT_ACTIONS": "إجراءات الفعالية",
+      "REGISTER_FOR_EVENT": "التسجيل في الفعالية",
+      "UNREGISTER": "إلغاء التسجيل",
+      "CHECK_IN_NOW": "تسجيل الحضور الآن",
+      "SHARE_EVENT": "مشاركة الفعالية",
+      "EDIT_EVENT": "تعديل الفعالية",
+      "DELETE_EVENT": "حذف الفعالية",
+      "EVENT_INFO": "معلومات الفعالية",
+      "DATE_TIME": "التاريخ والوقت",
+      "START": "البداية",
+      "END": "النهاية",
+      "DURATION": "المدة",
+      "REGISTRATION_DEADLINE": "الموعد النهائي للتسجيل",
+      "PASSED": "انقضى",
+      "LOCATION": "الموقع",
+      "VIRTUAL_PLATFORM": "منصة افتراضية",
+      "JOIN_VIRTUAL_EVENT": "الانضمام للفعالية الافتراضية",
+      "VENUE": "المكان",
+      "GAME": "اللعبة",
+      "ENTRY_FEE": "رسوم الدخول",
+      "FREE": "مجاني",
+      "EVENT_FEATURES": "مميزات الفعالية",
+      "COMPETITIVE": "تنافسي",
+      "ONLY": "فقط",
+      "REGISTRATION_REQUIRED": "التسجيل مطلوب",
+      "REGISTRATION_REQUIREMENTS": "متطلبات التسجيل",
+      "EVENT_ORGANIZER": "منظم الفعالية",
+      "VIEW_PROFILE": "عرض الملف الشخصي",
+      "CREATED": "تم الإنشاء",
+      "LAST_UPDATED": "آخر تحديث",
+      "EVENT_ID": "معرّف الفعالية",
+      "VISIBILITY": "الظهور",
+      "PUBLIC": "عام",
+      "PRIVATE": "خاص",
+      "ATTENDANCE": "الحضور",
+      "REGISTERED": "مسجل",
+      "OF": "من",
+      "FULL": "ممتلئ",
+      "SPOTS_LEFT": "مقاعد متبقية",
+      "ATTENDEES_LIST": "الحضور",
+      "LOADING_ATTENDEES": "جاري تحميل الحضور...",
+      "NO_ATTENDEES": "لا يوجد حضور بعد",
+      "BE_FIRST": "كن أول من يسجّل!",
+      "NOT_FOUND_TITLE": "الفعالية غير موجودة",
+      "NOT_FOUND_DESC": "الفعالية التي تبحث عنها غير موجودة أو تم حذفها.",
+      "BACK_TO_EVENTS": "العودة للفعاليات"
+    },
+    "CARD1": {
+      "TITLE": "لقاء المجتمع",
+      "DESC": "تواصل مع اللاعبين المحليين وشكّل فرقاً."
+    },
+    "CARD2": {
+      "TITLE": "ليلة LAN",
+      "DESC": "أحضر جهازك وانضم لأقوى حفلة LAN."
+    },
+    "CARD3": {
+      "TITLE": "حديث المطورين",
+      "DESC": "استمع لمطوري الألعاب حول العناوين القادمة."
+    },
+    "ACTIONS": {
+      "REGISTER": "سجّل الآن",
+      "CREATE": "إنشاء فعالية"
+    }
+  },
+  "MARKET": {
+    "TITLE": "السوق",
+    "SUBTITLE": "اكتشف أفضل معدات الألعاب من البائعين الموثوقين",
+    "SEARCH": {
+      "LABEL": "بحث",
+      "PLACEHOLDER": "ابحث عن المنتجات..."
+    },
+    "CATEGORY": {
+      "LABEL": "الفئة",
+      "ALL": "جميع الفئات"
+    },
+    "PRICE_RANGE": {
+      "LABEL": "نطاق السعر",
+      "MIN": "الحد الأدنى",
+      "MAX": "الحد الأقصى"
+    },
+    "CONDITION": {
+      "LABEL": "الحالة",
+      "NEW": "جديد",
+      "USED_LIKE_NEW": "مستعمل - كالجديد",
+      "USED_GOOD": "مستعمل - جيد",
+      "USED_FAIR": "مستعمل - مقبول",
+      "FOR_PARTS": "لقطع الغيار"
+    },
+    "LOCATION": {
+      "LABEL": "الموقع",
+      "PLACEHOLDER": "المدينة، الولاية أو الدولة"
+    },
+    "FILTERS": {
+      "FREE_SHIPPING": "شحن مجاني فقط",
+      "VERIFIED_SELLERS": "بائعون موثوقون فقط",
+      "AVAILABLE_ONLY": "العناصر المتاحة فقط",
+      "APPLY": "تطبيق الفلاتر",
+      "CLEAR": "مسح",
+      "BUTTON_LABEL": "الفلاتر",
+      "CLEAR_ALL": "مسح جميع الفلاتر"
+    },
+    "RESULTS": {
+      "LOADING": "جاري تحميل المنتجات...",
+      "SHOWING": "عرض",
+      "OF": "من",
+      "PRODUCTS": "منتج"
+    },
+    "SORT": {
+      "LABEL": "ترتيب حسب:",
+      "NEWEST": "الأحدث أولاً",
+      "OLDEST": "الأقدم أولاً",
+      "PRICE_LOW": "السعر: من الأقل إلى الأعلى",
+      "PRICE_HIGH": "السعر: من الأعلى إلى الأقل",
+      "NAME_ASC": "الاسم: من أ إلى ي",
+      "NAME_DESC": "الاسم: من ي إلى أ",
+      "RATING": "الأعلى تقييماً",
+      "POPULAR": "الأكثر شعبية"
+    },
+    "VIEW": {
+      "LIST": "عرض القائمة",
+      "GRID": "عرض الشبكة"
+    },
+    "ACTIONS": {
+      "VIEW_DETAILS": "عرض التفاصيل",
+      "CONTACT": "تواصل",
+      "ADD_TO_CART": "أضف إلى السلة"
+    },
+    "PAGINATION": {
+      "PREVIOUS": "السابق",
+      "NEXT": "التالي"
+    },
+    "EMPTY": {
+      "TITLE": "لم يتم العثور على منتجات",
+      "DESCRIPTION": "حاول تعديل معايير البحث أو الفلاتر.",
+      "CLEAR_BUTTON": "مسح جميع الفلاتر"
+    },
+    "REVIEWS": "تقييمات"
+  },
+  "PROFILE": {
+    "TITLE": "الملف الشخصي",
+    "EDIT": "تعديل الملف",
+    "BIO": "السيرة الذاتية",
+    "PREFERENCES": "تفضيلات الألعاب",
+    "STATS": "إحصائيات اللعب",
+    "WIN_RATE": "نسبة الفوز",
+    "TOURN_WON": "بطولات فاز بها",
+    "TOTAL_MATCHES": "إجمالي المباريات"
+  },
+  "WISHLIST": {
+    "TITLE": "قائمتي المفضلة",
+    "SUBTITLE": "تجميعتك المختارة بعناية من المنتجات المفضلة",
+    "STATS": {
+      "TOTAL_ITEMS": "إجمالي العناصر",
+      "TOTAL_VALUE": "القيمة الإجمالية",
+      "ON_SALE": "تخفيضات"
+    },
+    "ACTIONS": {
+      "ADD_ALL": "إضافة الكل للسلة",
+      "CLEAR_ALL": "مسح الكل",
+      "ADD_TO_CART": "أضف إلى السلة",
+      "ADD_TO_WISHLIST": "أضف للمفضلة",
+      "BROWSE_PRODUCTS": "تصفح المنتجات"
+    },
+    "FILTERS": {
+      "ALL": "كل العناصر",
+      "ON_SALE": "تخفيضات",
+      "IN_STOCK": "متوفر",
+      "RECENT": "أضيف حديثاً"
+    },
+    "SORT": {
+      "LABEL": "الترتيب حسب:",
+      "DATE": "تاريخ الإضافة",
+      "PRICE_ASC": "السعر: من الأقل للأعلى",
+      "PRICE_DESC": "السعر: من الأعلى للأقل",
+      "NAME_ASC": "الاسم أ-ي",
+      "NAME_DESC": "الاسم ي-أ"
+    },
+    "EMPTY": {
+      "TITLE": "قائمة المفضلة فارغة",
+      "DESC": "ابدأ بإضافة المنتجات التي تحبها لتتبعها وشرائها لاحقاً."
+    },
+    "BADGES": {
+      "SALE_25": "خصم 25%",
+      "SALE_50": "خصم 50%",
+      "NEW": "جديد",
+      "LIMITED": "محدود",
+      "IN_STOCK": "متوفر",
+      "LOW_STOCK": "كمية قليلة",
+      "OUT_STOCK": "غير متوفر"
+    }
+  },
+  "AUTH": {
+    "LOGIN": {
+      "TITLE": "تسجيل الدخول",
+      "EMAIL": "البريد الإلكتروني",
+      "PASSWORD": "كلمة المرور",
+      "SUBMIT": "تسجيل الدخول",
+      "OR": "أو",
+      "LOGIN_DISCORD": "تسجيل الدخول عبر ديسكورد",
+      "DONT_HAVE": "ليس لديك حساب؟",
+      "REGISTER_NOW": "سجّل الآن",
+      "ERRORS": {
+        "REQUIRED": "هذا الحقل مطلوب",
+        "EMAIL": "يرجى إدخال بريد إلكتروني صالح. :)",
+        "MIN_LENGTH": "يرجى إدخال 8 أحرف على الأقل.",
+        "PASSWORD_PATTERN": "الحرف الأول كبير ثم 7+ أحرف أو أرقام."
+      }
+    },
+    "DISCORD": {
+      "PROCESSING": "جاري معالجة المصادقة عبر ديسكورد..."
+    },
+    "SIGNUP": {
+      "TITLE": "إنشاء حساب",
+      "USERNAME": "اسم المستخدم",
+      "EMAIL": "البريد الإلكتروني",
+      "PASSWORD": "كلمة المرور",
+      "CONFIRM_PASSWORD": "تأكيد كلمة المرور",
+      "SUBMIT": "سجّل",
+      "ALREADY": "لديك حساب بالفعل؟",
+      "LOGIN_NOW": "سجّل الدخول الآن",
+      "ERRORS": {
+        "REQUIRED": "هذا الحقل مطلوب",
+        "EMAIL": "يرجى إدخال بريد إلكتروني صالح. :)",
+        "MIN_LENGTH": "يرجى إدخال 8 أحرف على الأقل.",
+        "USERNAME_MIN": "الحد الأدنى 3 أحرف",
+        "PASSWORD_PATTERN": "الحرف الأول كبير ثم 7+ أحرف أو أرقام.",
+        "NOT_SAME": "كلمتا المرور غير متطابقتين. يرجى إعادة الإدخال."
+      }
+    }
+  },
+  "CHAT": {
+    "SEARCH": "بحث",
+    "EMPTY": "جاهز للتواصل؟ ابدأ محادثة مع اللاعبين الآن",
+    "TYPE": "اكتب رسالة...",
+    "SEND": "إرسال",
+    "USER": "اسم المستخدم",
+    "TITLE": "جيمر مجلس",
+    "SEARCH_PLACEHOLDER": "البحث في الغرف...",
+    "FILTER_ALL": "الكل",
+    "FILTER_GROUPS": "المجموعات",
+    "FILTER_DMS": "الرسائل المباشرة",
+    "NEW_ROOM": "غرفة جديدة",
+    "NEW_MESSAGE": "رسالة جديدة",
+    "NO_ROOMS": "لا توجد غرف",
+    "SELECT_ROOM_TITLE": "اختر غرفة محادثة",
+    "SELECT_ROOM_DESC": "اختر غرفة من الشريط الجانبي لبدء المحادثة",
+    "MEMBERS": "الأعضاء",
+    "MEMBERS_COUNT": "{{count}} أعضاء",
+    "MEMBERS_LIST_COMING_SOON": "قائمة الأعضاء قريباً",
+    "ONLINE_USERS": "المستخدمون المتصلون",
+    "NO_DESCRIPTION": "بدون وصف",
+    "CONNECTION_STATUS": {
+      "CONNECTED": "متصل",
+      "CONNECTING": "جاري الاتصال",
+      "RECONNECTING": "إعادة الاتصال",
+      "DISCONNECTED": "غير متصل",
+      "FAILED": "فشل"
+    },
+    "MESSAGE": {
+      "TYPE_PLACEHOLDER": "اكتب رسالة...",
+      "SEND": "إرسال",
+      "REPLY": "رد",
+      "DELETE": "حذف",
+      "REACT": "تفاعل",
+      "REPLYING_TO": "الرد على {{name}}",
+      "FILE_ATTACHED": "[ملف]",
+      "TYPING": "{{name}} يكتب",
+      "TODAY": "اليوم",
+      "YESTERDAY": "أمس"
+    },
+    "CREATE_ROOM": {
+      "TITLE": "إنشاء غرفة جديدة",
+      "NAME_LABEL": "اسم الغرفة *",
+      "NAME_PLACEHOLDER": "أدخل اسم الغرفة...",
+      "DESCRIPTION_LABEL": "الوصف",
+      "DESCRIPTION_PLACEHOLDER": "ما موضوع هذه الغرفة...",
+      "TYPE_LABEL": "نوع الغرفة",
+      "TYPE_GROUP": "محادثة جماعية",
+      "TYPE_DM": "رسالة مباشرة",
+      "GAME_LABEL": "اسم اللعبة (اختياري)",
+      "GAME_PLACEHOLDER": "مثل: League of Legends، Valorant...",
+      "MAX_MEMBERS_LABEL": "الحد الأقصى للأعضاء",
+      "CANCEL": "إلغاء",
+      "CREATE": "إنشاء الغرفة",
+      "CREATING": "جاري الإنشاء..."
+    },
+    "NEW_DM": {
+      "TITLE": "بدء رسالة جديدة",
+      "DESCRIPTION": "اختر مستخدمًا من قائمة المستخدمين المتصلين لبدء رسالة مباشرة.",
+      "CANCEL": "إلغاء"
+    }
+  },
+  "NOT_FOUND": {
+    "TITLE": "الصفحة غير موجودة",
+    "BACK": "العودة للصفحة الرئيسية"
+  },
+  "PROFILE_PAGE": {
+    "LOADING": "جاري تحميل الملف...",
+    "STATUS": { "LIVE": "مباشر", "ONLINE": "متصل", "OFFLINE": "غير متصل" },
+    "ACTIONS": {
+      "CHANGE": "تغيير",
+      "REFRESH": "تحديث",
+      "CANCEL": "إلغاء",
+      "SAVE_PROFILE": "حفظ الملف",
+      "SAVE_STATS": "حفظ الإحصائيات",
+      "SAVE_PRIVACY": "حفظ الخصوصية",
+      "REMOVE": "إزالة",
+      "UPLOAD": "رفع",
+      "VIEW_PROFILE": "عرض الملف",
+      "SEARCH": "بحث"
+    },
+    "TABS": {
+      "OVERVIEW": "نظرة عامة",
+      "EDIT": "تعديل",
+      "EDITING": "يتم التعديل",
+      "STATS": "إحصائيات",
+      "PRIVACY": "الخصوصية",
+      "SEARCH": "اكتشف"
+    },
+    "HEADERS": {
+      "BASIC_INFO": "معلومات أساسية",
+      "GAMING_STATS": "إحصائيات اللعب",
+      "ABOUT_ME": "نبذة عني",
+      "SOCIAL_LINKS": "روابط اجتماعية",
+      "EDIT_PROFILE": "تعديل الملف الشخصي",
+      "PRIVACY_SETTINGS": "إعدادات الخصوصية",
+      "CHANGE_PICTURE": "تغيير الصورة الشخصية",
+      "SEARCH_RESULTS": "نتائج البحث",
+      "SUGGESTED_PLAYERS": "لاعبون مقترحون"
+    },
+    "FIELDS": {
+      "DISPLAY_NAME": "اسم العرض",
+      "EMAIL": "البريد الإلكتروني",
+      "JOINED": "انضم",
+      "BIO": "السيرة الذاتية",
+      "PLAY_STYLE": "أسلوب اللعب",
+      "SKILL_LEVEL": "مستوى المهارة",
+      "FAVORITE_MAP": "الخريطة المفضلة",
+      "TOTAL_GAMES": "إجمالي الألعاب",
+      "WIN_RATE": "نسبة الفوز",
+      "WINS": "عدد الانتصارات",
+      "LOSSES": "عدد الخسائر",
+      "AVG_KDA": "متوسط KDA",
+      "HOURS": "الساعات",
+      "HOURS_PLAYED": "عدد الساعات",
+      "TOTAL_WINS": "إجمالي الانتصارات",
+      "TOTAL_LOSSES": "إجمالي الخسائر",
+      "AVERAGE_KDA": "متوسط KDA"
+    },
+    "SKILL": {
+      "BEGINNER": "مبتدئ",
+      "INTERMEDIATE": "متوسط",
+      "ADVANCED": "متقدم",
+      "PROFESSIONAL": "محترف"
+    },
+    "PRIVACY": {
+      "PROFILE_VISIBLE": "الملف مرئي للمستخدمين الآخرين",
+      "SHOW_EMAIL": "عرض بريدي الإلكتروني",
+      "SHOW_STATS": "عرض إحصائيات اللعب",
+      "SHOW_LINKS": "عرض الروابط الاجتماعية",
+      "ALLOW_DM": "السماح بالرسائل المباشرة",
+      "SHOW_ONLINE": "عرض حالتي عند الاتصال"
+    },
+    "SEARCH": {
+      "PLACEHOLDER": "ابحث عن اللاعبين بالاسم أو اللعبة...",
+      "NO_RESULTS": "لا يوجد لاعبين للبحث: \"{{term}}\"",
+      "MATCH": "التوافق:"
+    },
+    "MODAL": { "PREVIEW": "معاينة", "CURRENT_PICTURE": "الصورة الحالية" },
+    "MESSAGES": {
+      "NO_STATS": "لا توجد إحصائيات لعب بعد.",
+      "CONNECT": "تواصل"
+    }
+  }
+}

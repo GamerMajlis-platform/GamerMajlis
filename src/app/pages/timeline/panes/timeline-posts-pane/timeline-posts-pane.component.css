@@ -1,0 +1,77 @@
+:host {
+    display: block;
+}
+
+/* Timeline posts pane specific styles */
+.tl-card {
+    transition-property: border-color, background-color, transform, box-shadow;
+}
+
+.tl-card:hover {
+    transform: translateY(-1px);
+}
+
+/* Like button hover effects */
+.tl-card button:hover {
+    color: rgb(var(--mint));
+}
+
+/* Skeleton shimmer animation is inherited from parent timeline component */
+
+/* Loading spinner */
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Line clamp utilities for content */
+.line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Focus states for accessibility */
+.tl-card:focus-visible {
+    outline: 2px solid rgb(var(--mint) / 0.6);
+    outline-offset: 2px;
+}
+
+button:focus-visible {
+    outline: 2px solid rgb(var(--mint) / 0.6);
+    outline-offset: 1px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+    .tl-card {
+        padding: 0.75rem;
+    }
+
+    .tl-card h3 {
+        font-size: 0.875rem;
+    }
+
+    .tl-card p {
+        font-size: 0.75rem;
+    }
+}

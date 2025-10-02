@@ -1,1 +1,519 @@
-<p>marketplace works!</p>
+ <div class="min-h-screen px-20">
+    <!-- Header -->
+    <div class=" pt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20">
+
+            <div class="pointer-events-none absolute inset-0 overflow-hidden">
+                <div
+                    class="absolute -top-24 -left-24 w-80 h-80 bg-mint/10 rounded-full blur-3xl animate-pulse"></div>
+                <div
+                    class="absolute top-1/3 -right-32 w-96 h-96 bg-teal/10 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+            </div>
+
+            <div class="text-center mb-14">
+                <h1
+                    class="text-4xl sm:text-5xl font-black tracking-tight mb-4 text-white">{{
+                    'MARKET.TITLE' | translate }}</h1>
+                <p
+                    class="text-slate-400 max-w-2xl mx-auto text-sm sm:text-base">
+                    {{ 'MARKET.SUBTITLE' | translate }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="flex justify-end gap-3">
+
+    </div>
+
+    <div class="max-w-[90%] mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <!-- Filters Sidebar -->
+            <div [class]="filtersClass()" class="lg:w-80 space-y-6">
+                <div
+                    class="bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl p-6">
+                    <form [formGroup]="filterForm" (ngSubmit)="applyFilters()">
+                        <!-- Search -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-bold text-white mb-2">{{
+                                'MARKET.SEARCH.LABEL' | translate }}</label>
+                            <div class="relative">
+                                <input
+                                    type="text"
+                                    formControlName="search"
+                                    [placeholder]="'MARKET.SEARCH.PLACEHOLDER' | translate"
+                                    class="w-full pl-10 pr-4 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg focus:ring-2 focus:ring-mint focus:border-mint text-white placeholder-gray-300" />
+                                <svg
+                                    class="absolute left-3 top-2.5 h-5 w-5 text-gray-300"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                        stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Categories -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-bold text-white mb-2">{{
+                                'MARKET.CATEGORY.LABEL' | translate }}</label>
+                            <select
+                                formControlName="categoryId"
+                                class="w-full px-3 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg focus:ring-2 focus:ring-mint focus:border-mint text-white">
+                                <option value class="text-gray-900">{{
+                                    'MARKET.CATEGORY.ALL' | translate
+                                    }}</option>
+                                @for (category of categories(); track
+                                category.name) {
+                                <option [value]="category.name"
+                                    class="text-gray-900">
+                                    {{ category.displayName || category.name }}
+                                </option>
+                                }
+                            </select>
+                        </div>
+
+                        <!-- Price Range -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-bold text-white mb-2">{{
+                                'MARKET.PRICE_RANGE.LABEL' | translate
+                                }}</label>
+                            <div class="grid grid-cols-2 gap-2">
+                                <input
+                                    type="number"
+                                    formControlName="minPrice"
+                                    [placeholder]="'MARKET.PRICE_RANGE.MIN' | translate"
+                                    class="px-3 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg focus:ring-2 focus:ring-mint focus:border-mint text-white placeholder-gray-300" />
+                                <input
+                                    type="number"
+                                    formControlName="maxPrice"
+                                    [placeholder]="'MARKET.PRICE_RANGE.MAX' | translate"
+                                    class="px-3 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg focus:ring-2 focus:ring-mint focus:border-mint text-white placeholder-gray-300" />
+                            </div>
+                        </div>
+
+                        <!-- Condition -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-bold text-white mb-2">{{
+                                'MARKET.CONDITION.LABEL' | translate }}</label>
+                            <div class="space-y-2">
+                                @for (condition of conditions; track
+                                condition.value) {
+                                <label class="flex items-center">
+                                    <input
+                                        type="checkbox"
+                                        [value]="condition.value"
+                                        (change)="onConditionChange($event)"
+                                        class="rounded border-white/30 text-mint focus:ring-mint bg-white/20" />
+                                    <span
+                                        class="ml-2 text-sm text-white font-medium">{{
+                                        condition.translationKey | translate
+                                        }}</span>
+                                </label>
+                                }
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-6">
+                            <label
+                                class="block text-sm font-bold text-white mb-2">{{
+                                'MARKET.LOCATION.LABEL' | translate }}</label>
+                            <input
+                                type="text"
+                                formControlName="location"
+                                [placeholder]="'MARKET.LOCATION.PLACEHOLDER' | translate"
+                                class="w-full px-3 py-2 bg-white/20 backdrop-blur-sm border border-white/30 rounded-lg focus:ring-2 focus:ring-mint focus:border-mint text-white placeholder-gray-300" />
+                        </div>
+
+                        <!-- Other Filters -->
+                        <div class="mb-6 space-y-3">
+                            <label class="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    formControlName="freeShippingOnly"
+                                    class="rounded border-white/30 text-mint focus:ring-mint bg-white/20" />
+                                <span
+                                    class="ml-2 text-sm text-white font-medium">{{
+                                    'MARKET.FILTERS.FREE_SHIPPING' | translate
+                                    }}</span>
+                            </label>
+
+                            <label class="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    formControlName="verifiedSellersOnly"
+                                    class="rounded border-white/30 text-mint focus:ring-mint bg-white/20" />
+                                <span
+                                    class="ml-2 text-sm text-white font-medium">{{
+                                    'MARKET.FILTERS.VERIFIED_SELLERS' |
+                                    translate }}</span>
+                            </label>
+
+                            <label class="flex items-center">
+                                <input
+                                    type="checkbox"
+                                    formControlName="availableOnly"
+                                    class="rounded border-white/30 text-mint focus:ring-mint bg-white/20" />
+                                <span
+                                    class="ml-2 text-sm text-white font-medium">{{
+                                    'MARKET.FILTERS.AVAILABLE_ONLY' | translate
+                                    }}</span>
+                            </label>
+                        </div>
+
+                        <!-- Action Buttons -->
+                        <div class="flex gap-2">
+                            <button
+                                type="submit"
+                                class="flex-1 bg-mint text-gray-900 py-2 px-4 rounded-lg font-bold hover:bg-mint/90 transition-colors">
+                                {{ 'MARKET.FILTERS.APPLY' | translate }}
+                            </button>
+
+                            <button
+                                type="button"
+                                (click)="clearFilters()"
+                                class="px-4 py-2 border border-white/30 text-white rounded-lg hover:bg-white/10 transition-colors font-medium">
+                                {{ 'MARKET.FILTERS.CLEAR' | translate }}
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="flex-1">
+                <!-- Results Header -->
+                <div
+                    class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-6 gap-4">
+                    <div class="flex items-center gap-4">
+                        <p class="text-gray-600">
+                            @if (loading()) { {{ 'MARKET.RESULTS.LOADING' |
+                            translate }} } @else {
+                            {{ 'MARKET.RESULTS.SHOWING' | translate }}
+                            {{ products().length }} {{ 'MARKET.RESULTS.OF' |
+                            translate }} {{ totalProducts() }}
+                            {{ 'MARKET.RESULTS.PRODUCTS' | translate }} }
+                        </p>
+
+                        @if (hasActiveFilters()) {
+                        <button
+                            (click)="clearFilters()"
+                            class="text-blue-600 hover:text-blue-800 text-sm font-medium">
+                            {{ 'MARKET.FILTERS.CLEAR_ALL' | translate }}
+                        </button>
+                        }
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <!-- Sort Options -->
+                        <div class="flex items-center gap-2">
+                            <label class="text-sm text-gray-700">{{
+                                'MARKET.SORT.LABEL' | translate }}</label>
+                            <select
+                                [value]="currentSort()"
+                                (change)="onSortChange($event)"
+                                class="px-4 py-3 border bg-navy border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-white">
+                                @for (option of sortOptions; track option.value)
+                                {
+                                <option [value]="option.value">{{
+                                    option.translationKey | translate
+                                    }}</option>
+                                }
+                            </select>
+                        </div>
+
+                        <button
+                            (click)="toggleViewMode()"
+                            class="border border-gray-300  px-4 py-2 rounded-xl text-gray-500 hover:bg-gray-50 flex items-center gap-2">
+                            @if (viewMode() === 'grid') {
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                            </svg>
+                            <span class="hidden lg:inline">{{ 'MARKET.VIEW.LIST'
+                                | translate }}</span> }
+                            @else {
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                            </svg>
+                            <span class="hidden lg:inline">{{ 'MARKET.VIEW.GRID'
+                                | translate }}</span>}
+                        </button>
+                        <button
+                            (click)="toggleFilters()"
+                            class="lg:hidden bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 flex items-center gap-2">
+                            <svg
+                                class="w-5 h-5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path>
+                            </svg>
+                            {{ 'MARKET.FILTERS.BUTTON_LABEL' | translate }}
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Active Filters -->
+                @if (hasActiveFilters()) {
+                <div class="mb-6">
+                    <div class="flex flex-wrap gap-2">
+                        @for (filter of getActiveFilters(); track filter.key) {
+                        <span
+                            class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm flex items-center gap-1">
+                            {{ filter.label }}
+                            <button
+                                (click)="removeFilter(filter.key)"
+                                class="ml-1 hover:text-blue-600">
+                                <svg
+                                    class="w-4 h-4"
+                                    fill="currentColor"
+                                    viewBox="0 0 20 20">
+                                    <path
+                                        fill-rule="evenodd"
+                                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                            </button>
+                        </span>
+                        }
+                    </div>
+                </div>
+                }
+
+                <!-- Loading State -->
+                @if (loading()) {
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    @for (item of [1,2,3,4,5,6]; track item) {
+                    <div class="bg-mint rounded-lg shadow animate-pulse">
+                        <div
+                            class="aspect-square bg-navy rounded-t-lg"></div>
+                        <div class="p-4 space-y-3">
+                            <div class="h-4 bg-navy rounded w-3/4"></div>
+                            <div class="h-4 bg-navy rounded w-1/2"></div>
+                            <div class="h-6 bg-navy rounded w-1/4"></div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                }
+
+                <!-- Products Grid/List -->
+                @else if (products().length > 0) { @if (viewMode() === 'grid') {
+                <div
+                    class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                    @for (product of products(); track product.id) {
+                    <app-product-card [productData]="product" />
+                    }
+                </div>
+                } @else {
+                <div class="space-y-4">
+                    @for (product of products(); track product.id) {
+                    <div
+                        class="bg-white rounded-lg shadow hover:shadow-lg transition-shadow">
+                        <div class="flex p-6 gap-6">
+                            <!-- Product Image -->
+                            <div class="flex-shrink-0">
+                                @let productImage = 'http://localhost:8080/api'
+                                + product.mainImageUrl;
+                                <img
+                                    [src]="productImage"
+                                    [alt]="product.name"
+                                    class="w-32 h-32 object-cover rounded-lg"
+                                    (error)="onImageError($event)" />
+                            </div>
+
+                            <!-- Product Info -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between">
+                                    <div class="flex-1 min-w-0">
+                                        <h3
+                                            class="text-lg font-semibold text-gray-900 truncate">
+                                            <a
+                                                [routerLink]="['/marketplace/product', product.id]"
+                                                class="hover:text-blue-600">
+                                                {{ product.name }}
+                                            </a>
+                                        </h3>
+                                        <p class="text-sm text-gray-500 mt-1">
+                                            {{ product.category.name }}
+                                        </p>
+
+                                        <!-- Rating -->
+                                        <div
+                                            class="flex items-center mt-2 gap-2">
+                                            <div class="flex">
+                                                @for (star of
+                                                getRatingStars(product.averageRating
+                                                || 0); track $index) {
+                                                <svg
+                                                    [class]="getStarClass(star)"
+                                                    class="w-4 h-4"
+                                                    fill="currentColor"
+                                                    viewBox="0 0 20 20">
+                                                    <path
+                                                        d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                                                </svg>
+                                                }
+                                            </div>
+                                            <span
+                                                class="text-sm text-gray-600">({{
+                                                product.averageRating.toFixed(1)
+                                                || '0.0'
+                                                }})</span>
+                                            @if (product.totalReviews > 0) {
+                                            <span
+                                                class="text-sm text-gray-400">{{
+                                                product.totalReviews }}
+                                                {{ 'MARKET.REVIEWS' | translate
+                                                }}</span>
+                                            }
+                                        </div>
+
+                                        <!-- Description -->
+                                        <p
+                                            class="text-gray-600 mt-2 line-clamp-2">
+                                            {{ product.description }}
+                                        </p>
+                                    </div>
+
+                                    <!-- Price and Actions -->
+                                    <div class="ml-6 flex flex-col items-end">
+                                        <div
+                                            class="text-2xl font-bold text-gray-900 mb-2">
+                                            {{ formatPrice(product.price) }}
+                                        </div>
+
+                                        <!-- Condition Badge -->
+                                        <span
+                                            [class]="getConditionBadgeColor(product.condition)"
+                                            class="px-2 py-1 rounded-full text-xs font-medium mb-3">
+                                            {{
+                                            formatCondition(product.condition)
+                                            }}
+                                        </span>
+
+                                        <!-- Action Buttons -->
+                                        <div class="flex gap-2">
+                                            <button
+                                                (click)="viewProduct(product.id)"
+                                                class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors">
+                                                {{ 'MARKET.ACTIONS.VIEW_DETAILS'
+                                                | translate }}
+                                            </button>
+
+                                            <button
+                                                (click)="toggleWishlist(product.id)"
+                                                class="border border-gray-300 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+                                                <svg
+                                                    class="w-4 h-4"
+                                                    fill="none"
+                                                    stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path
+                                                        stroke-linecap="round"
+                                                        stroke-linejoin="round"
+                                                        stroke-width="2"
+                                                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+                }
+
+                <!-- Pagination -->
+                @if (totalPages() > 1) {
+                <div class="mt-8 flex justify-center">
+                    <nav class="flex items-center gap-1">
+                        <button
+                            (click)="goToPage(currentPage() - 1)"
+                            [disabled]="currentPage() <= 1"
+                            class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            {{ 'MARKET.PAGINATION.PREVIOUS' | translate }}
+                        </button>
+
+                        @for (page of getPageNumbers(); track page) {
+                        <button
+                            (click)="goToPage(page)"
+                            [class]="getPageButtonClass(page)"
+                            class="px-3 py-2 text-sm font-medium rounded">
+                            {{ page }}
+                        </button>
+                        }
+
+                        <button
+                            (click)="goToPage(currentPage() + 1)"
+                            [disabled]="currentPage() >= totalPages()"
+                            class="px-3 py-2 text-sm text-gray-500 hover:text-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
+                            {{ 'MARKET.PAGINATION.NEXT' | translate }}
+                        </button>
+                    </nav>
+                </div>
+                } }
+
+                <!-- Empty State -->
+                @else {
+                <div class="text-center py-12">
+                    <svg
+                        class="mx-auto h-12 w-12 text-gray-400"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 48 48">
+                        <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M34 14l-10 10m0 0l-10-10m10 10V8"></path>
+                    </svg>
+                    <h3 class="mt-2 text-sm font-medium text-gray-900">
+                        {{ 'MARKET.EMPTY.TITLE' | translate }}
+                    </h3>
+                    <p class="mt-1 text-sm text-gray-500">
+                        {{ 'MARKET.EMPTY.DESCRIPTION' | translate }}
+                    </p>
+                    <div class="mt-6">
+                        <button
+                            (click)="clearFilters()"
+                            class="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                            {{ 'MARKET.EMPTY.CLEAR_BUTTON' | translate }}
+                        </button>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

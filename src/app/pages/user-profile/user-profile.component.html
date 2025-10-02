@@ -1,217 +1,926 @@
-<div
-    class="min-h-screen bg-gradient-to-br  from-slate-900 via-slate-800 to-slate-900 text-white overflow-x-hidden"
-    #homeContainer>
-
-    <div class="fixed inset-0 pointer-events-none z-0">
+<!-- User Profile Content -->
+<div class="max-w-6xl min-h-screen mx-auto px-4 py-10" #homeContainer
+    appanimate="fade"
+    animateonce>
+    @if (isLoading()) {
+    <div
+        class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex flex-col items-center justify-center gap-6">
         <div
-            class="absolute top-20 left-10 w-32 h-32 border-2 border-mint/30 rotate-45 animate-spin-slow"></div>
-        <div
-            class="absolute top-40 right-20 w-24 h-24 border-2 border-teal/30 rounded-full animate-bounce-slow"></div>
-        <div
-            class="absolute bottom-40 left-1/4 w-16 h-16 rotate-12 animate-pulse"><img
-                src="/images/Controller.png" alt></div>
-        <div
-            class="absolute top-1/2 right-10 w-20 h-20 border-2 border-mint/30 transform rotate-45 animate-ping"></div>
+            class="w-14 h-14 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin"></div>
+        <p class="text-cyan-200 text-lg tracking-wide">{{
+            'PROFILE_PAGE.LOADING' | translate }}</p>
     </div>
+    }
 
-    <!-- Interactive Hero Section -->
-    <section #heroSection
-        class="hero-interactive relative min-h-screen flex items-center justify-center overflow-hidden"
-        [@heroAnimation]>
-
-        <!-- Profile Header -->
-        <div class="container mx-auto px-4 py-8">
-            <h1
-                class="text-3xl font-bold text-white text-center mb-8">Profile</h1>
-
-            <!-- Profile Card -->
-            <div class="max-w-4xl mx-auto">
+    <!-- Header / Identity (Modern Responsive Layout) -->
+    <div
+        class="bg-slate-800/60 rounded-2xl border border-slate-700/60 mb-8 relative overflow-hidden"
+        appanimate="fade-slide">
+        <div
+            class="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-r from-cyan-500/5 via-transparent to-fuchsia-500/5"></div>
+        @if (viewedUser(); as user) {
+        <div
+            class="p-6 md:p-8 grid gap-10 lg:gap-12 lg:grid-cols-[240px_1fr] xl:grid-cols-[260px_1fr] relative">
+            <!-- Left Column: Avatar + Primary Status + Quick Stats (desktop) -->
+            <div class="space-y-8">
                 <div
-                    class="bg-slate-800/50 backdrop-blur-sm rounded-2xl border border-slate-700/50 shadow-2xl p-6 md:p-8">
-
-                    <!-- Profile Info Section -->
+                    class="relative group mx-auto lg:mx-0 w-40 h-40 xl:w-48 xl:h-48"
+                    appanimate="zoom-in">
                     <div
-                        class="flex flex-col md:flex-row items-center md:items-start gap-6 mb-8">
-
-                        <!-- Profile Image -->
-                        <div class="relative group">
-                            <div
-                                class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden ring-4 ring-cyan-500/30 group-hover:ring-cyan-400/50 transition-all duration-300">
-                                <img src="/images/user4.jpg"
-                                    alt="Profile Avatar"
-                                    class="w-full h-full object-cover">
-                            </div>
-                            <div
-                                class="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        </div>
-
-                        <!-- Profile Details -->
-                        <div class="flex-1 text-center md:text-left">
-                            <div
-                                class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                                <div>
-                                    <h2
-                                        class="text-2xl md:text-3xl font-bold text-white mb-1">Display
-                                        Name</h2>
-                                    <p
-                                        class="text-cyan-400 text-sm md:text-base">Discord
-                                        Name</p>
-                                </div>
-
-                                <!-- Edit Profile Button - Desktop -->
-                                <button
-                                    class="hidden md:flex items-center gap-2 px-6 py-2.5 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-200 hover:shadow-lg hover:shadow-cyan-500/20">
-                                    <svg class="w-4 h-4" fill="none"
-                                        stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round"
-                                            stroke-linejoin="round"
-                                            stroke-width="2"
-                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                                    </svg>
-                                    Edit Profile
-                                </button>
-                            </div>
-
-                            <!-- Social Media Links -->
-                            <div
-                                class="flex items-center justify-center md:justify-start gap-4 mt-4">
-                                <a href="#"
-                                    class="text-slate-400 hover:text-cyan-400 transition-colors duration-200">
-                                    <svg class="w-5 h-5" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"></path>
-                                    </svg>
-                                </a>
-                                <a href="#"
-                                    class="text-slate-400 hover:text-cyan-400 transition-colors duration-200">
-                                    <svg class="w-5 h-5" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
-                                    </svg>
-                                </a>
-                                <a href="#"
-                                    class="text-slate-400 hover:text-cyan-400 transition-colors duration-200">
-                                    <svg class="w-5 h-5" fill="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path
-                                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073z"></path>
-                                        <path
-                                            d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zm0 10.162a3.999 3.999 0 110-7.998 3.999 3.999 0 010 7.998z"></path>
-                                        <circle cx="18.406" cy="5.594"
-                                            r="1.44"></circle>
-                                    </svg>
-                                </a>
-                            </div>
-                        </div>
+                        class="w-full h-full rounded-2xl overflow-hidden ring-4 ring-cyan-500/20 shadow-xl shadow-cyan-900/40 bg-slate-900">
+                        <img [src]="getProfilePicture()"
+                            [alt]="user.displayName + ' avatar'"
+                            class="w-full h-full object-cover transition duration-500 group-hover:scale-105" />
                     </div>
+                    @if (user.isOnline) {<span
+                        class="absolute -bottom-2 -right-2 w-9 h-9 rounded-xl bg-emerald-500 flex items-center justify-center ring-4 ring-slate-900 text-[10px] font-semibold tracking-wide shadow-lg shadow-emerald-900/40"
+                        title="{{ 'PROFILE_PAGE.STATUS.ONLINE' | translate }}">{{
+                        'PROFILE_PAGE.STATUS.LIVE' | translate
+                        }}</span>}
+                    @if (isOwnProfile()) {
+                    <button type="button"
+                        (click)="showImageUpload.set(true)"
+                        class="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity"
+                        aria-label="Change profile picture">
+                        <span
+                            class="px-3 py-1.5 bg-slate-900/80 backdrop-blur rounded-lg text-sm font-medium border border-cyan-500/40 text-cyan-200 shadow-md">
+                            <i class="fa-solid fa-camera mr-1"></i>
+                            Change
+                        </span>
+                    </button>
+                    }
+                </div>
 
-                    <!-- Edit Profile Button - Mobile -->
-                    <div class="md:hidden mb-6">
-                        <button
-                            class="w-full flex items-center justify-center gap-2 px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg transition-all duration-200">
-                            <svg class="w-4 h-4" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round"
-                                    stroke-linejoin="round" stroke-width="2"
-                                    d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
-                            </svg>
-                            Edit Profile
-                        </button>
-                    </div>
+                <!-- Status + Joined Date (desktop) -->
+                <div class="hidden lg:flex flex-wrap gap-2"
+                    appanimate="fade-up">
+                    @if (user.isOnline) {<span
+                        class="inline-flex items-center gap-1 px-3 py-1 text-[11px] font-medium rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-400/30"><span
+                            class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>{{
+                        'PROFILE_PAGE.STATUS.ONLINE' | translate
+                        }}</span>}
+                    @else {<span
+                        class="inline-flex items-center gap-1 px-3 py-1 text-[11px] font-medium rounded-full bg-slate-600/30 text-slate-300 border border-slate-600"><span
+                            class="w-2 h-2 rounded-full bg-slate-400"></span>{{
+                        'PROFILE_PAGE.STATUS.OFFLINE' | translate
+                        }}</span>}
+                    <span
+                        class="inline-flex items-center gap-1 px-3 py-1 text-[11px] rounded-full bg-slate-700/40 text-slate-300 border border-slate-600"
+                        title="{{ 'PROFILE_PAGE.FIELDS.JOINED' | translate }}">
+                        <i
+                            class="fa-solid fa-calendar-days text-cyan-400"></i>{{
+                        user.createdAt | date:'MMM y' }}
+                    </span>
+                </div>
 
-                    <!-- Bio Section -->
-                    <div class="mb-6">
+            </div>
+            <!-- Right Column: Identity, Bio, Roles, Tabs -->
+            <div class="flex flex-col gap-6">
+                <div class="space-y-4" appanimate="fade-up">
+                    <div class="flex flex-col gap-4">
                         <div
-                            class="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors duration-200">
-                            <h3
-                                class="text-lg font-semibold text-white mb-3">Bio</h3>
-                            <p class="text-slate-300 leading-relaxed">
-                                Passionate gamer and tournament enthusiast.
-                                Always looking for new challenges and
-                                opportunities to improve my skills.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Gaming Preferences & Statistics Grid -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                        <!-- Gaming Preferences -->
-                        <div
-                            class="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors duration-200">
-                            <h3
-                                class="text-lg font-semibold text-white mb-4">Gaming
-                                Preferences</h3>
+                            class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                             <div class="space-y-3">
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                    <span class="text-slate-300">FPS
-                                        Games</span>
+                                <h1
+                                    class="text-3xl md:text-4xl font-extrabold tracking-tight leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-cyan-300">
+                                    {{ user.displayName }}
+                                </h1>
+                                <div
+                                    class="flex flex-wrap gap-2 items-center">
+                                    @if (hasRoles()) {
+                                    @for (role of user.roles; track
+                                    role) {
+                                    <span
+                                        class="px-2.5 py-1 text-[11px] rounded-full bg-gradient-to-r from-cyan-500/15 to-fuchsia-500/15 text-cyan-200 border border-cyan-400/30 backdrop-blur-sm"
+                                        [title]="'Role: ' + formatRole(role)"
+                                        appanimate="pop">
+                                        <i
+                                            class="fa-solid fa-shield-halved mr-1 text-cyan-300"></i>{{
+                                        formatRole(role) }}
+                                    </span>
+                                    }
+                                    }
                                 </div>
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                    <span class="text-slate-300">Strategy
-                                        Games</span>
-                                </div>
-                                <div class="flex items-center gap-3">
-                                    <div
-                                        class="w-2 h-2 bg-cyan-400 rounded-full"></div>
-                                    <span class="text-slate-300">MOBA</span>
-                                </div>
+                            </div>
+                            <!-- Mobile Status Row -->
+                            <div
+                                class="flex lg:hidden flex-wrap gap-2">
+                                @if (user.isOnline) {<span
+                                    class="inline-flex items-center gap-1 px-3 py-1 text-[11px] font-medium rounded-full bg-emerald-500/15 text-emerald-400 border border-emerald-400/30"><span
+                                        class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>{{
+                                    'PROFILE_PAGE.STATUS.ONLINE' |
+                                    translate
+                                    }}</span>}
+                                @else {<span
+                                    class="inline-flex items-center gap-1 px-3 py-1 text-[11px] font-medium rounded-full bg-slate-600/30 text-slate-300 border border-slate-600"><span
+                                        class="w-2 h-2 rounded-full bg-slate-400"></span>{{
+                                    'PROFILE_PAGE.STATUS.OFFLINE' |
+                                    translate }}</span>}
+                                <span
+                                    class="inline-flex items-center gap-1 px-3 py-1 text-[11px] rounded-full bg-slate-700/40 text-slate-300 border border-slate-600"
+                                    title="{{ 'PROFILE_PAGE.FIELDS.JOINED' | translate }}">
+                                    <i
+                                        class="fa-solid fa-calendar-days text-cyan-400"></i>{{
+                                    user.createdAt | date:'MMM y' }}
+                                </span>
                             </div>
                         </div>
 
-                        <!-- Gaming Statistics -->
+                        <!-- Contact + Bio -->
+                        <div class="space-y-2">
+                            @if (getPrivacySettings().showEmail ||
+                            isOwnProfile()) {
+                            <p
+                                class="text-slate-300 text-sm md:text-base break-all flex items-center gap-2">
+                                <i
+                                    class="fa-solid fa-envelope text-cyan-400"></i>{{
+                                user.email }}
+                            </p>
+                            }
+                            @if (user.bio) {<p
+                                class="text-slate-400 leading-relaxed max-w-prose">{{
+                                user.bio }}</p>}
+                        </div>
+                    </div>
+
+                    <!-- Quick Stats (mobile below bio) -->
+                    @if (getGamingStatistics(); as quick) {
+                    @if (getPrivacySettings().showGamingStats ||
+                    isOwnProfile()) {
+                    <div class="lg:hidden" appanimate="fade-up"
+                        animatedelay="60ms">
+                        <gm-quick-stats
+                            [stats]="{ totalGames: quick.totalGames ?? 0, winRate: quick.winRate ?? 0, averageKDA: quick.averageKDA ?? 0 }"></gm-quick-stats>
+                    </div>
+                    }
+                    }
+                </div>
+
+                <!-- Tab Bar / Actions -->
+                <div class="-mx-6 mt-2 md:mx-0 md:mt-0">
+                    <div
+                        class="sticky md:static top-14 z-20 overflow-y-hidden px-6 md:px-0 pt-2 md:pt-0 pb-3 md:pb-0">
+                        @if (isOwnProfile()) {
+                        <nav
+                            class="flex gap-2 overflow-x-auto overflow-y-hidden no-scrollbar py-1 pr-2"
+                            role="tablist"
+                            aria-label="Profile sections"
+                            appanimate="stagger-parent">
+                            @for (btn of tabButtons; track btn.id) {
+                            <button type="button"
+                                (click)="onTabButtonClick(btn, $event)"
+                                role="tab"
+                                [attr.aria-selected]="isTabActive(btn.id)"
+                                [attr.data-active]="isTabActive(btn.id)"
+                                [title]="btn.title"
+                                class="group cursor-pointer relative px-3 sm:px-4 py-2 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-1.5 sm:gap-2 border backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400/70 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-800 overflow-hidden transition-colors duration-300 shrink-0"
+                                appanimate="fade-up"
+                                animatetap="scale"
+                                [ngStyle]="{'--stagger-index': tabButtons.indexOf(btn)}"
+                                [ngClass]="isTabActive(btn.id) ? 'bg-gradient-to-r from-teal-600 via-teal-500 to-cyan-500 text-white border-teal-400 shadow-md shadow-teal-900/40' : 'bg-slate-700/60 hover:bg-slate-600/70 text-slate-200 border-slate-600/60'">
+                                <span
+                                    class="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-br from-white/5 to-transparent"></span>
+                                <i
+                                    class="fa-solid transition-transform duration-300 {{ btn.icon }} {{ isTabActive(btn.id) ? 'text-white scale-105' : 'text-teal-300 group-hover:text-teal-200' }}"></i>
+                                <span
+                                    class="hidden sm:inline transition-colors duration-300">
+                                    {{ btn.type==='edit' ?
+                                    (isEditing() ?
+                                    ('PROFILE_PAGE.TABS.EDITING' |
+                                    translate) : (btn.label |
+                                    translate)) :
+                                    (btn.label | translate) }}
+                                </span>
+                                <span
+                                    class="absolute bottom-0 left-0 h-0.5 bg-white/80 transition-all duration-300"
+                                    [ngStyle]="{ width: isTabActive(btn.id) ? '100%' : '0' }"></span>
+                            </button>
+                            }
+                        </nav>
+                        } @else {
                         <div
-                            class="bg-slate-700/50 rounded-xl p-6 hover:bg-slate-700/70 transition-colors duration-200">
-                            <h3
-                                class="text-lg font-semibold text-white mb-4">Gaming
-                                Statistics</h3>
-                            <div class="space-y-4">
-                                <div>
-                                    <div
-                                        class="flex justify-between text-sm mb-1">
-                                        <span class="text-slate-400">Win
-                                            Rate</span>
-                                        <span
-                                            class="text-cyan-400 font-medium">78%</span>
-                                    </div>
-                                    <div
-                                        class="w-full bg-slate-800 rounded-full h-2">
-                                        <div
-                                            class="bg-gradient-to-r from-cyan-500 to-cyan-400 h-2 rounded-full"
-                                            style="width: 78%"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        class="flex justify-between text-sm mb-1">
-                                        <span class="text-slate-400">Tournaments
-                                            Won</span>
-                                        <span
-                                            class="text-cyan-400 font-medium">15</span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div
-                                        class="flex justify-between text-sm mb-1">
-                                        <span class="text-slate-400">Total
-                                            Matches</span>
-                                        <span
-                                            class="text-cyan-400 font-medium">234</span>
-                                    </div>
-                                </div>
-                            </div>
+                            class="flex flex-wrap gap-2 md:justify-end"
+                            appanimate="fade-up">
+                            <button type="button"
+                                (click)="viewProfile(user.id)"
+                                class="px-5 py-2 rounded-lg bg-gradient-to-r from-cyan-600 to-fuchsia-600 hover:from-cyan-500 hover:to-fuchsia-500 text-sm font-semibold tracking-wide shadow-md shadow-cyan-900/30 transition"
+                                animatetap="scale">
+                                <i class="fa-solid fa-rotate"></i>
+                                {{
+                                'PROFILE_PAGE.ACTIONS.REFRESH' |
+                                translate
+                                }}
+                            </button>
                         </div>
-
+                        }
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+        } @else {<p class="p-6 text-slate-400">{{ 'NOT_FOUND.TITLE'
+            |
+            translate }}</p>}
+    </div>
+
+    <!-- Overview / Display -->
+    @if (activeTab()==='profile' && !isEditing()) {
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8"
+        appanimate="fade-slide">
+        <div
+            class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-6 space-y-4"
+            appanimate="fade-up" animatedelay="60ms">
+            <h2
+                class="text-lg font-semibold flex items-center gap-2"><span
+                    class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                {{
+                'PROFILE_PAGE.HEADERS.BASIC_INFO' | translate
+                }}</h2>
+            @if (viewedUser(); as user) {
+            <dl class="space-y-3 text-sm">
+                <div class="flex justify-between"><dt
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.DISPLAY_NAME' |
+                        translate
+                        }}</dt><dd
+                        class="font-medium">{{ user.displayName
+                        }}</dd></div>
+                @if (getPrivacySettings().showEmail ||
+                isOwnProfile()) {<div
+                    class="flex justify-between"><dt
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.EMAIL' | translate
+                        }}</dt><dd
+                        class="font-medium break-all">{{ user.email
+                        }}</dd></div>}
+                <div class="flex justify-between"><dt
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.JOINED' | translate
+                        }}</dt><dd
+                        class="font-medium">{{ user.createdAt |
+                        date:'mediumDate' }}</dd></div>
+            </dl>
+            }
+        </div>
+        @if (getPrivacySettings().showGamingStats || isOwnProfile())
+        {
+        <div
+            class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-6 space-y-4"
+            appanimate="fade-up" animatedelay="120ms">
+            <h2
+                class="text-lg font-semibold flex items-center gap-2"><span
+                    class="w-2 h-2 rounded-full bg-purple-400"></span>
+                {{ 'PROFILE_PAGE.HEADERS.GAMING_STATS' | translate
+                }}</h2>
+            @if (getGamingStatistics(); as stats) {
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.TOTAL_GAMES' |
+                        translate
+                        }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.totalGames
+                        }}</p></div>
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.WIN_RATE' | translate
+                        }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.winRate
+                        }}%</p></div>
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.WINS'
+                        | translate }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.totalWins
+                        }}</p></div>
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.LOSSES' | translate
+                        }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.totalLosses
+                        }}</p></div>
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.AVG_KDA' | translate
+                        }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.averageKDA
+                        }}</p></div>
+                <div class="bg-slate-700/40 rounded-lg p-3"><p
+                        class="text-slate-400">{{
+                        'PROFILE_PAGE.FIELDS.HOURS' | translate
+                        }}</p><p
+                        class="text-xl font-semibold">{{
+                        stats.hoursPlayed
+                        }}</p></div>
+            </div>
+            @if (stats.favoriteMap) {<p
+                class="text-xs text-slate-400 pt-3">{{
+                'PROFILE_PAGE.FIELDS.FAVORITE_MAP' | translate }}:
+                <span
+                    class="font-medium text-slate-200">{{
+                    stats.favoriteMap
+                    }}</span></p>}
+            } @else {<p class="text-slate-400 text-sm">{{
+                'PROFILE_PAGE.MESSAGES.NO_STATS' | translate }}</p>}
+        </div>
+        }
+        @if (viewedUser()?.bio) {<div
+            class="lg:col-span-2 bg-slate-800/60 rounded-xl border border-slate-700/60 p-6"
+            appanimate="fade-up" animatedelay="180ms"><h2
+                class="text-lg font-semibold mb-3 flex items-center gap-2"><span
+                    class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                {{ 'PROFILE_PAGE.HEADERS.ABOUT_ME' | translate
+                }}</h2><p
+                class="text-slate-300 leading-relaxed">{{
+                viewedUser()!.bio }}</p></div>}
+        @if (hasSocialLinks() &&
+        (getPrivacySettings().showSocialLinks ||
+        isOwnProfile())) {
+        <div
+            class="lg:col-span-2 bg-slate-800/60 rounded-xl border border-slate-700/60 p-6 space-y-5"
+            appanimate="fade-up" animatedelay="240ms">
+            <div
+                class="flex items-center justify-between flex-wrap gap-4">
+                <h2
+                    class="text-lg font-semibold flex items-center gap-2">
+                    <span
+                        class="w-2 h-2 rounded-full bg-pink-400"></span>
+                    {{ 'PROFILE_PAGE.HEADERS.SOCIAL_LINKS' |
+                    translate }}
+                </h2>
+                <div
+                    class="text-[11px] uppercase tracking-wide text-slate-400 flex items-center gap-2"
+                    title="{{ 'PROFILE_PAGE.MESSAGES.CONNECT' | translate }}">
+                    <span
+                        class="w-2 h-2 rounded-full bg-gradient-to-r from-sky-400 via-fuchsia-400 to-pink-400 animate-pulse"></span>
+                    {{ 'PROFILE_PAGE.MESSAGES.CONNECT' | translate
+                    }}
+                </div>
+            </div>
+            <div
+                class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3"
+                appanimate="stagger-parent">
+                @if (getSocialLinks().twitter) {
+                <a
+                    appanimate="fade-up" animatetap="scale"
+                    [href]="getSocialLinks().twitter"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl border border-sky-500/40 bg-sky-500/10 hover:bg-sky-500/20 transition flex flex-col items-start p-3 gap-3">
+                    <span
+                        class="absolute inset-0 bg-gradient-to-br from-sky-500/0 via-sky-400/10 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-9 h-9 rounded-lg bg-sky-500/20 flex items-center justify-center text-sky-300 shadow-inner shadow-sky-900/40">
+                            <i
+                                class="fa-brands fa-x-twitter text-lg"></i>
+                        </span>
+                        <span class="font-medium text-sm">Twitter /
+                            X</span>
+                    </div>
+                    <span
+                        class="text-[11px] text-sky-300/80 group-hover:text-sky-200 flex items-center gap-1 mt-auto">{{
+                        '@' +
+                        extractHandle(getSocialLinks().twitter) }}<i
+                            class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                </a>
+                }
+                @if (getSocialLinks().twitch) {
+                <a
+                    appanimate="fade-up" animatetap="scale"
+                    [href]="getSocialLinks().twitch" target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl border border-purple-500/40 bg-purple-500/10 hover:bg-purple-500/20 transition flex flex-col items-start p-3 gap-3">
+                    <span
+                        class="absolute inset-0 bg-gradient-to-br from-purple-500/0 via-purple-400/10 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-9 h-9 rounded-lg bg-purple-500/25 flex items-center justify-center text-purple-300 shadow-inner shadow-purple-900/40">
+                            <i
+                                class="fa-brands fa-twitch text-lg"></i>
+                        </span>
+                        <span
+                            class="font-medium text-sm">Twitch</span>
+                    </div>
+                    <span
+                        class="text-[11px] text-purple-300/80 group-hover:text-purple-200 flex items-center gap-1 mt-auto">{{
+                        extractHandle(getSocialLinks().twitch) }}<i
+                            class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                </a>
+                }
+                @if (getSocialLinks().youtube) {
+                <a
+                    appanimate="fade-up" animatetap="scale"
+                    [href]="getSocialLinks().youtube"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl border border-red-500/40 bg-red-500/10 hover:bg-red-500/20 transition flex flex-col items-start p-3 gap-3">
+                    <span
+                        class="absolute inset-0 bg-gradient-to-br from-red-500/0 via-red-400/10 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-9 h-9 rounded-lg bg-red-500/25 flex items-center justify-center text-red-300 shadow-inner shadow-red-900/40">
+                            <i
+                                class="fa-brands fa-youtube text-lg"></i>
+                        </span>
+                        <span
+                            class="font-medium text-sm">YouTube</span>
+                    </div>
+                    <span
+                        class="text-[11px] text-red-300/80 group-hover:text-red-200 flex items-center gap-1 mt-auto">{{
+                        extractHandle(getSocialLinks().youtube) }}<i
+                            class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                </a>
+                }
+                @if (getSocialLinks().instagram) {
+                <a
+                    appanimate="fade-up" animatetap="scale"
+                    [href]="getSocialLinks().instagram"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl border border-pink-500/40 bg-pink-500/10 hover:bg-pink-500/20 transition flex flex-col items-start p-3 gap-3">
+                    <span
+                        class="absolute inset-0 bg-gradient-to-br from-pink-500/0 via-pink-400/10 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-9 h-9 rounded-lg bg-pink-500/25 flex items-center justify-center text-pink-300 shadow-inner shadow-pink-900/40">
+                            <i
+                                class="fa-brands fa-instagram text-lg"></i>
+                        </span>
+                        <span
+                            class="font-medium text-sm">Instagram</span>
+                    </div>
+                    <span
+                        class="text-[11px] text-pink-300/80 group-hover:text-pink-200 flex items-center gap-1 mt-auto">{{
+                        '@' +
+                        extractHandle(getSocialLinks().instagram)
+                        }}<i
+                            class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                </a>
+                }
+                @if (getSocialLinks().discord) {
+                <a
+                    appanimate="fade-up" animatetap="scale"
+                    [href]="getSocialLinks().discord"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="group relative overflow-hidden rounded-xl border border-indigo-500/40 bg-indigo-500/10 hover:bg-indigo-500/20 transition flex flex-col items-start p-3 gap-3">
+                    <span
+                        class="absolute inset-0 bg-gradient-to-br from-indigo-500/0 via-indigo-400/10 to-transparent opacity-0 group-hover:opacity-100 transition"></span>
+                    <div class="flex items-center gap-2">
+                        <span
+                            class="w-9 h-9 rounded-lg bg-indigo-500/25 flex items-center justify-center text-indigo-300 shadow-inner shadow-indigo-900/40">
+                            <i
+                                class="fa-brands fa-discord text-lg"></i>
+                        </span>
+                        <span
+                            class="font-medium text-sm">Discord</span>
+                    </div>
+                    <span
+                        class="text-[11px] text-indigo-300/80 group-hover:text-indigo-200 flex items-center gap-1 mt-auto">{{
+                        extractHandle(getSocialLinks().discord) }}<i
+                            class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i></span>
+                </a>
+                }
+            </div>
+        </div>
+        }
+    </div>
+    }
+
+    <!-- Edit Profile Form -->
+    @if (isEditing()) {
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()"
+        class="space-y-8 max-w-4xl mx-auto" appanimate="fade-slide">
+        <div
+            class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-6 space-y-6"
+            appanimate="fade-up">
+            <h2
+                class="text-lg font-semibold flex items-center gap-2"><span
+                    class="w-2 h-2 rounded-full bg-cyan-400"></span>
+                {{
+                'PROFILE_PAGE.HEADERS.EDIT_PROFILE' | translate
+                }}</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-sm text-slate-300">{{
+                        'PROFILE_PAGE.FIELDS.DISPLAY_NAME' |
+                        translate
+                        }}</label>
+                    <input type="text" formControlName="displayName"
+                        class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+                </div>
+                <div class="space-y-2 md:col-span-2">
+                    <label class="text-sm text-slate-300">{{
+                        'PROFILE_PAGE.FIELDS.BIO' | translate
+                        }}</label>
+                    <textarea rows="4" formControlName="bio"
+                        class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"></textarea>
+                </div>
+                <div class="space-y-4 md:col-span-2"
+                    formGroupName="socialLinks">
+                    <h3
+                        class="text-sm font-medium text-slate-300">{{
+                        'PROFILE_PAGE.HEADERS.SOCIAL_LINKS' |
+                        translate
+                        }}</h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">Twitter</label><input
+                                type="url" formControlName="twitter"
+                                placeholder="https://"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">Twitch</label><input
+                                type="url" formControlName="twitch"
+                                placeholder="https://"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">YouTube</label><input
+                                type="url" formControlName="youtube"
+                                placeholder="https://"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">Instagram</label><input
+                                type="url"
+                                formControlName="instagram"
+                                placeholder="https://"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">Discord</label><input
+                                type="url" formControlName="discord"
+                                placeholder="https://"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                    </div>
+                </div>
+                <div class="space-y-4 md:col-span-2"
+                    formGroupName="gamingPreferences">
+                    <h3
+                        class="text-sm font-medium text-slate-300">Gaming
+                        Preferences</h3>
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="space-y-1 md:col-span-2"><label
+                                class="text-xs text-slate-400">{{
+                                'PROFILE_PAGE.FIELDS.PLAY_STYLE' |
+                                translate
+                                }}</label><input type="text"
+                                formControlName="playStyle"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500" /></div>
+                        <div class="space-y-1"><label
+                                class="text-xs text-slate-400">{{
+                                'PROFILE_PAGE.FIELDS.SKILL_LEVEL' |
+                                translate }}</label><select
+                                formControlName="skillLevel"
+                                class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:ring-2 focus:ring-cyan-500"><option
+                                    value="BEGINNER">{{
+                                    'PROFILE_PAGE.SKILL.BEGINNER' |
+                                    translate }}</option><option
+                                    value="INTERMEDIATE">{{
+                                    'PROFILE_PAGE.SKILL.INTERMEDIATE'
+                                    |
+                                    translate }}</option><option
+                                    value="ADVANCED">{{
+                                    'PROFILE_PAGE.SKILL.ADVANCED' |
+                                    translate }}</option><option
+                                    value="PROFESSIONAL">{{
+                                    'PROFILE_PAGE.SKILL.PROFESSIONAL'
+                                    |
+                                    translate
+                                    }}</option></select></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-end gap-3 pt-2">
+                <button type="button" (click)="cancelEdit()"
+                    class="px-5 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm"
+                    appanimate="fade-up" animatetap="press">{{
+                    'PROFILE_PAGE.ACTIONS.CANCEL' | translate
+                    }}</button>
+                <button type="submit"
+                    [disabled]="profileForm.invalid || isLoading()"
+                    class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 disabled:opacity-60 text-sm font-medium flex items-center gap-2"
+                    appanimate="fade-up" animatetap="scale"
+                    animatedelay="80ms">@if (isLoading()) {<span
+                        class="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin"></span>}
+                    {{ 'PROFILE_PAGE.ACTIONS.SAVE_PROFILE' |
+                    translate
+                    }}</button>
+            </div>
+        </div>
+    </form>
+    }
+
+    <!-- Gaming Stats Edit -->
+    @if (activeTab()==='gaming' && isOwnProfile()) {
+    <form [formGroup]="gamingStatsForm"
+        (ngSubmit)="updateGamingStatistics()"
+        class="space-y-6 max-w-3xl"
+        appanimate="fade-slide">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.TOTAL_GAMES' | translate
+                    }}</label><input
+                    type="number" formControlName="totalGames"
+                    min="0"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.WIN_RATE' | translate }}
+                    (%)</label><input type="number"
+                    formControlName="winRate" min="0" max="100"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.TOTAL_WINS' | translate
+                    }}</label><input
+                    type="number" formControlName="totalWins"
+                    min="0"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.TOTAL_LOSSES' | translate
+                    }}</label><input type="number"
+                    formControlName="totalLosses" min="0"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.AVERAGE_KDA' | translate
+                    }}</label><input
+                    type="number" formControlName="averageKDA"
+                    min="0"
+                    step="0.01"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.HOURS_PLAYED' | translate
+                    }}</label><input type="number"
+                    formControlName="hoursPlayed" min="0"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+            <div class="space-y-2 sm:col-span-2"><label
+                    class="text-sm text-slate-300">{{
+                    'PROFILE_PAGE.FIELDS.FAVORITE_MAP' | translate
+                    }}</label><input type="text"
+                    formControlName="favoriteMap"
+                    class="w-full px-3 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" /></div>
+        </div>
+        <div class="flex justify-end gap-3 pt-2">
+            <button type="button" (click)="setActiveTab('profile')"
+                class="px-5 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm"
+                appanimate="fade-up" animatetap="press">{{
+                'PROFILE_PAGE.ACTIONS.CANCEL' | translate
+                }}</button>
+            <button type="submit"
+                [disabled]="gamingStatsForm.invalid || isLoading()"
+                class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 disabled:opacity-60 text-sm font-medium flex items-center gap-2"
+                appanimate="fade-up" animatetap="scale"
+                animatedelay="60ms">@if (isLoading()) {<span
+                    class="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin"></span>}
+                {{ 'PROFILE_PAGE.ACTIONS.SAVE_STATS' | translate
+                }}</button>
+        </div>
+    </form>
+    }
+
+    <!-- Privacy Settings -->
+    @if (activeTab()==='privacy' && isOwnProfile()) {
+    <form [formGroup]="profileForm" (ngSubmit)="updateProfile()"
+        class="space-y-8 max-w-3xl" appanimate="fade-slide">
+        <div formGroupName="privacySettings"
+            class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-6 space-y-6">
+            <h2
+                class="text-lg font-semibold flex items-center gap-2"><span
+                    class="w-2 h-2 rounded-full bg-amber-400"></span>
+                {{ 'PROFILE_PAGE.HEADERS.PRIVACY_SETTINGS' |
+                translate
+                }}</h2>
+            <div class="space-y-4">
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="profileVisible"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.PROFILE_VISIBLE' |
+                        translate
+                        }}</span></label>
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="showEmail"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.SHOW_EMAIL'
+                        | translate }}</span></label>
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="showGamingStats"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.SHOW_STATS'
+                        | translate }}</span></label>
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="showSocialLinks"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.SHOW_LINKS'
+                        | translate }}</span></label>
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="allowDirectMessages"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.ALLOW_DM' |
+                        translate }}</span></label>
+                <label class="flex items-start gap-3"><input
+                        type="checkbox"
+                        formControlName="showOnlineStatus"
+                        class="mt-1 w-4 h-4 accent-cyan-500" /><span
+                        class="text-sm">{{
+                        'PROFILE_PAGE.PRIVACY.SHOW_ONLINE' |
+                        translate
+                        }}</span></label>
+            </div>
+            <div class="flex justify-end"><button type="submit"
+                    [disabled]="isLoading()"
+                    class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 disabled:opacity-60 text-sm font-medium flex items-center gap-2"
+                    appanimate="fade-up" animatetap="scale">@if
+                    (isLoading()) {<span
+                        class="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin"></span>}
+                    {{ 'PROFILE_PAGE.ACTIONS.SAVE_PRIVACY' |
+                    translate
+                    }}</button></div>
+        </div>
+    </form>
+    }
+
+    <!-- Search & Suggestions -->
+    @if (activeTab()==='search') {
+    <div class="space-y-10" appanimate="fade-slide">
+        <div
+            class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-5 flex flex-col md:flex-row gap-4 md:items-center"
+            appanimate="fade-up">
+            <input type="text" [ngModel]="searchQuery()"
+                (ngModelChange)="searchQuery.set($event)"
+                (keyup.enter)="searchProfiles()"
+                placeholder="{{ 'PROFILE_PAGE.SEARCH.PLACEHOLDER' | translate }}"
+                class="flex-1 px-4 py-2 rounded-lg bg-slate-900 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-cyan-500" />
+            <button (click)="searchProfiles()"
+                [disabled]="!searchQuery().trim() || isLoading()"
+                class="px-5 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 disabled:opacity-50 text-sm font-medium flex items-center gap-2">@if
+                (isLoading()) {<span
+                    class="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin"></span>}
+                {{ 'PROFILE_PAGE.ACTIONS.SEARCH' | translate
+                }}</button>
+        </div>
+        @if (searchResults.length > 0) {
+        <div class="space-y-4">
+            <h3 class="text-lg font-semibold">{{
+                'PROFILE_PAGE.HEADERS.SEARCH_RESULTS' | translate
+                }}</h3>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                appanimate="stagger-parent">
+                @for (r of searchResults; track r.id) {
+                <div
+                    class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-4 flex flex-col gap-3 hover:border-cyan-500/50 transition cursor-pointer"
+                    (click)="viewProfile(r.id)" appanimate="fade-up"
+                    animatetap="scale"
+                    [ngStyle]="{'--stagger-index': searchResults.indexOf(r)}">
+                    <div class="flex items-center gap-3">
+                        <img
+                            [src]="r.profilePictureUrl || '/images/user4.jpg'"
+                            [alt]="r.displayName"
+                            class="w-12 h-12 rounded-xl object-cover" />
+                        <div class="flex-1"><p
+                                class="font-medium leading-tight">{{
+                                r.displayName }}</p><p
+                                class="text-[11px] text-slate-500">Joined
+                                {{
+                                r.createdAt | date:'y' }}</p></div>
+                    </div>
+                    @if (r.bio) {<p
+                        class="text-xs text-slate-400 line-clamp-2">{{
+                        r.bio
+                        }}</p>}
+                </div>
+                }
+            </div>
+        </div>
+        }
+        @if (profileSuggestions().length > 0) {
+        <div class="space-y-4">
+            <h3 class="text-lg font-semibold">{{
+                'PROFILE_PAGE.HEADERS.SUGGESTED_PLAYERS' | translate
+                }}</h3>
+            <div
+                class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+                appanimate="stagger-parent">
+                @for (s of profileSuggestions(); track s.id) {
+                <div
+                    class="bg-slate-800/60 rounded-xl border border-slate-700/60 p-4 flex flex-col gap-3 hover:border-purple-500/50 transition"
+                    appanimate="fade-up" animatetap="scale"
+                    [ngStyle]="{'--stagger-index': profileSuggestions().indexOf(s)}">
+                    <div class="flex items-center gap-3">
+                        <img
+                            [src]="s.profilePictureUrl || '/images/user4.jpg'"
+                            [alt]="s.displayName"
+                            class="w-12 h-12 rounded-xl object-cover" />
+                        <div class="flex-1"><p
+                                class="font-medium leading-tight">{{
+                                s.displayName }}</p>@if
+                            (s.matchScore) {<p
+                                class="text-[10px] text-emerald-400 mt-1">{{
+                                'PROFILE_PAGE.SEARCH.MATCH' |
+                                translate }}
+                                {{ s.matchScore }}%</p>}</div>
+                    </div>
+                    @if (s.bio) {<p
+                        class="text-xs text-slate-400 line-clamp-2">{{
+                        s.bio
+                        }}</p>}
+                    <button (click)="viewProfile(s.id)"
+                        class="mt-auto px-3 py-1.5 rounded-lg bg-purple-600/30 hover:bg-purple-600/40 text-purple-200 text-xs font-medium"
+                        appanimate="fade-up" animatetap="press">{{
+                        'PROFILE_PAGE.ACTIONS.VIEW_PROFILE' |
+                        translate
+                        }}</button>
+                </div>
+                }
+            </div>
+        </div>
+        }
+        @if (searchResults.length === 0 && !isLoading() &&
+        searchQuery().trim()) {<p
+            class="text-sm text-slate-400 italic">{{
+            'PROFILE_PAGE.SEARCH.NO_RESULTS' | translate:{ term:
+            searchQuery() } }}</p>}
+    </div>
+    }
+
+    <!-- Image Upload Modal -->
+    @if (showImageUpload()) {
+    <div
+        class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+        appanimate="fade">
+        <div
+            class="bg-slate-800 rounded-2xl border border-slate-700 w-full max-w-md p-6 space-y-6 relative"
+            appanimate="fade-up">
+            <button (click)="showImageUpload.set(false)"
+                class="absolute top-2 right-2 p-1 rounded-md hover:bg-slate-700 text-slate-400 hover:text-white">✕</button>
+            <h3 class="text-lg font-semibold">{{
+                'PROFILE_PAGE.HEADERS.CHANGE_PICTURE' | translate
+                }}</h3>
+            @if (profilePicturePreview) {<div
+                class="flex flex-col items-center gap-2"><img
+                    [src]="profilePicturePreview" alt="Preview"
+                    class="w-32 h-32 rounded-2xl object-cover ring-4 ring-cyan-500/30" /><p
+                    class="text-xs text-cyan-300">{{
+                    'PROFILE_PAGE.MODAL.PREVIEW' | translate
+                    }}</p></div>}
+            @else if (currentUser()?.profilePictureUrl) {<div
+                class="flex flex-col items-center gap-2"><img
+                    [src]="currentUser()!.profilePictureUrl"
+                    alt="Current"
+                    class="w-32 h-32 rounded-2xl object-cover ring-4 ring-slate-600/50" /><p
+                    class="text-xs text-slate-400">{{
+                    'PROFILE_PAGE.MODAL.CURRENT_PICTURE' | translate
+                    }}</p></div>}
+            <input type="file" (change)="onFileSelected($event)"
+                accept="image/*"
+                class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-cyan-600 file:text-white hover:file:bg-cyan-500 text-sm" />
+            <div class="flex flex-wrap gap-3 justify-end pt-2">
+                <button type="button"
+                    (click)="showImageUpload.set(false)"
+                    class="px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm"
+                    appanimate="fade-up" animatetap="press">{{
+                    'PROFILE_PAGE.ACTIONS.CANCEL' | translate
+                    }}</button>
+                @if (currentUser()?.profilePictureUrl &&
+                !profilePicturePreview) {<button type="button"
+                    (click)="removeProfilePicture()"
+                    [disabled]="isLoading()"
+                    class="px-4 py-2 rounded-lg bg-red-600/80 hover:bg-red-600 disabled:opacity-60 text-sm font-medium"
+                    appanimate="fade-up" animatetap="press"
+                    animatedelay="40ms">{{
+                    'PROFILE_PAGE.ACTIONS.REMOVE' |
+                    translate }}</button>}
+                @if (selectedFile) {<button type="button"
+                    (click)="uploadProfilePicture()"
+                    [disabled]="isLoading()"
+                    class="px-4 py-2 rounded-lg bg-cyan-600 hover:bg-cyan-500 disabled:opacity-60 text-sm font-medium flex items-center gap-2"
+                    appanimate="fade-up" animatetap="scale"
+                    animatedelay="80ms">@if (isLoading()) {<span
+                        class="w-4 h-4 border-2 border-white/60 border-t-transparent rounded-full animate-spin"></span>}
+                    {{ 'PROFILE_PAGE.ACTIONS.UPLOAD' | translate
+                    }}</button>}
+            </div>
+        </div>
+    </div>
+    }
 </div>

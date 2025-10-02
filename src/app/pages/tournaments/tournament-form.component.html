@@ -1,0 +1,413 @@
+<div class="min-h-screen  py-8">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- Header -->
+        <div class="mb-8">
+            <div class="flex items-center space-x-3">
+                <a
+                    routerLink="/tournaments"
+                    class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-arrow-left text-xl"></i>
+                </a>
+                <div class="w-full grow">
+                    <h1
+                        class="text-3xl text-center font-bold text-white">
+                        {{ isEditMode ? ('TOURNAMENTS.EDIT' | translate) :
+                        ('TOURNAMENTS.CREATE' | translate) }}
+                    </h1>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div *ngIf="loading" class="flex justify-center items-center py-12">
+            <div
+                class="animate-spin rounded-full h-12 w-12 border-b-2 border-teal-600"></div>
+        </div>
+
+        <!-- Form -->
+        <div *ngIf="!loading" class="bg-teal text-black shadow rounded-lg">
+            <form [formGroup]="tournamentForm" (ngSubmit)="onSubmit()">
+
+                <!-- Form Errors -->
+                <div *ngIf="error || getFormError()"
+                    class="p-6 border-b border-gray-200">
+                    <div class="bg-red-50 border border-red-200 rounded-md p-4">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <i
+                                    class="fas fa-exclamation-circle text-red-400"></i>
+                            </div>
+                            <div class="ml-3">
+                                <h3 class="text-sm font-medium text-red-800">
+                                    {{ error || getFormError() }}
+                                </h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 space-y-6">
+
+                    <!-- Basic Information -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Basic
+                            Information</h3>
+                        <div class="grid grid-cols-1 gap-6">
+
+                            <!-- Tournament Name -->
+                            <div>
+                                <label for="name"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Tournament Name *
+                                </label>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    formControlName="name"
+                                    placeholder="Enter tournament name"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('name')">
+                                <p *ngIf="isFieldInvalid('name')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('name') }}
+                                </p>
+                            </div>
+
+                            <!-- Description -->
+                            <div>
+                                <label for="description"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Description *
+                                </label>
+                                <textarea
+                                    id="description"
+                                    rows="4"
+                                    formControlName="description"
+                                    placeholder="Describe your tournament..."
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('description')"></textarea>
+                                <p *ngIf="isFieldInvalid('description')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('description') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game Settings -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Game
+                            Settings</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                            <!-- Game Title -->
+                            <div>
+                                <label for="gameTitle"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Game *
+                                </label>
+                                <select
+                                    id="gameTitle"
+                                    formControlName="gameTitle"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('gameTitle')">
+                                    <option value>Select a game</option>
+                                    <option *ngFor="let game of gameOptions"
+                                        [value]="game.value">
+                                        {{ game.label }}
+                                    </option>
+                                </select>
+                                <p *ngIf="isFieldInvalid('gameTitle')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('gameTitle') }}
+                                </p>
+                            </div>
+
+                            <!-- Game Mode -->
+                            <div>
+                                <label for="gameMode"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Game Mode *
+                                </label>
+                                <input
+                                    id="gameMode"
+                                    type="text"
+                                    formControlName="gameMode"
+                                    placeholder="e.g., Competitive, Ranked"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('gameMode')">
+                                <p *ngIf="isFieldInvalid('gameMode')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('gameMode') }}
+                                </p>
+                            </div>
+
+                            <!-- Tournament Type -->
+                            <div>
+                                <label for="tournamentType"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Tournament Type *
+                                </label>
+                                <select
+                                    id="tournamentType"
+                                    formControlName="tournamentType"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                                    <option *ngFor="let type of tournamentTypes"
+                                        [value]="type.value">
+                                        {{ type.label }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Max Participants -->
+                            <div>
+                                <label for="maxParticipants"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Max Participants *
+                                </label>
+                                <input
+                                    id="maxParticipants"
+                                    type="number"
+                                    formControlName="maxParticipants"
+                                    (change)="onMaxParticipantsChange()"
+                                    min="4"
+                                    max="1024"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('maxParticipants')">
+                                <p *ngIf="isFieldInvalid('maxParticipants')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('maxParticipants') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Prize & Entry Settings -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Prize
+                            & Entry Settings</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                            <!-- Entry Fee -->
+                            <div>
+                                <label for="entryFee"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Entry Fee *
+                                </label>
+                                <input
+                                    id="entryFee"
+                                    type="number"
+                                    formControlName="entryFee"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('entryFee')">
+                                <p *ngIf="isFieldInvalid('entryFee')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('entryFee') }}
+                                </p>
+                            </div>
+
+                            <!-- Prize Pool -->
+                            <div>
+                                <label for="prizePool"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Prize Pool *
+                                </label>
+                                <input
+                                    id="prizePool"
+                                    type="number"
+                                    formControlName="prizePool"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="0.00"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('prizePool')">
+                                <p *ngIf="isFieldInvalid('prizePool')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('prizePool') }}
+                                </p>
+                            </div>
+
+                            <!-- Currency -->
+                            <div>
+                                <label for="currency"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Currency *
+                                </label>
+                                <select
+                                    id="currency"
+                                    formControlName="currency"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                                    <option
+                                        *ngFor="let currency of currencyOptions"
+                                        [value]="currency.value">
+                                        {{ currency.label }}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Settings -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3
+                            class="text-lg font-medium text-gray-900 mb-4">Schedule</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+                            <!-- Registration Deadline -->
+                            <div>
+                                <label for="registrationDeadline"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Registration Deadline *
+                                </label>
+                                <input
+                                    id="registrationDeadline"
+                                    type="datetime-local"
+                                    formControlName="registrationDeadline"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('registrationDeadline')">
+                                <p
+                                    *ngIf="isFieldInvalid('registrationDeadline')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('registrationDeadline') }}
+                                </p>
+                            </div>
+
+                            <!-- Start Date -->
+                            <div>
+                                <label for="startDate"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Start Date *
+                                </label>
+                                <input
+                                    id="startDate"
+                                    type="datetime-local"
+                                    formControlName="startDate"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('startDate')">
+                                <p *ngIf="isFieldInvalid('startDate')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('startDate') }}
+                                </p>
+                            </div>
+
+                            <!-- End Date -->
+                            <div>
+                                <label for="endDate"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    End Date *
+                                </label>
+                                <input
+                                    id="endDate"
+                                    type="datetime-local"
+                                    formControlName="endDate"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('endDate')">
+                                <p *ngIf="isFieldInvalid('endDate')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('endDate') }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rules & Settings -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <h3 class="text-lg font-medium text-gray-900 mb-4">Rules
+                            & Settings</h3>
+                        <div class="space-y-6">
+
+                            <!-- Rules -->
+                            <div>
+                                <label for="rules"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Tournament Rules *
+                                </label>
+                                <textarea
+                                    id="rules"
+                                    rows="6"
+                                    formControlName="rules"
+                                    placeholder="Enter detailed tournament rules..."
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm"
+                                    [class.border-red-300]="isFieldInvalid('rules')"></textarea>
+                                <p *ngIf="isFieldInvalid('rules')"
+                                    class="mt-1 text-sm text-red-600">
+                                    {{ getFieldError('rules') }}
+                                </p>
+                            </div>
+
+                            <!-- Status -->
+                            <div>
+                                <label for="status"
+                                    class="block text-sm font-medium text-gray-700 mb-1">
+                                    Status *
+                                </label>
+                                <select
+                                    id="status"
+                                    formControlName="status"
+                                    class="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-teal-500 focus:border-teal-500 sm:text-sm">
+                                    <option *ngFor="let status of statusOptions"
+                                        [value]="status.value">
+                                        {{ status.label }}
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Checkboxes -->
+                            <div class="space-y-4">
+                                <div class="flex items-center">
+                                    <input
+                                        id="isPublic"
+                                        type="checkbox"
+                                        formControlName="isPublic"
+                                        class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded">
+                                    <label for="isPublic"
+                                        class="ml-2 block text-sm text-gray-900">
+                                        Public Tournament (visible to all users)
+                                    </label>
+                                </div>
+
+                                <div class="flex items-center">
+                                    <input
+                                        id="requiresApproval"
+                                        type="checkbox"
+                                        formControlName="requiresApproval"
+                                        class="h-4 w-4 text-teal-600 focus:ring-teal-500 border-gray-300 rounded">
+                                    <label for="requiresApproval"
+                                        class="ml-2 block text-sm text-gray-900">
+                                        Require approval for registration
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div
+                    class="px-6 py-4 bg-gray-50 border-t border-gray-200 flex justify-end space-x-3">
+                    <button
+                        type="button"
+                        (click)="cancel()"
+                        class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        Cancel
+                    </button>
+                    <button
+                        type="submit"
+                        [disabled]="submitting || tournamentForm.invalid"
+                        class="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-teal-600 hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500 disabled:opacity-50 disabled:cursor-not-allowed">
+                        <i *ngIf="submitting"
+                            class="fas fa-spinner fa-spin mr-2"></i>
+                        {{ submitting ? 'Saving...' : (isEditMode ?
+                        'Update Tournament' : 'Create Tournament') }}
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>

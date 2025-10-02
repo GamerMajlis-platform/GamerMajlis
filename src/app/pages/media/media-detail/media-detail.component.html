@@ -1,0 +1,116 @@
+@if(media){
+<div
+    class="max-w-5xl  min-h-screen items-center mx-auto px-4 py-10 space-y-8"
+    *ngIf="media as m; else loadingTpl">
+    <div class="flex flex-col md:flex-row md:items-start gap-8">
+        <div class="flex-1 space-y-4">
+            <div
+                class="relative rounded-xl overflow-hidden bg-slate-900 border border-slate-700">
+                <ng-container *ngIf="m.mediaType === 'VIDEO'; else imageTpl">
+                    <video
+                        class="w-full max-h-[520px] bg-black"
+                        controls
+                        [poster]="m.thumbnailPath || undefined"
+                        (play)="incrementView()"
+                        autoplay>
+                        <source [src]="mediaFilePath" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </ng-container>
+                <ng-template #imageTpl>
+                    @let MediaFilePath = 'localhost:8080/api' + m.filePath;
+                    <img
+                        [src]="MediaFilePath"
+                        [alt]="m.title"
+                        class="w-full object-contain max-h-[520px] mx-auto" />
+                </ng-template>
+            </div>
+            <div class="space-y-3">
+                <h1 class="text-2xl md:text-3xl font-bold leading-tight">
+                    {{ m.title }}
+                </h1>
+                <p
+                    *ngIf="m.description"
+                    class="text-slate-300 whitespace-pre-line text-sm">
+                    {{ m.description }}
+                </p>
+                <div
+                    class="flex flex-wrap gap-2 text-[11px] text-slate-400 pt-1">
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-700/60"
+                        *ngIf="m.mediaType">{{ m.mediaType }}</span>
+                    <span
+                        class="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-slate-700/60"
+                        *ngIf="m.gameCategory">{{ m.gameCategory }}</span>
+                    <span class="inline-flex items-center gap-1"><i
+                            class="fa-solid fa-eye text-cyan-400"></i>{{
+                        m.viewCount }}</span>
+                    <span *ngIf="m.duration"
+                        class="inline-flex items-center gap-1"><i
+                            class="fa-solid fa-clock"></i>{{ m.duration
+                        }}s</span>
+                    <span *ngIf="m.resolution"
+                        class="inline-flex items-center gap-1"><i
+                            class="fa-solid fa-up-right-and-down-left-from-center"></i>{{
+                        m.resolution }}</span>
+                    <span class="ml-auto" *ngIf="m.createdAt as d">{{
+                        d | date : 'medium'
+                        }}</span>
+                </div>
+                <div *ngIf="parsedTags().length"
+                    class="flex flex-wrap gap-1 pt-2">
+                    <span
+                        *ngFor="let t of parsedTags(); track: t"
+                        class="px-2 py-0.5 rounded-full bg-gradient-to-r from-cyan-600/20 to-fuchsia-600/20 text-[11px] text-cyan-200 border border-cyan-500/30">#{{
+                        t }}</span>
+                </div>
+            </div>
+        </div>
+        <aside class="w-full md:w-64 space-y-6">
+            <div
+                class="bg-slate-800/60 rounded-xl border border-slate-700 p-4 text-sm">
+                <h2 class="font-semibold mb-3">Uploader</h2>
+                <div *ngIf="m.uploader as u" class="flex items-center gap-3">
+                    <img
+                        [src]="UploaderProfileUrl"
+                        [alt]="u.displayName"
+                        class="w-12 h-12 rounded-lg object-cover" />
+                    <div>
+                        <p class="font-medium leading-tight">{{ u.displayName
+                            }}</p>
+                        <a
+                            [routerLink]="['/profile']"
+                            class="text-[11px] text-cyan-300 hover:underline">View
+                            Profile</a>
+                    </div>
+                </div>
+            </div>
+            <div
+                class="bg-slate-800/60 rounded-xl border border-slate-700 p-4 text-xs space-y-2">
+                <h2 class="font-semibold text-sm">Meta</h2>
+                <p *ngIf="m.originalFilename">
+                    <span class="text-slate-400">File:</span> {{
+                    m.originalFilename }}
+                </p>
+                <p *ngIf="m.fileSize">
+                    <span class="text-slate-400">Size:</span>
+                    {{ m.fileSize | number }} bytes
+                </p>
+                <p *ngIf="m.compressionRatio">
+                    <span class="text-slate-400">Compression:</span>
+                    {{ m.compressionRatio }}
+                </p>
+            </div>
+            <a
+                routerLink="/media"
+                class="block text-center px-4 py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-sm">Back
+                to Library</a>
+        </aside>
+    </div>
+</div>
+}
+<ng-template #loadingTpl>
+    <div class="max-w-5xl mx-auto px-4 py-20 text-center text-slate-500">
+        Loading...
+    </div>
+</ng-template>

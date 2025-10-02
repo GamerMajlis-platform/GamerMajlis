@@ -1,0 +1,138 @@
+<div class="media-page-wrapper">
+
+    <!-- Decorative / ambient ornaments -->
+    <div class="ambient-layer pointer-events-none select-none"
+        aria-hidden="true">
+        <div class="orb orb-a animate-spin-slow"></div>
+        <div class="orb orb-b animate-bounce-slow"></div>
+        <div class="sprite-controller animate-pulse">
+            <img src="/images/Controller.png" alt loading="lazy" />
+        </div>
+        <div class="diamond-border animate-ping"></div>
+    </div>
+
+    <!-- Interactive Hero / Filters / Content -->
+    <section #heroSection class="hero-interactive" [@heroAnimation]>
+
+        <!-- Interactive Background with Cursor Light Effect -->
+        <div class="absolute inset-0 hero-bg">
+            <!-- Base gradient background -->
+            <div
+                class="absolute inset-0 bg-gradient-to-br from-navy via-dark-blue/50 to-navy"></div>
+
+            <!-- Main cursor light effect -->
+            <div #cursorLight
+                class="cursor-light absolute w-[600px] h-[600px] pointer-events-none opacity-0 transition-opacity duration-300 ease-out"></div>
+
+            <!-- Animated background orbs -->
+            <div
+                class="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-r from-mint/20 to-teal/20 rounded-full blur-3xl animate-pulse"></div>
+            <div
+                class="absolute bottom-1/4 right-1/4 w-80 h-80 bg-gradient-to-r from-teal/20 to-blue-gray/20 rounded-full blur-3xl animate-pulse animation-delay-1000"></div>
+
+            <!-- Floating particles -->
+            <div class="absolute inset-0 pointer-events-none">
+                <div class="floating-particle particle-1"></div>
+                <div class="floating-particle particle-2"></div>
+                <div class="floating-particle particle-3"></div>
+                <div class="floating-particle particle-4"></div>
+                <div class="floating-particle particle-5"></div>
+                <div class="floating-particle particle-6"></div>
+                <div class="floating-particle particle-7"></div>
+                <div class="floating-particle particle-8"></div>
+            </div>
+        </div>
+
+        <header class="header-bar">
+            <div class="intro">
+                <h1 class="title">Media Library</h1>
+                <p class="subtitle">Discover uploaded clips & images from the
+                    community.</p>
+            </div>
+            <div class="actions">
+                <button routerLink="/media/upload" class="btn-accent"
+                    aria-label="Upload media">
+                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                    <span class="hidden sm:inline">Upload</span>
+                </button>
+                <div class="search-box" role="search">
+                    <input [(ngModel)]="searchTerm" (keyup.enter)="onSearch()"
+                        placeholder="Search media..."
+                        class="search-input"
+                        aria-label="Search media" />
+                    <button (click)="onSearch()" class="icon-btn"
+                        aria-label="Execute search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <div class="filters" aria-label="Media filters">
+            <div class="filter-group">
+                <label class="filter-label" for="mediaType">Type</label>
+                <select id="mediaType" [(ngModel)]="typeFilter"
+                    (change)="refresh()" class="filter-control">
+                    <option value>All</option>
+                    <option value="VIDEO">Video</option>
+                    <option value="IMAGE">Image</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label class="filter-label" for="mediaCategory">Category</label>
+                <input id="mediaCategory" [(ngModel)]="categoryFilter"
+                    (change)="refresh()" placeholder="FPS..."
+                    class="filter-control" />
+            </div>
+            <div class="filter-group">
+                <label class="filter-label"
+                    for="mediaVisibility">Visibility</label>
+                <select id="mediaVisibility" [(ngModel)]="visibilityFilter"
+                    (change)="refresh()"
+                    class="filter-control">
+                    <option value>All</option>
+                    <option value="PUBLIC">Public</option>
+                    <option value="PRIVATE">Private</option>
+                </select>
+            </div>
+            <div class="filter-group toggle">
+                <label class="filter-label" for="myMediaToggle">My Media</label>
+                <input id="myMediaToggle" type="checkbox" [(ngModel)]="myMedia"
+                    (change)="refresh()"
+                    class="checkbox" />
+            </div>
+        </div>
+
+        <div class="min-h-[200px]" *ngIf="isLoading() && media().length === 0">
+            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                <div
+                    *ngFor="let s of skeletons"
+                    class="animate-pulse h-48 rounded-xl bg-slate-800/70 border border-slate-700"></div>
+            </div>
+        </div>
+
+        <div
+            *ngIf="!isLoading() && media().length === 0"
+            class="p-10 text-center text-slate-400 border border-dashed border-slate-600 rounded-xl">
+            No media found.
+        </div>
+
+        <div class="media-grid" (window:scroll)="onWindowScroll()">
+            <gm-media-card
+                *ngFor="let m of media(); trackBy: trackMedia"
+                [media]="m"></gm-media-card>
+        </div>
+
+        <div class="load-more-wrapper" *ngIf="hasMore() && !isLoading()">
+            <button (click)="loadMore()" class="btn-load-more"
+                aria-label="Load more media results">
+                Load More
+            </button>
+        </div>
+        <div
+            class="flex justify-center pt-6"
+            *ngIf="isLoading() && media().length > 0">
+            <span class="text-slate-400 text-xs">Loading...</span>
+        </div>
+    </section>
+</div>

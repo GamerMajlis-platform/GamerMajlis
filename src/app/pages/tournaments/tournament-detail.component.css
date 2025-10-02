@@ -1,0 +1,145 @@
+/* Tournament Detail Specific Styles */
+.tournament-header {
+    background: linear-gradient(135deg, #0f766e 0%, #14b8a6 100%);
+}
+
+.tournament-info-card {
+    transition: all 0.2s ease-in-out;
+}
+
+.tournament-info-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.participant-card {
+    transition: all 0.2s ease-in-out;
+    border: 1px solid #e5e7eb;
+}
+
+.participant-card:hover {
+    border-color: #14b8a6;
+    box-shadow: 0 2px 8px rgba(20, 184, 166, 0.1);
+}
+
+.status-badge {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, #14b8a6, #059669);
+    transition: width 0.5s ease-in-out;
+}
+
+.action-button {
+    transition: all 0.2s ease-in-out;
+}
+
+.action-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.info-grid {
+    display: grid;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .info-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.organizer-card {
+    border-left: 4px solid #14b8a6;
+}
+
+.moderator-card {
+    border-left: 4px solid #6366f1;
+}
+
+.stats-card {
+    border-left: 4px solid #f59e0b;
+}
+
+.user-participation-card {
+    background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+    border: 1px solid #93c5fd;
+}
+
+.danger-zone {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 1px solid #fca5a5;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .tournament-header {
+        padding: 1rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-buttons button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Animation for loading states */
+.loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Custom scrollbar for participant list */
+.participants-container {
+    max-height: 400px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #14b8a6 #f1f5f9;
+}
+
+.participants-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.participants-container::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.participants-container::-webkit-scrollbar-thumb {
+    background: #14b8a6;
+    border-radius: 3px;
+}
+
+.participants-container::-webkit-scrollbar-thumb:hover {
+    background: #0f766e;
+}

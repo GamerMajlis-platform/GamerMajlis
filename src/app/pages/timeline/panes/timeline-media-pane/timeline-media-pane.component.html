@@ -1,0 +1,52 @@
+ <div
+    class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4"
+    role="list"
+    aria-label="Recent media items">
+    <ng-container *ngIf="!loadedOnce() && isLoading()">
+        <div
+            *ngFor="let s of skeletons"
+            class="skeleton-shimmer aspect-video rounded-lg bg-slate-800/60 border border-slate-700/50"></div>
+    </ng-container>
+
+    <div
+        *ngFor="let m of media(); trackBy: trackMedia; let i = index"
+        role="listitem"
+        class="tl-card group relative rounded-lg overflow-hidden border border-slate-700/50 bg-slate-800/50 hover:border-mint/60 transition-all duration-400 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60"
+        [style.animationDelay.ms]="i * 40"
+        [attr.data-id]="m.id"
+        (click)="openMedia(m)"
+        tabindex="0"
+        (keydown.enter)="openMedia(m)">
+
+        <img
+            *ngIf="m.thumbnailPath"
+            [src]="m.thumbnailPath"
+            alt
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            loading="lazy" />
+        <div
+            *ngIf="!m.thumbnailPath"
+            class="flex items-center justify-center aspect-video text-slate-500 text-xs">
+            {{ m.mediaType }}
+        </div>
+        <div
+            class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-950/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div
+            class="absolute bottom-1.5 left-1.5 right-1.5 text-[10px] leading-tight font-medium text-slate-200 line-clamp-2 drop-shadow">
+            {{ m.title }}
+        </div>
+    </div>
+
+    <div
+        class="col-span-full flex items-center justify-center py-6"
+        *ngIf="loadedOnce() && isLoading()">
+        <div
+            class="w-6 h-6 border-2 border-mint/30 border-t-mint rounded-full animate-spin"></div>
+    </div>
+    <div
+        class="col-span-full text-center text-slate-500 text-sm py-10"
+        *ngIf="!isLoading() && media().length === 0">
+        No media yet.
+    </div>
+    <div #sentinel class="h-2 w-full col-span-full" aria-hidden="true"></div>
+</div>

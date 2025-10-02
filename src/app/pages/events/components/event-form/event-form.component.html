@@ -1,0 +1,578 @@
+<div
+    class="min-h-screen px-6 py-@0">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="flex items-center justify-between mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-white mb-2">
+                    {{ isEditMode() ? 'Edit Event' : 'Create New Event' }}
+                </h1>
+                <p class="text-gray-300">
+                    {{ isEditMode() ? 'Update your event details' :
+                    'Set up your gaming event and invite the community' }}
+                </p>
+            </div>
+            <button
+                type="button"
+                (click)="goBack()"
+                class="px-4 py-2 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Back
+            </button>
+        </div>
+
+        <!-- Event Form -->
+        <form [formGroup]="eventForm" (ngSubmit)="onSubmit()" class="space-y-8">
+            <!-- Basic Information Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Basic Information
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Event Title -->
+                    <div class="lg:col-span-2">
+                        <label for="title"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Event Title *
+                        </label>
+                        <input
+                            id="title"
+                            type="text"
+                            formControlName="title"
+                            placeholder="Enter a catchy event title"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('title')?.invalid && eventForm.get('title')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Event title is required and must be at least 3
+                            characters long
+                        </div>
+                    </div>
+
+                    <!-- Event Type -->
+                    <div>
+                        <label for="type"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Event Type *
+                        </label>
+                        <select
+                            id="type"
+                            formControlName="type"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                            <option value class="bg-gray-800">Select event
+                                type</option>
+                            <option value="tournament"
+                                class="bg-gray-800">Tournament</option>
+                            <option value="casual" class="bg-gray-800">Casual
+                                Gaming</option>
+                            <option value="workshop"
+                                class="bg-gray-800">Workshop</option>
+                            <option value="meetup"
+                                class="bg-gray-800">Meetup</option>
+                            <option value="streaming"
+                                class="bg-gray-800">Streaming Event</option>
+                            <option value="beta_test" class="bg-gray-800">Beta
+                                Testing</option>
+                            <option value="lan_party" class="bg-gray-800">LAN
+                                Party</option>
+                            <option value="competition"
+                                class="bg-gray-800">Competition</option>
+                        </select>
+                        <div
+                            *ngIf="eventForm.get('type')?.invalid && eventForm.get('type')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Please select an event type
+                        </div>
+                    </div>
+
+                    <!-- Location Type -->
+                    <div>
+                        <label for="locationType"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Location Type *
+                        </label>
+                        <select
+                            id="locationType"
+                            formControlName="locationType"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                            <option value class="bg-gray-800">Select location
+                                type</option>
+                            <option value="online"
+                                class="bg-gray-800">Online</option>
+                            <option value="physical"
+                                class="bg-gray-800">Physical Location</option>
+                            <option value="hybrid" class="bg-gray-800">Hybrid
+                                (Online + Physical)</option>
+                        </select>
+                        <div
+                            *ngIf="eventForm.get('locationType')?.invalid && eventForm.get('locationType')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Please select a location type
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Description -->
+                <div class="mt-6">
+                    <label for="description"
+                        class="block text-sm font-medium text-gray-200 mb-2">
+                        Event Description *
+                    </label>
+                    <textarea
+                        id="description"
+                        formControlName="description"
+                        rows="4"
+                        placeholder="Describe your event, what to expect, rules, and any other important details..."
+                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 resize-vertical"></textarea>
+                    <div
+                        *ngIf="eventForm.get('description')?.invalid && eventForm.get('description')?.touched"
+                        class="mt-2 text-red-400 text-sm">
+                        Event description is required and must be at least 20
+                        characters long
+                    </div>
+                </div>
+            </div>
+
+            <!-- Date & Time Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Date & Time
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Start Date & Time -->
+                    <div>
+                        <label for="startDate"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Start Date & Time *
+                        </label>
+                        <input
+                            id="startDate"
+                            type="datetime-local"
+                            formControlName="startDate"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('startDate')?.invalid && eventForm.get('startDate')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Start date and time is required
+                        </div>
+                    </div>
+
+                    <!-- End Date & Time -->
+                    <div>
+                        <label for="endDate"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            End Date & Time *
+                        </label>
+                        <input
+                            id="endDate"
+                            type="datetime-local"
+                            formControlName="endDate"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('endDate')?.invalid && eventForm.get('endDate')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            End date and time is required and must be after
+                            start date
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location Details Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                    </svg>
+                    Location Details
+                </h2>
+
+                <!-- Physical Location Fields -->
+                <div *ngIf="showPhysicalLocation()" class="space-y-6">
+                    <div>
+                        <label for="address"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Address *
+                        </label>
+                        <input
+                            id="address"
+                            type="text"
+                            formControlName="address"
+                            placeholder="Enter the physical address"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('address')?.invalid && eventForm.get('address')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Address is required for physical events
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label for="city"
+                                class="block text-sm font-medium text-gray-200 mb-2">
+                                City *
+                            </label>
+                            <input
+                                id="city"
+                                type="text"
+                                formControlName="city"
+                                placeholder="Enter city"
+                                class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                            <div
+                                *ngIf="eventForm.get('city')?.invalid && eventForm.get('city')?.touched"
+                                class="mt-2 text-red-400 text-sm">
+                                City is required for physical events
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="country"
+                                class="block text-sm font-medium text-gray-200 mb-2">
+                                Country *
+                            </label>
+                            <input
+                                id="country"
+                                type="text"
+                                formControlName="country"
+                                placeholder="Enter country"
+                                class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                            <div
+                                *ngIf="eventForm.get('country')?.invalid && eventForm.get('country')?.touched"
+                                class="mt-2 text-red-400 text-sm">
+                                Country is required for physical events
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Online Location Fields -->
+                <div *ngIf="showOnlineLocation()" class="space-y-6">
+                    <div>
+                        <label for="platform"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Platform *
+                        </label>
+                        <input
+                            id="platform"
+                            type="text"
+                            formControlName="platform"
+                            placeholder="e.g., Discord, Zoom, Twitch, Steam"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('platform')?.invalid && eventForm.get('platform')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Platform is required for online events
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="meetingLink"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Meeting Link
+                        </label>
+                        <input
+                            id="meetingLink"
+                            type="url"
+                            formControlName="meetingLink"
+                            placeholder="https://discord.gg/... or https://zoom.us/..."
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('meetingLink')?.invalid && eventForm.get('meetingLink')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Please enter a valid URL
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Registration Settings Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"></path>
+                    </svg>
+                    Registration Settings
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Max Attendees -->
+                    <div>
+                        <label for="maxAttendees"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Maximum Attendees
+                        </label>
+                        <input
+                            id="maxAttendees"
+                            type="number"
+                            formControlName="maxAttendees"
+                            min="1"
+                            placeholder="Leave empty for unlimited"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('maxAttendees')?.invalid && eventForm.get('maxAttendees')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Maximum attendees must be at least 1
+                        </div>
+                    </div>
+
+                    <!-- Registration Deadline -->
+                    <div>
+                        <label for="registrationDeadline"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Registration Deadline
+                        </label>
+                        <input
+                            id="registrationDeadline"
+                            type="datetime-local"
+                            formControlName="registrationDeadline"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <div
+                            *ngIf="eventForm.get('registrationDeadline')?.invalid && eventForm.get('registrationDeadline')?.touched"
+                            class="mt-2 text-red-400 text-sm">
+                            Registration deadline must be before event start
+                            date
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Require Approval -->
+                <div class="mt-6">
+                    <label class="flex items-center gap-3 cursor-pointer">
+                        <input
+                            type="checkbox"
+                            formControlName="requiresApproval"
+                            class="w-5 h-5 text-teal-500 bg-white/10 border border-white/20 rounded focus:ring-teal-500 focus:ring-2">
+                        <span class="text-gray-200">Require approval for
+                            registration</span>
+                    </label>
+                    <p class="text-sm text-gray-400 mt-2">
+                        When enabled, you'll need to manually approve each
+                        registration request
+                    </p>
+                </div>
+            </div>
+
+            <!-- Game Information Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1.5a2.5 2.5 0 010 5H9m0-5a5 5 0 105 5m-5-5H6.5a2.5 2.5 0 000 5H9m3 0a5 5 0 105-5"></path>
+                    </svg>
+                    Game Information
+                </h2>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <!-- Game Title -->
+                    <div>
+                        <label for="gameTitle"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Game Title
+                        </label>
+                        <input
+                            id="gameTitle"
+                            type="text"
+                            formControlName="gameTitle"
+                            placeholder="e.g., League of Legends, Valorant, FIFA 24"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                    </div>
+
+                    <!-- Game Mode -->
+                    <div>
+                        <label for="gameMode"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Game Mode
+                        </label>
+                        <input
+                            id="gameMode"
+                            type="text"
+                            formControlName="gameMode"
+                            placeholder="e.g., 5v5, Battle Royale, Single Player"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                </div>
+
+                <!-- Skill Level -->
+                <div class="mt-6">
+                    <label for="skillLevel"
+                        class="block text-sm font-medium text-gray-200 mb-2">
+                        Required Skill Level
+                    </label>
+                    <select
+                        id="skillLevel"
+                        formControlName="skillLevel"
+                        class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                        <option value class="bg-gray-800">Select skill
+                            level</option>
+                        <option value="beginner"
+                            class="bg-gray-800">Beginner</option>
+                        <option value="intermediate"
+                            class="bg-gray-800">Intermediate</option>
+                        <option value="advanced"
+                            class="bg-gray-800">Advanced</option>
+                        <option value="professional"
+                            class="bg-gray-800">Professional</option>
+                        <option value="any" class="bg-gray-800">Any
+                            Level</option>
+                    </select>
+                </div>
+
+                <!-- Entry Fee -->
+                <div class="mt-6 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <label for="entryFee"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Entry Fee (Optional)
+                        </label>
+                        <input
+                            id="entryFee"
+                            type="number"
+                            formControlName="entryFee"
+                            min="0"
+                            step="0.01"
+                            placeholder="0.00"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                    </div>
+
+                    <div>
+                        <label for="prizePool"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Prize Pool (Optional)
+                        </label>
+                        <input
+                            id="prizePool"
+                            type="text"
+                            formControlName="prizePool"
+                            placeholder="e.g., $500 cash, Gaming gear, Trophies"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional Information Section -->
+            <div
+                class="bg-white/10 backdrop-blur-md rounded-2xl border border-white/20 p-8">
+                <h2
+                    class="text-xl font-semibold text-white mb-6 flex items-center gap-2">
+                    <svg class="w-6 h-6 text-teal-400" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                    </svg>
+                    Additional Information
+                </h2>
+
+                <div class="space-y-6">
+                    <!-- Rules -->
+                    <div>
+                        <label for="rules"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Rules & Guidelines
+                        </label>
+                        <textarea
+                            id="rules"
+                            formControlName="rules"
+                            rows="4"
+                            placeholder="Specify any rules, guidelines, or requirements for participants..."
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 resize-vertical"></textarea>
+                    </div>
+
+                    <!-- Requirements -->
+                    <div>
+                        <label for="requirements"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Requirements
+                        </label>
+                        <textarea
+                            id="requirements"
+                            formControlName="requirements"
+                            rows="3"
+                            placeholder="List any equipment, software, or other requirements..."
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200 resize-vertical"></textarea>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div>
+                        <label for="contactInfo"
+                            class="block text-sm font-medium text-gray-200 mb-2">
+                            Contact Information
+                        </label>
+                        <input
+                            id="contactInfo"
+                            type="text"
+                            formControlName="contactInfo"
+                            placeholder="Discord: @username, Email: contact@example.com"
+                            class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-200">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form Actions -->
+            <div class="flex justify-end gap-4 pt-6">
+                <button
+                    type="button"
+                    (click)="goBack()"
+                    class="px-6 py-3 bg-gray-700 hover:bg-gray-600 text-white rounded-lg transition-colors duration-200 font-medium">
+                    Cancel
+                </button>
+                <button
+                    type="submit"
+                    [disabled]="eventForm.invalid || isSubmitting()"
+                    class="px-8 py-3 bg-gradient-to-r from-teal-500 to-blue-600 hover:from-teal-600 hover:to-blue-700 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white rounded-lg transition-all duration-200 font-medium flex items-center gap-2">
+                    <svg *ngIf="isSubmitting()"
+                        class="animate-spin -ml-1 mr-2 h-5 w-5 text-white"
+                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10"
+                            stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    {{ isSubmitting() ? 'Saving...' : (isEditMode() ?
+                    'Update Event' : 'Create Event') }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

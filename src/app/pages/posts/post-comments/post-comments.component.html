@@ -1,0 +1,35 @@
+<section class="pt-6 border-t border-slate-700/60">
+    <h2 class="font-semibold mb-4">Comments</h2>
+    <form (submit)="onSubmit($event)" class="flex gap-2 mb-6">
+        <input
+            [(ngModel)]="draft"
+            name="comment"
+            required
+            placeholder="Add a comment"
+            class="flex-1 px-4 py-2 rounded-lg bg-slate-800 border border-slate-600 focus:outline-none focus:ring-2 focus:ring-fuchsia-500" />
+        <button
+            class="px-4 py-2 rounded-lg bg-fuchsia-600 hover:bg-fuchsia-500 disabled:opacity-60"
+            [disabled]="!draft.trim() || adding()">
+            Post
+        </button>
+    </form>
+    <div class="space-y-4"
+        *ngIf="comments && comments.length; else noCommentsTpl">
+        <div *ngFor="let c of comments"
+            class="bg-slate-800/70 rounded-lg p-4 flex flex-col gap-2">
+            <div
+                class="flex items-center justify-between text-xs text-slate-400">
+                <span>{{ c.author.displayName || 'User' }}</span>
+                <span>{{ c.createdAt | date : 'short' }}</span>
+            </div>
+            <p class="text-sm leading-relaxed">{{ c.content }}</p>
+            <button *ngIf="canDelete(c)" (click)="delete.emit(c)"
+                class="self-end text-[10px] uppercase tracking-wider text-red-400 hover:text-red-300">
+                Delete
+            </button>
+        </div>
+    </div>
+    <ng-template #noCommentsTpl>
+        <p class="text-sm text-slate-500">No comments yet.</p>
+    </ng-template>
+</section>

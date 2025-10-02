@@ -1,0 +1,210 @@
+/* Ripple effect for tab buttons */
+.tab-ripple {
+    position: absolute;
+    border-radius: 9999px;
+    transform: scale(0);
+    animation: tab-ripple 600ms ease-out;
+    background: rgba(255, 255, 255, 0.35);
+    pointer-events: none;
+    opacity: 0.75;
+}
+
+@keyframes tab-ripple {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* ===================== */
+/* Generic Animations    */
+/* ===================== */
+
+/* Base state before entry */
+.anim-pre {
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+/* Activated entry */
+.anim-enter {
+    opacity: 1;
+}
+
+/* Fade */
+.anim-fade {
+    animation: fade-in 560ms cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* Fade + slight upward translate */
+.anim-fade-up {
+    animation: fade-up 640ms cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes fade-up {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Fade + slide (Y + subtle scale) */
+.anim-fade-slide {
+    animation: fade-slide 720ms cubic-bezier(.16, .68, .43, .99) both;
+}
+
+@keyframes fade-slide {
+    0% {
+        opacity: 0;
+        transform: translateY(28px) scale(.96);
+        filter: blur(2px);
+    }
+
+    60% {
+        opacity: 1;
+        filter: blur(0);
+    }
+
+    100% {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Zoom in (pop) */
+.anim-zoom-in {
+    animation: zoom-in 520ms cubic-bezier(.22, .61, .36, 1) both;
+}
+
+@keyframes zoom-in {
+    0% {
+        opacity: 0;
+        transform: scale(.85);
+    }
+
+    70% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Pop (elastic) */
+.anim-pop {
+    animation: pop-in 680ms cubic-bezier(.34, 1.56, .64, 1) both;
+}
+
+@keyframes pop-in {
+    0% {
+        opacity: 0;
+        transform: scale(.6);
+    }
+
+    60% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Stagger parent helper */
+.anim-stagger-parent>* {
+    --stagger-index: 0;
+    /* allow manual override */
+    animation-delay: calc(var(--stagger-index) * 90ms);
+}
+
+/* Tap / interaction animations */
+.tap-scale {
+    animation: tap-scale 220ms cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@keyframes tap-scale {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(.93);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.tap-press {
+    animation: tap-press 260ms cubic-bezier(.4, 0, .2, 1);
+}
+
+@keyframes tap-press {
+    0% {
+        transform: translateY(0);
+    }
+
+    40% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.tap-bounce {
+    animation: tap-bounce 420ms cubic-bezier(.34, 1.56, .64, 1);
+}
+
+@keyframes tap-bounce {
+    0% {
+        transform: scale(1);
+    }
+
+    40% {
+        transform: scale(.9);
+    }
+
+    70% {
+        transform: scale(1.04);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    .anim-fade,
+    .anim-fade-up,
+    .anim-fade-slide,
+    .anim-zoom-in,
+    .anim-pop,
+    .tap-scale,
+    .tap-press,
+    .tap-bounce {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition: none !important;
+    }
+}

@@ -1,155 +1,238 @@
 <nav
-    class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-xl border-b border-gray-100">
-    <div class="container mx-auto px-6">
-        <div class="flex items-center justify-between h-16">
+    class="nav-glass fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+    role="navigation"
+    aria-label="Main navigation"
+    [class.nav-compact]="scrolled">
 
-            <!-- Logo Section -->
-            <div class="flex items-center space-x-3">
-                <!-- Gaming Controller Icon -->
-                <div class="flex items-center space-x-2">
-                    <a routerLink="home" class="w-60">
-                        <img src="/images/GamerMajlis-removebg-preview.png" alt>
-                    </a>
-                </div>
-            </div>
+    <div class="container-responsive">
+        <div class="nav-inner">
 
-            <!-- Navigation Links -->
-            <div class="hidden md:flex items-center space-x-8">
-                <a routerLink="home"
-                    routerLinkActive="bg-teal py-2 text-black rounded-md"
-                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
-                    Home
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
-                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
-                </a>
-                <a routerLink="tournaments"
-                    routerLinkActive="bg-teal py-2 text-black rounded-md"
-                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
-                    Tournaments
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
-                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
-                </a>
-                <a routerLink="marketplace"
-                    routerLinkActive="bg-teal py-2 text-black rounded-md"
-                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
-                    Marketplace
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
-                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
-                </a>
-                <a routerLink="events"
-                    routerLinkActive="bg-teal py-2 text-black rounded-md"
-                    class="text-xl md:px-6 hover:text-teal transition-all duration-200 relative group">
-                    Events
-                    <span
-                        class="absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-200 group-hover:w-full"
-                        [class]="scrolled ? 'bg-teal' : 'bg-navy'"></span>
+            <!-- Brand / Logo -->
+            <div class="brand-container">
+                <a routerLink="/home"
+                    class="brand-link group"
+                    aria-label="Go to home"
+                    (click)="closeMobileMenu()">
+                    <div class="logo-wrapper">
+                        <img src="/images/GamerMajlis-removebg-preview.png"
+                            alt="GamerMajlis logo"
+                            class="logo-img">
+                        <span class="logo-glow"></span>
+                    </div>
                 </a>
             </div>
 
-            <!-- Right Section: Messages Button + Profile -->
-            <div class="flex items-center space-x-4">
-
-                @if (!isMobileView) {
-
-                <!-- Messages Button -->
-                <button
-                    class="flex items-center space-x-2 bg-navy text-mint px-4 py-2 rounded-lg font-medium hover:bg-dark-blue transition-all duration-200 shadow-md hover:shadow-lg">
-                    <svg class="w-5 h-5" fill="currentColor"
-                        viewBox="0 0 24 24">
-                        <path
-                            d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H6L4,18V4H20V16Z" />
-                    </svg>
-                    <span>Messages</span>
-                </button>
+            <!-- Desktop Navigation -->
+            <div class="desktop-nav" aria-label="Primary navigation">
+                @for (item of navItems; track item.path) {
+                <a [routerLink]="item.path"
+                    routerLinkActive="nav-active"
+                    class="flex items-baseline rounded-3xl group px-4 py-2"
+                    [attr.aria-label]="(item.label | translate)">
+                    <i class="nav-icon fas me-2" [ngClass]="item.icon"></i>
+                    <span class="nav-text-full">{{ item.label | translate
+                        }}</span>
+                    <span class="nav-text-short">{{ (item.label |
+                        translate)?.slice(0, 4) }}</span>
+                    <span class="pill-indicator"></span>
+                </a>
                 }
+            </div>
 
-                <!-- Profile Avatar -->
-                <div class="relative group">
-                    <button
-                        class="w-10 h-10 rounded-full overflow-hidden border-2 border-navy hover:border-teal transition-all duration-200 shadow-md hover:shadow-lg">
-                        <img
-                            src="/images/user4.jpg"
-                            alt="Profile"
-                            class="w-full h-full object-cover">
+            <!-- Right Actions -->
+            <div class="actions-container">
+
+                <!-- Desktop Messages & Language Toggle -->
+                <div class="desktop-actions">
+                    @if (isAuthenticated$) {
+                    <a routerLink="/chatsPage"
+                        class="action-chip"
+                        aria-label="Messages">
+                        <i class="fas fa-comments"></i>
+                        <span class="action-text">{{ 'NAV.MESSAGES' | translate
+                            }}</span>
+                    </a>
+                    }
+
+                    <button (click)="language.toggleLanguage()"
+                        class="icon-btn"
+                        aria-label="Toggle language">
+                        <i class="fas fa-globe"></i>
+                    </button>
+                </div>
+
+                <!-- Profile Menu (Desktop & Tablet) -->
+                @if (isAuthenticated$ && !isMobileView) {
+                <div class="profile-container"
+                    (mouseleave)="closeProfileMenu()"
+                    (keyup.escape)="closeProfileMenu()">
+                    <button (mouseenter)="profileOpen=true"
+                        (click)="profileOpen=!profileOpen"
+                        class="avatar-btn flex items-center"
+                        aria-haspopup="menu"
+                        [attr.aria-expanded]="profileOpen"
+                        aria-label="Profile menu">
+                        <img [src]="profilePictureUrl"
+                            alt="User avatar"
+                            class="avatar-img"
+                            loading="lazy" />
                     </button>
 
-                    <!-- Profile Dropdown -->
-                    <div
-                        class="absolute z-100 right-0 top-12 w-48 bg-white rounded-lg shadow-xl border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 transform translate-y-2 group-hover:translate-y-0">
-                        <div class="p-4 border-b border-gray-200">
-                            <p class="text-sm font-medium text-gray-900">John
-                                Gamer</p>
-                            <p
-                                class="text-xs text-gray-500">johngamermajlis.com</p>
+                    @if (profileOpen) {
+                    <div class="profile-menu" role="menu" @slideDown>
+                        <div class="profile-header">
+                            <p class="profile-name">{{ userData.user.displayName
+                                }}</p>
+                            <p class="profile-email">{{ userData.user.email
+                                }}</p>
                         </div>
-                        <div class="py-2">
+                        <div class="profile-links">
                             <a routerLink="/profile"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Profile</a>
-                            <a routerLink="/profile"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Settings</a>
-                            <a routerLink="login"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-mint/10 transition-colors">Logout</a>
+                                role="menuitem"
+                                class="menu-item"
+                                (click)="closeProfileMenu()">
+                                <i class="fas fa-user"></i>
+                                {{ 'NAV.PROFILE' | translate }}
+                            </a>
+                            <a routerLink="/wishlist"
+                                role="menuitem"
+                                class="menu-item"
+                                (click)="closeProfileMenu()">
+                                <i class="fas fa-heart text-red-600"></i>
+                                {{ 'NAV.WISHLIST' | translate }}
+                            </a>
+                            <button (click)="logout()"
+                                role="menuitem"
+                                class="menu-item logout-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                {{ 'NAV.LOGOUT' | translate }}
+                            </button>
                         </div>
                     </div>
+                    }
                 </div>
+                }
 
-                <!-- Mobile Menu Button -->
-                <button class="md:hidden transition-colors duration-200"
-                    [class]="scrolled ? 'text-gray-700 hover:text-teal' : 'text-navy hover:text-dark-blue'"
-                    (click)="toggleMobileMenu()">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
+                <!-- Mobile Hamburger -->
+                @if (isMobileView) {
+                <button class="hamburger"
+                    (click)="toggleMobileMenu()"
+                    [attr.aria-expanded]="isMobileMenuOpen"
+                    aria-label="Toggle mobile menu">
+                    <span class="hamburger-line"
+                        [class.open]="isMobileMenuOpen"></span>
+                    <span class="sr-only">Toggle navigation</span>
                 </button>
-            </div>
-        </div>
-
-        <!-- Mobile Menu -->
-        <div class="md:hidden" [class.hidden]="!isMobileMenuOpen" [@slideDown]>
-            <div
-                class="px-2 pt-2 pb-3 space-y-1 rounded-lg mt-2 backdrop-blur-sm transition-colors duration-300"
-                [class]="scrolled ? 'bg-gray-50' : 'bg-white/10'">
-                <a routerLink="/home"
-                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
-                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
-                    Home
-                </a>
-                <a routerLink="/tournament"
-                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
-                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
-                    Tournaments
-                </a>
-                <a routerLink="/marketplace"
-                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
-                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
-                    Marketplace
-                </a>
-                <a routerLink="/events"
-                    class="block px-3 py-2 font-medium rounded-md transition-all duration-200"
-                    [class]="scrolled ? 'text-gray-700 hover:bg-mint/10' : 'text-navy hover:bg-white/20'">
-                    Events
-                </a>
-                <div class="px-3 py-2">
-                    <button
-                        class="w-full flex items-center justify-center space-x-2 bg-navy text-mint px-4 py-2 rounded-lg font-medium hover:bg-dark-blue transition-colors duration-200">
-                        <svg class="w-5 h-5" fill="currentColor"
-                            viewBox="0 0 24 24">
-                            <path
-                                d="M20,2H4A2,2 0 0,0 2,4V22L6,18H20A2,2 0 0,0 22,16V4A2,2 0 0,0 20,2M20,16H6L4,18V4H20V16Z" />
-                        </svg>
-                        <span>Messages</span>
-                    </button>
-                </div>
+                }
             </div>
         </div>
     </div>
 </nav>
 
-<!-- Spacer to prevent content from hiding behind fixed navbar -->
-<div class="h-16"></div>
+<!-- Mobile Menu Overlay -->
+@if (isMobileView && isMobileMenuOpen) {
+<div class="mobile-overlay" @slideInLeft>
+    <!-- Backdrop -->
+    <div class="mobile-backdrop" (click)="closeMobileMenu()"></div>
+
+    <!-- Mobile Drawer -->
+    <aside class="mobile-drawer" role="dialog" aria-label="Mobile navigation">
+        <div class="mobile-content">
+
+            <!-- Mobile Header -->
+            <div class="mobile-header">
+                <a routerLink="/home"
+                    class="mobile-brand"
+                    (click)="closeMobileMenu()"
+                    aria-label="Home">
+                    <img src="/images/GamerMajlis-removebg-preview.png"
+                        class="mobile-logo"
+                        alt="GamerMajlis" />
+                </a>
+                <button class="mobile-close"
+                    (click)="closeMobileMenu()"
+                    aria-label="Close menu">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <div class="mobile-nav">
+
+                <!-- Search Bar -->
+                <div class="mobile-search">
+                    <input type="text"
+                        placeholder="Search..."
+                        class="search-input" />
+                    <i class="search-icon fas fa-search"></i>
+                </div>
+
+                <!-- Navigation Links -->
+                <div class="mobile-links">
+                    @for (item of navItems; track item.path) {
+                    <a [routerLink]="'/' + item.path"
+                        (click)="closeMobileMenu()"
+                        routerLinkActive="mobile-active"
+                        class="mobile-link">
+                        <i class="mobile-link-icon fas"
+                            [ngClass]="item.icon"></i>
+                        <span class="mobile-link-text">{{ item.label | translate
+                            }}</span>
+                    </a>
+                    }
+                </div>
+
+                <!-- Mobile Actions -->
+                @if (isAuthenticated$) {
+                <div class="mobile-actions">
+                    <a routerLink="/chatsPage"
+                        (click)="closeMobileMenu()"
+                        class="mobile-action">
+                        <i class="fas fa-comments"></i>
+                        <span>{{ 'NAV.MESSAGES' | translate }}</span>
+                    </a>
+
+                    <button (click)="language.toggleLanguage()"
+                        class="mobile-action">
+                        <i class="fas fa-globe"></i>
+                        <span>{{ 'LANG.TOGGLE' | translate }}</span>
+                    </button>
+
+                    <a routerLink="/profile"
+                        (click)="closeMobileMenu()"
+                        class="mobile-action">
+                        <i class="fas fa-user"></i>
+                        <span>{{ 'NAV.PROFILE' | translate }}</span>
+                    </a>
+                </div>
+                }
+            </div>
+
+            <!-- Mobile Footer -->
+            @if (isAuthenticated$) {
+            <div class="mobile-footer">
+                <div class="mobile-user-info">
+                    <img [src]="profilePictureUrl"
+                        alt="User avatar"
+                        class="mobile-avatar" />
+                    <div class="mobile-user-details">
+                        <p class="mobile-user-name">{{
+                            userData.user.displayName }}</p>
+                        <p class="mobile-user-email">{{ userData.user.email
+                            }}</p>
+                    </div>
+                </div>
+                <button (click)="logout()"
+                    class="mobile-logout">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>{{ 'NAV.LOGOUT' | translate }}</span>
+                </button>
+            </div>
+            }
+        </div>
+    </aside>
+</div>
+}
+
+<!-- Navbar Spacer -->
+<div class="navbar-spacer"></div>

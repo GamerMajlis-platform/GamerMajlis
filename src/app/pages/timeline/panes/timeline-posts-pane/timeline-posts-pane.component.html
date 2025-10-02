@@ -1,0 +1,73 @@
+ <div class="space-y-4" role="list" aria-label="Recent posts">
+    <ng-container *ngIf="!loadedOnce() && isLoading()">
+        <div
+            *ngFor="let s of skeletons"
+            class="skeleton-shimmer rounded-xl bg-slate-800/60 border border-slate-700/40 p-4 h-32"></div>
+    </ng-container>
+
+    <div
+        *ngFor="let p of posts(); trackBy: trackPost; let i = index"
+        role="listitem"
+        class="tl-card group rounded-xl border border-slate-700/50 bg-slate-800/60 backdrop-blur-sm p-4 flex flex-col gap-3 hover:border-mint/60 hover:bg-slate-800/80 transition-all duration-400 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60"
+        [style.animationDelay.ms]="i * 45"
+        (click)="openPost(p)"
+        tabindex="0"
+        (keydown.enter)="openPost(p)">
+        <div class="flex items-start justify-between gap-4">
+            <h3
+                class="font-semibold text-sm sm:text-base leading-snug line-clamp-2 text-slate-100 group-hover:text-mint transition-colors">
+                {{ p.title }}
+            </h3>
+            <span
+                class="shrink-0 text-[10px] px-2 py-0.5 rounded-full bg-slate-700/70 text-slate-300 tracking-wide">{{
+                p.type || 'POST' }}</span>
+        </div>
+        <p class="text-xs text-slate-400 line-clamp-3" *ngIf="p.content">
+            {{ p.content }}
+        </p>
+        <div class="flex items-center gap-4 text-[11px] text-slate-400">
+            <ng-container *ngIf="augment(p) as ap">
+                <button
+                    type="button"
+                    class="flex items-center gap-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-mint/60 rounded px-1 -ml-1"
+                    (click)="$event.stopPropagation(); toggleLike(ap)"
+                    [attr.aria-pressed]="ap.__liked ? 'true' : 'false'"
+                    [disabled]="ap.__likeBusy"
+                    [class.opacity-60]="ap.__likeBusy"
+                    [title]="ap.__liked ? 'Unlike' : 'Like'">
+                    <i
+                        class="fa-thumbs-up"
+                        [class.fa-solid]="ap.__liked"
+                        [class.fa-regular]="!ap.__liked"></i>
+                    {{ ap.likeCount || 0 }}
+                </button>
+                <span class="flex items-center gap-1" aria-label="Views"><i
+                        class="fa-regular fa-eye"></i>{{ ap.viewCount || 0
+                    }}</span>
+                <span class="flex items-center gap-1" aria-label="Comments"><i
+                        class="fa-regular fa-comment"></i>{{ ap.commentCount ||
+                    0 }}</span>
+                <span class="ml-auto opacity-70" [attr.title]="ap.createdAt">{{
+                    timeAgo(ap.createdAt)
+                    }}</span>
+            </ng-container>
+        </div>
+    </div>
+
+    <div
+        *ngIf="!isLoading() && posts().length === 0"
+        class="text-center py-12 text-slate-500 text-sm">
+        No posts yet.
+    </div>
+
+    <!-- Loading indicator on incremental fetches -->
+    <div
+        class="flex items-center justify-center py-6"
+        *ngIf="loadedOnce() && isLoading()">
+        <div
+            class="w-6 h-6 border-2 border-mint/30 border-t-mint rounded-full animate-spin"></div>
+    </div>
+
+    <!-- Sentinel for IntersectionObserver -->
+    <div #sentinel class="h-2 w-full" aria-hidden="true"></div>
+</div>

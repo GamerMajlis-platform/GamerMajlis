@@ -1,1 +1,11 @@
-<p>not-found works!</p>
+<div
+    class="min-h-screen flex items-center justify-center bg-slate-900 text-white">
+    <div class="text-center space-y-4">
+        <div class="text-6xl font-black">404</div>
+        <div class="text-xl text-slate-300">{{ 'NOT_FOUND.TITLE' | translate: {}
+            : 'Page not found' }}</div>
+        <a routerLink="/home"
+            class="inline-block px-6 py-3 bg-teal-500 text-slate-900 rounded-lg font-semibold">{{
+            'NOT_FOUND.BACK' | translate: {} : 'Back to Home' }}</a>
+    </div>
+</div>
